@@ -7,18 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AFE05E582AF8060E003D22A2 /* EduEmpower_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E572AF8060E003D22A2 /* EduEmpower_AppApp.swift */; };
-		AFE05E5A2AF8060E003D22A2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E592AF8060E003D22A2 /* ContentView.swift */; };
+		AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */; };
+		AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E592AF8060E003D22A2 /* LoginView.swift */; };
 		AFE05E5C2AF8060F003D22A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE05E5B2AF8060F003D22A2 /* Assets.xcassets */; };
 		AFE05E5F2AF8060F003D22A2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE05E5E2AF8060F003D22A2 /* Preview Assets.xcassets */; };
+		AFE05E682AF80995003D22A2 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E672AF80995003D22A2 /* LoginViewModel.swift */; };
+		AFE05E722AF80CE3003D22A2 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E712AF80CE3003D22A2 /* LoginRequest.swift */; };
+		AFE05E742AF80D0E003D22A2 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E732AF80D0E003D22A2 /* LoginResponse.swift */; };
+		AFE05E762AF80D33003D22A2 /* LoginAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E752AF80D33003D22A2 /* LoginAction.swift */; };
+		AFE05E7A2AF810E3003D22A2 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E792AF810E3003D22A2 /* ForgotPasswordView.swift */; };
+		AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E7B2AF81211003D22A2 /* PasswordViewModel.swift */; };
+		AFE05E7E2AF81273003D22A2 /* PasswordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E7D2AF81273003D22A2 /* PasswordRequest.swift */; };
+		AFE05E802AF812CC003D22A2 /* PasswordAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E7F2AF812CC003D22A2 /* PasswordAction.swift */; };
+		AFE05E822AF812DA003D22A2 /* SignUpAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E812AF812DA003D22A2 /* SignUpAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AFE05E542AF8060E003D22A2 /* EduEmpower App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EduEmpower App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFE05E572AF8060E003D22A2 /* EduEmpower_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduEmpower_AppApp.swift; sourceTree = "<group>"; };
-		AFE05E592AF8060E003D22A2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduEmpowerApp.swift; sourceTree = "<group>"; };
+		AFE05E592AF8060E003D22A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AFE05E5B2AF8060F003D22A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AFE05E5E2AF8060F003D22A2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AFE05E672AF80995003D22A2 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		AFE05E712AF80CE3003D22A2 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		AFE05E732AF80D0E003D22A2 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
+		AFE05E752AF80D33003D22A2 /* LoginAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAction.swift; sourceTree = "<group>"; };
+		AFE05E792AF810E3003D22A2 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		AFE05E7B2AF81211003D22A2 /* PasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewModel.swift; sourceTree = "<group>"; };
+		AFE05E7D2AF81273003D22A2 /* PasswordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRequest.swift; sourceTree = "<group>"; };
+		AFE05E7F2AF812CC003D22A2 /* PasswordAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordAction.swift; sourceTree = "<group>"; };
+		AFE05E812AF812DA003D22A2 /* SignUpAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,8 +69,8 @@
 		AFE05E562AF8060E003D22A2 /* EduEmpower App */ = {
 			isa = PBXGroup;
 			children = (
-				AFE05E572AF8060E003D22A2 /* EduEmpower_AppApp.swift */,
-				AFE05E592AF8060E003D22A2 /* ContentView.swift */,
+				AFE05E6D2AF80BB4003D22A2 /* Features */,
+				AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */,
 				AFE05E5B2AF8060F003D22A2 /* Assets.xcassets */,
 				AFE05E5D2AF8060F003D22A2 /* Preview Content */,
 			);
@@ -65,6 +83,71 @@
 				AFE05E5E2AF8060F003D22A2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AFE05E692AF80A81003D22A2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AFE05E672AF80995003D22A2 /* LoginViewModel.swift */,
+				AFE05E7B2AF81211003D22A2 /* PasswordViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		AFE05E6A2AF80AFD003D22A2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AFE05E592AF8060E003D22A2 /* LoginView.swift */,
+				AFE05E792AF810E3003D22A2 /* ForgotPasswordView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AFE05E6B2AF80B13003D22A2 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				AFE05E752AF80D33003D22A2 /* LoginAction.swift */,
+				AFE05E7F2AF812CC003D22A2 /* PasswordAction.swift */,
+				AFE05E812AF812DA003D22A2 /* SignUpAction.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		AFE05E6D2AF80BB4003D22A2 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				AFE05E6F2AF80BD8003D22A2 /* Common */,
+				AFE05E6E2AF80BCB003D22A2 /* Login */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		AFE05E6E2AF80BCB003D22A2 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				AFE05E702AF80CCB003D22A2 /* Models */,
+				AFE05E6B2AF80B13003D22A2 /* Actions */,
+				AFE05E692AF80A81003D22A2 /* ViewModels */,
+				AFE05E6A2AF80AFD003D22A2 /* Views */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		AFE05E6F2AF80BD8003D22A2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		AFE05E702AF80CCB003D22A2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AFE05E712AF80CE3003D22A2 /* LoginRequest.swift */,
+				AFE05E732AF80D0E003D22A2 /* LoginResponse.swift */,
+				AFE05E7D2AF81273003D22A2 /* PasswordRequest.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +220,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFE05E5A2AF8060E003D22A2 /* ContentView.swift in Sources */,
-				AFE05E582AF8060E003D22A2 /* EduEmpower_AppApp.swift in Sources */,
+				AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */,
+				AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */,
+				AFE05E7A2AF810E3003D22A2 /* ForgotPasswordView.swift in Sources */,
+				AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */,
+				AFE05E682AF80995003D22A2 /* LoginViewModel.swift in Sources */,
+				AFE05E722AF80CE3003D22A2 /* LoginRequest.swift in Sources */,
+				AFE05E822AF812DA003D22A2 /* SignUpAction.swift in Sources */,
+				AFE05E802AF812CC003D22A2 /* PasswordAction.swift in Sources */,
+				AFE05E7E2AF81273003D22A2 /* PasswordRequest.swift in Sources */,
+				AFE05E742AF80D0E003D22A2 /* LoginResponse.swift in Sources */,
+				AFE05E762AF80D33003D22A2 /* LoginAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
