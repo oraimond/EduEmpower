@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  LoginView.swift
 //  EduEmpower App
 //
 //  Created by Oli Raimond on 11/5/23.
@@ -11,10 +11,11 @@ struct LoginView: View {
     
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
     
-//    @State private var presentingPasswordView = false
+    @State private var forgotPasswordPresenting = false
+    @State private var signUpPresenting = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 
                 Spacer()
@@ -58,35 +59,33 @@ struct LoginView: View {
                     }
                 )
                 HStack {
-                    NavigationLink(destination: ForgotPasswordView()) {
-                        Button(
-                            action: {
-                                print("Button tapped")
-        //                        presentingPasswordView.toggle()
-                            },
-                            label: {
-                                Text("Forgot password")
-                            }
-                        )
+                    Button(
+                        action: {
+                            forgotPasswordPresenting = true
+                        },
+                        label: {
+                            Text("Forgot password")
+                        }
+                    )
+                    .navigationDestination(isPresented: $forgotPasswordPresenting) {
+                        ForgotPasswordView(isPresented: $forgotPasswordPresenting)
                     }
                     
                     Spacer()
                     Button(
                         action: {
-                            // sign up action
+                            signUpPresenting = true
                         },
                         label: {
                             Text("Sign up")
                         }
                     )
+                    
                 }
             }
             .padding(30)
         }
         
-//        .navigationDestination(isPresented: $presentingPasswordView) {
-//            ForgotPasswordView(isPresented: $presentingPasswordView)
-//        }
     }
 }
 

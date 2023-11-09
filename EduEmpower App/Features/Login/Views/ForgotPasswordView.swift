@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ForgotPasswordView: View {
-//    @Binding var isPresented: Bool
+    @Binding var isPresented: Bool
     
     @ObservedObject var viewModel: PasswordViewModel = PasswordViewModel()
     
@@ -37,7 +37,10 @@ struct ForgotPasswordView: View {
             Spacer()
             
             Button(
-                action: viewModel.submit,
+                action: {
+                    viewModel.submit()
+                    isPresented = false
+                },
                 label: {
                     Text("Submit")
                         .font(.system(size: 24, weight: .bold, design: .default))
@@ -53,6 +56,6 @@ struct ForgotPasswordView: View {
 }
 
 #Preview {
-//    ForgotPasswordView(isPresented: .constant(true))
-    ForgotPasswordView()
+    ForgotPasswordView(isPresented: .constant(true))
+//    ForgotPasswordView()
 }
