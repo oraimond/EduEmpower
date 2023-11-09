@@ -80,6 +80,9 @@ struct LoginView: View {
                             Text("Sign up")
                         }
                     )
+                    .navigationDestination(isPresented: $signUpPresenting) {
+                        SignUpView(isPresented: $signUpPresenting)
+                    }
                     
                 }
             }

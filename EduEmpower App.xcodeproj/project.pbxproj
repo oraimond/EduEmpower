@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
+		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
 		AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */; };
 		AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E592AF8060E003D22A2 /* LoginView.swift */; };
 		AFE05E5C2AF8060F003D22A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE05E5B2AF8060F003D22A2 /* Assets.xcassets */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		AFE05E542AF8060E003D22A2 /* EduEmpower App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EduEmpower App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduEmpowerApp.swift; sourceTree = "<group>"; };
 		AFE05E592AF8060E003D22A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -90,6 +94,7 @@
 			children = (
 				AFE05E672AF80995003D22A2 /* LoginViewModel.swift */,
 				AFE05E7B2AF81211003D22A2 /* PasswordViewModel.swift */,
+				AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -99,6 +104,7 @@
 			children = (
 				AFE05E592AF8060E003D22A2 /* LoginView.swift */,
 				AFE05E792AF810E3003D22A2 /* ForgotPasswordView.swift */,
+				AF0C57332AFD614A005C9E25 /* SignUpView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,9 +227,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */,
+				AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */,
 				AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */,
 				AFE05E7A2AF810E3003D22A2 /* ForgotPasswordView.swift in Sources */,
 				AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */,
+				AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */,
 				AFE05E682AF80995003D22A2 /* LoginViewModel.swift in Sources */,
 				AFE05E722AF80CE3003D22A2 /* LoginRequest.swift in Sources */,
 				AFE05E822AF812DA003D22A2 /* SignUpAction.swift in Sources */,
