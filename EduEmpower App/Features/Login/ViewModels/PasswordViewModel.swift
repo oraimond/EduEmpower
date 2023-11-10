@@ -5,11 +5,19 @@
 //  Created by Oli Raimond on 11/5/23.
 //
 
-import Foundation
+import SwiftUI
 
 class PasswordViewModel: ObservableObject {
 
     @Published var email: String = ""
+    
+    var buttonColor: Color {
+        return ready() ? Color.blue :  Color.gray
+    }
+    
+    func ready() -> Bool {
+        return !email.isEmpty
+    }
 
     func submit() {
         PasswordAction(

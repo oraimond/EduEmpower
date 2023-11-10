@@ -54,10 +54,12 @@ struct LoginView: View {
                             .font(.system(size: 24, weight: .bold, design: .default))
                             .frame(maxWidth: .infinity, maxHeight: 60)
                             .foregroundColor(Color.white)
-                            .background(Color.blue)
+                            .background(viewModel.buttonColor)
                             .cornerRadius(10)
                     }
                 )
+                .disabled(!viewModel.ready())
+                
                 HStack {
                     Button(
                         action: {
