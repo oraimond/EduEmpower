@@ -15,7 +15,13 @@
 		AF44CF852AFE7F260087A57B /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF842AFE7F260087A57B /* TasksView.swift */; };
 		AF44CF872AFE7F420087A57B /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF862AFE7F420087A57B /* ProfileView.swift */; };
 		AF44CF892AFE7F5C0087A57B /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF882AFE7F5C0087A57B /* StatisticsView.swift */; };
-		AF44CF8B2AFE816E0087A57B /* CalendarEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF8A2AFE816E0087A57B /* CalendarEvents.swift */; };
+		AF97E0BA2AFFC33300759297 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0B92AFFC33300759297 /* Task.swift */; };
+		AF97E0BC2AFFC4C600759297 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0BB2AFFC4C600759297 /* Event.swift */; };
+		AF97E0BE2AFFC7E500759297 /* TaskListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0BD2AFFC7E500759297 /* TaskListRow.swift */; };
+		AF97E0C12AFFC94200759297 /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0C02AFFC94200759297 /* TasksViewModel.swift */; };
+		AF97E0C32AFFCCE000759297 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0C22AFFCCE000759297 /* User.swift */; };
+		AF97E0C52AFFD12C00759297 /* SingleTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0C42AFFD12C00759297 /* SingleTaskView.swift */; };
+		AF97E0C72AFFD22E00759297 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0C62AFFD22E00759297 /* EditTaskView.swift */; };
 		AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */; };
 		AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E592AF8060E003D22A2 /* LoginView.swift */; };
 		AFE05E5C2AF8060F003D22A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE05E5B2AF8060F003D22A2 /* Assets.xcassets */; };
@@ -40,7 +46,13 @@
 		AF44CF842AFE7F260087A57B /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
 		AF44CF862AFE7F420087A57B /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		AF44CF882AFE7F5C0087A57B /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
-		AF44CF8A2AFE816E0087A57B /* CalendarEvents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvents.swift; sourceTree = "<group>"; };
+		AF97E0B92AFFC33300759297 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		AF97E0BB2AFFC4C600759297 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		AF97E0BD2AFFC7E500759297 /* TaskListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListRow.swift; sourceTree = "<group>"; };
+		AF97E0C02AFFC94200759297 /* TasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
+		AF97E0C22AFFCCE000759297 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AF97E0C42AFFD12C00759297 /* SingleTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTaskView.swift; sourceTree = "<group>"; };
+		AF97E0C62AFFD22E00759297 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		AFE05E542AF8060E003D22A2 /* EduEmpower App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EduEmpower App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduEmpowerApp.swift; sourceTree = "<group>"; };
 		AFE05E592AF8060E003D22A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -97,7 +109,6 @@
 		AF44CF722AFE7CF60087A57B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AF44CF8A2AFE816E0087A57B /* CalendarEvents.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -128,6 +139,7 @@
 		AF44CF7B2AFE7ECC0087A57B /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
+				AF97E0BF2AFFC92A00759297 /* ViewModels */,
 				AF44CF802AFE7EF00087A57B /* Views */,
 			);
 			path = Tasks;
@@ -169,6 +181,9 @@
 			isa = PBXGroup;
 			children = (
 				AF44CF842AFE7F260087A57B /* TasksView.swift */,
+				AF97E0BD2AFFC7E500759297 /* TaskListRow.swift */,
+				AF97E0C42AFFD12C00759297 /* SingleTaskView.swift */,
+				AF97E0C62AFFD22E00759297 /* EditTaskView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,6 +194,24 @@
 				AF44CF822AFE7F090087A57B /* GroupsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		AF97E0B82AFFC31B00759297 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AF97E0B92AFFC33300759297 /* Task.swift */,
+				AF97E0BB2AFFC4C600759297 /* Event.swift */,
+				AF97E0C22AFFCCE000759297 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AF97E0BF2AFFC92A00759297 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				AF97E0C02AFFC94200759297 /* TasksViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		AFE05E4B2AF8060E003D22A2 = {
@@ -274,6 +307,7 @@
 		AFE05E6F2AF80BD8003D22A2 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				AF97E0B82AFFC31B00759297 /* Models */,
 				AF44CF772AFE7E6D0087A57B /* Views */,
 			);
 			path = Common;
@@ -360,24 +394,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */,
+				AF97E0C72AFFD22E00759297 /* EditTaskView.swift in Sources */,
 				AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */,
 				AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */,
+				AF97E0C52AFFD12C00759297 /* SingleTaskView.swift in Sources */,
 				AFE05E7A2AF810E3003D22A2 /* ForgotPasswordView.swift in Sources */,
-				AF44CF8B2AFE816E0087A57B /* CalendarEvents.swift in Sources */,
 				AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */,
 				AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */,
 				AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */,
+				AF97E0C12AFFC94200759297 /* TasksViewModel.swift in Sources */,
 				AF44CF852AFE7F260087A57B /* TasksView.swift in Sources */,
 				AFE05E682AF80995003D22A2 /* LoginViewModel.swift in Sources */,
+				AF97E0BE2AFFC7E500759297 /* TaskListRow.swift in Sources */,
 				AF44CF752AFE7D560087A57B /* HomeCalendarView.swift in Sources */,
 				AF44CF872AFE7F420087A57B /* ProfileView.swift in Sources */,
+				AF97E0BC2AFFC4C600759297 /* Event.swift in Sources */,
 				AFE05E722AF80CE3003D22A2 /* LoginRequest.swift in Sources */,
 				AFE05E822AF812DA003D22A2 /* SignUpAction.swift in Sources */,
 				AFE05E802AF812CC003D22A2 /* PasswordAction.swift in Sources */,
 				AF44CF792AFE7E7E0087A57B /* ContentView.swift in Sources */,
 				AFE05E7E2AF81273003D22A2 /* PasswordRequest.swift in Sources */,
 				AF44CF892AFE7F5C0087A57B /* StatisticsView.swift in Sources */,
+				AF97E0C32AFFCCE000759297 /* User.swift in Sources */,
 				AFE05E742AF80D0E003D22A2 /* LoginResponse.swift in Sources */,
+				AF97E0BA2AFFC33300759297 /* Task.swift in Sources */,
 				AFE05E762AF80D33003D22A2 /* LoginAction.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
