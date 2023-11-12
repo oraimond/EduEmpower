@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct EduEmpower_AppApp: App {
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
