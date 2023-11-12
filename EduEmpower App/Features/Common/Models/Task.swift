@@ -14,5 +14,6 @@ struct varTask {
     var dueDate: Date
     var taskDescription: String
     var members: [User]
+//    var group: UserGroup
 }
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
 		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
+		AF2216482B0042F800CA4164 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2216472B0042F800CA4164 /* Group.swift */; };
 		AF44CF752AFE7D560087A57B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF742AFE7D560087A57B /* HomeView.swift */; };
 		AF44CF792AFE7E7E0087A57B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF782AFE7E7E0087A57B /* ContentView.swift */; };
 		AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF822AFE7F090087A57B /* GroupsView.swift */; };
@@ -39,11 +40,16 @@
 		AFE05E7E2AF81273003D22A2 /* PasswordRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E7D2AF81273003D22A2 /* PasswordRequest.swift */; };
 		AFE05E802AF812CC003D22A2 /* PasswordAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E7F2AF812CC003D22A2 /* PasswordAction.swift */; };
 		AFE05E822AF812DA003D22A2 /* SignUpAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E812AF812DA003D22A2 /* SignUpAction.swift */; };
+		AFF150022B014BFF000910C7 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF150012B014BFF000910C7 /* HomeViewModel.swift */; };
+		AFF150092B015943000910C7 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = AFF150082B015943000910C7 /* GoogleSignIn */; };
+		AFF1500B2B015943000910C7 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AFF1500A2B015943000910C7 /* GoogleSignInSwift */; };
+		AFF150122B016C29000910C7 /* GoogleSignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF150112B016C29000910C7 /* GoogleSignInView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		AF2216472B0042F800CA4164 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		AF44CF742AFE7D560087A57B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AF44CF782AFE7E7E0087A57B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AF44CF822AFE7F090087A57B /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
@@ -75,6 +81,9 @@
 		AFE05E7D2AF81273003D22A2 /* PasswordRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordRequest.swift; sourceTree = "<group>"; };
 		AFE05E7F2AF812CC003D22A2 /* PasswordAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordAction.swift; sourceTree = "<group>"; };
 		AFE05E812AF812DA003D22A2 /* SignUpAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAction.swift; sourceTree = "<group>"; };
+		AFF150012B014BFF000910C7 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AFF150062B0157BA000910C7 /* EduEmpower-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "EduEmpower-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		AFF150112B016C29000910C7 /* GoogleSignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +91,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AFF150092B015943000910C7 /* GoogleSignIn in Frameworks */,
+				AFF1500B2B015943000910C7 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +117,7 @@
 				AF499CAB2B001E6D00255F3A /* CalendarView.swift */,
 				AF499CAF2B00319900255F3A /* DaysEventsListView.swift */,
 				AF499CB12B00346700255F3A /* EventListViewRow.swift */,
+				AFF150112B016C29000910C7 /* GoogleSignInView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -113,6 +125,7 @@
 		AF44CF712AFE7CED0087A57B /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				AFF150012B014BFF000910C7 /* HomeViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -214,6 +227,7 @@
 				AF97E0BB2AFFC4C600759297 /* Event.swift */,
 				AF97E0C22AFFCCE000759297 /* User.swift */,
 				AF499CAD2B002B8400255F3A /* EventStore.swift */,
+				AF2216472B0042F800CA4164 /* Group.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -245,6 +259,7 @@
 		AFE05E562AF8060E003D22A2 /* EduEmpower App */ = {
 			isa = PBXGroup;
 			children = (
+				AFF150062B0157BA000910C7 /* EduEmpower-App-Info.plist */,
 				AFE05E6D2AF80BB4003D22A2 /* Features */,
 				AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */,
 				AFE05E5B2AF8060F003D22A2 /* Assets.xcassets */,
@@ -351,6 +366,10 @@
 			dependencies = (
 			);
 			name = "EduEmpower App";
+			packageProductDependencies = (
+				AFF150082B015943000910C7 /* GoogleSignIn */,
+				AFF1500A2B015943000910C7 /* GoogleSignInSwift */,
+			);
 			productName = "EduEmpower App";
 			productReference = AFE05E542AF8060E003D22A2 /* EduEmpower App.app */;
 			productType = "com.apple.product-type.application";
@@ -379,6 +398,9 @@
 				Base,
 			);
 			mainGroup = AFE05E4B2AF8060E003D22A2;
+			packageReferences = (
+				AFF150072B015943000910C7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = AFE05E552AF8060E003D22A2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -408,6 +430,7 @@
 				AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */,
 				AF97E0C72AFFD22E00759297 /* EditTaskView.swift in Sources */,
 				AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */,
+				AFF150022B014BFF000910C7 /* HomeViewModel.swift in Sources */,
 				AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */,
 				AF97E0C52AFFD12C00759297 /* SingleTaskView.swift in Sources */,
 				AFE05E7A2AF810E3003D22A2 /* ForgotPasswordView.swift in Sources */,
@@ -433,8 +456,10 @@
 				AF44CF892AFE7F5C0087A57B /* StatisticsView.swift in Sources */,
 				AF97E0C32AFFCCE000759297 /* User.swift in Sources */,
 				AFE05E742AF80D0E003D22A2 /* LoginResponse.swift in Sources */,
+				AF2216482B0042F800CA4164 /* Group.swift in Sources */,
 				AF97E0BA2AFFC33300759297 /* Task.swift in Sources */,
 				AFE05E762AF80D33003D22A2 /* LoginAction.swift in Sources */,
+				AFF150122B016C29000910C7 /* GoogleSignInView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +596,7 @@
 				DEVELOPMENT_TEAM = ZFFQQM46Q6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "EduEmpower-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -600,6 +626,7 @@
 				DEVELOPMENT_TEAM = ZFFQQM46Q6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "EduEmpower-App-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -640,6 +667,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AFF150072B015943000910C7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AFF150082B015943000910C7 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFF150072B015943000910C7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		AFF1500A2B015943000910C7 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AFF150072B015943000910C7 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AFE05E4C2AF8060E003D22A2 /* Project object */;
 }
