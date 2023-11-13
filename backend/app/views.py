@@ -21,13 +21,16 @@ def posttask(request):
         return HttpResponse(status=404)
 
     json_data = json.loads(request.body)
+    taskid = json_data['taskid']
+    tasktitle = json_data['tasktile']
+    groupid = json_data['groupid']
+    timeneeded = json_data['timeneeded']
+    duedate = json_data['duedate']
+    description = json_data['description']
     userid = json_data['userid']
-    fname = json_data['fname']
-    lname = json_data['lname']
-
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO tasks (userid, fname, lname) VALUES '
-                   '(%s, %s, %s);', (userid, fname, lname))
+    cursor.execute('INSERT INTO tasks (taskid tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
+                   '(%s, %s, %s, %s, %s, %s, %s );', (taskid, tasktitle, groupid, timeneeded, duedate, description, userid))
 
     return JsonResponse({})
     
