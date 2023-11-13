@@ -74,14 +74,14 @@ def is_consistent(task, slot, assignment, constraints):
 
 
 
-
+# output is a time slot mapped to a task
 def autoschedule(request):
     if request.method != 'GET':
         return HttpResponse(status=404)
     
     # get tasks from database 
     cursor = connection.cursor()
-    cursor.execute('SELECT taskid, tasktitle, timeneeded, duedate FROM events;')
+    cursor.execute('SELECT taskid, tasktitle, timeneeded, duedate FROM tasks;')
     rows = cursor.fetchall()
 
     tasks = []
@@ -90,7 +90,7 @@ def autoschedule(request):
 
     # get time slots from database 
     cursor1 = connection.cursor()
-    cursor1.execute('SELECT eventid, start, end FROM calendar ORDER BY start ASC;')
+    cursor1.execute('SELECT eventid, starttime, endtime FROM events ORDER BY starttime ASC;')
     rows = cursor1.fetchall()
 
     for row1, row2 in zip(rows, rows[1:]):
