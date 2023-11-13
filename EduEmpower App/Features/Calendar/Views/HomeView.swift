@@ -40,7 +40,7 @@ struct HomeView: View {
                     .presentationDetents([.medium, .large])
             }
             .sheet(isPresented: $displaySignIn) {
-                GoogleSignInView(isPresented: $displaySignIn)
+                GoogleSignInView(isPresented: $displaySignIn, eventStore: eventStore)
             }
             .navigationTitle("Calendar")
         }
