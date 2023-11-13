@@ -11,7 +11,7 @@ import json
 scopes = ['https://www.googleapis.com/auth/calendar']
 
 def postgoogle(request):
-   if request.method != 'POST':
+    if request.method != 'POST':
         return HttpResponse(status=404)
 
     json_data = json.loads(request.body)
@@ -25,7 +25,7 @@ def postgoogle(request):
         clientID = data['client_ID']
         client_secret = data['client_secret']
 
-    
+
 
     try:
         # Collect user info from the Google idToken, verify_oauth2_token checks
@@ -50,7 +50,7 @@ def postgoogle(request):
             'default_scopes': scopes  # Adjust the scope as needed
         }
     )
-    
+
     service = build("calendar", "v3", credentials)
 
     result = service.calendarList().list().execute()
@@ -82,6 +82,6 @@ def postgoogle(request):
         username = "Profile NA"
 
 
-    
+
     # Return chatterID and its lifetime
     return events 
