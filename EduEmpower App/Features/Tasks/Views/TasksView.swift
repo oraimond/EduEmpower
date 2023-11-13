@@ -10,7 +10,7 @@ import SwiftUI
 struct TasksView: View {
     @ObservedObject var viewModel: TasksViewModel = TasksViewModel()
     
-    @State var newTask: varTask = varTask(title: "", timeNeeded: 0, dueDate: Date(), taskDescription: "", members: [])
+    @State var newTask: varTask = varTask( title: "", timeNeeded: 0, dueDate: Date(), taskDescription: "", members: [])
     @State var showingEditTaskView = false
     
     var body: some View {

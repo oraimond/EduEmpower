@@ -9,6 +9,7 @@ import Foundation
 
 struct varTask {
     let id = UUID()
+    var groupId: Int?
     var title: String
     var timeNeeded: Int
     var dueDate: Date

@@ -6,10 +6,38 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct StatisticsView: View {
+    @ObservedObject var viewModel: StatisticsViewModel = StatisticsViewModel()
+    
+    @State var newInsight: varInsight = varInsight(title: "", insightDescription: "")
+    @State var newSuggestion: varSuggestion = varSuggestion(title: "", suggestionDescription: "")
+    
     var body: some View {
-        Text("Statistics View")
+        VStack {
+            
+            Spacer()
+            
+            Text("Focus Statistics")
+                .font(.largeTitle)
+            
+            // TODO: put graph diagram
+            PieChartView(dataEntries: viewModel.dummyStats)
+                .frame(width: 200, height: 200)
+            
+            VStack {
+                List(viewModel.dummyInsights, id: \.id) {
+                    insight in InsightListRow(insight: insight)
+                }
+                
+                List(viewModel.dummySuggestions, id: \.id) {
+                    suggestion in SuggestionListRow(suggestion: suggestion)
+                }
+            }
+           
+        }
+        .padding(30)
     }
 }
 

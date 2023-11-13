@@ -1,29 +1,25 @@
 //
-//  TasksViewModel.swift
+//  GroupViewModel.swift
 //  EduEmpower App
 //
-//  Created by Oli Raimond on 11/11/23.
+//  Created by Sori Kang on 11/12/23.
 //
 
 import Foundation
 
-class TasksViewModel: ObservableObject {
-
-    let dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        return formatter
-    }()
-    
-
-    
+class GroupViewModel: ObservableObject {
     let dummyUsers: [User] = [
         User(fname: "John", lname: "Doe"),
         User(fname: "Jane", lname: "Smith"),
         User(fname: "Tom", lname: "Johnson"),
         User(fname: "Emily", lname: "Brown"),
         User(fname: "Michael", lname: "Williams")
+    ]
+
+    lazy var dummyGroups: [varGroup] = [
+        varGroup(groupId: 1, groupName: "Chemistry Group", members: [dummyUsers[0], dummyUsers[1]]),
+        varGroup(groupId: 2, groupName: "Physics Group", members: [dummyUsers[2], dummyUsers[3]]),
+        varGroup(groupId: 3, groupName: "History Group", members: [dummyUsers[3], dummyUsers[4]])
     ]
     
     lazy var dummyTasks: [varTask] = [
