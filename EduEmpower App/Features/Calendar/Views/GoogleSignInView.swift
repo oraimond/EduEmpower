@@ -22,29 +22,29 @@ struct GoogleSignInView: View {
                 }
             }
             .frame(width:100, height:50, alignment: Alignment.center)
-//            .onAppear {
-//                if let user = signinClient.currentUser {
-//                    backendSignin(user.idToken?.tokenString)
-//                } else {
-//                    signinClient.restorePreviousSignIn { user, error in
-//                        if error != nil {
-//                            print("restorePreviousSignIn: \(error!.localizedDescription)")
-//                        } else {
-//                            backendSignin(user?.idToken?.tokenString)
-//                        }
-//                    }
-//                }
-//            }
+            .onAppear {
+                if let user = signinClient.currentUser {
+                    backendSignin(user.idToken?.tokenString)
+                } else {
+                    signinClient.restorePreviousSignIn { user, error in
+                        if error != nil {
+                            print("restorePreviousSignIn: \(error!.localizedDescription)")
+                        } else {
+                            getEvents(user?.accessToken.tokenString)
+                            backendSignin(user?.idToken?.tokenString)
+                        }
+                    }
+                }
+            }
         }
     }
     
     func getEvents(_ token: String?) {
         Task {
             if let accessToken = token {
-                let calendarId = "primary"
                 
                 let timeMin = ISO8601DateFormatter().string(from: Date())
-                let timeMax = ISO8601DateFormatter().string(from: Calendar.current.date(byAdding: .day, value: 7, to: Date())!)
+                let timeMax = ISO8601DateFormatter().string(from: Calendar.current.date(byAdding: .day, value: 30, to: Date())!)
                 
                 let url = URL(string: "https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin=\(timeMin)&timeMax=\(timeMax)&singleEvents=true&orderBy=startTime")!
                 var request = URLRequest(url: url)
@@ -66,8 +66,30 @@ struct GoogleSignInView: View {
                     
                     print(jsonObj)
                     
+                    
+                    
+                    struct Event: Codable {
+                        let id: String
+                        let summary: String
+                        let description: String?
+                        let start: EventDate
+                        let end: EventDate
+                    }
+
+                    struct EventDate: Codable {
+                        let dateTime: String
+                    }
+
+                    let decoder = JSONDecoder()
+                    let events = try decoder.decode([Event].self, from: data)
+                    
+                    print(events)
+                    
+                    
+                    
+                    
                 } catch {
-                    print("getEvents: NETWORKING ERROR")
+                    print("getEvents: ERROR")
                 }
             }
         }
