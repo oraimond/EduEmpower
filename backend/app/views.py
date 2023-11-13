@@ -6,20 +6,73 @@ import json
 
 
 def gettasks(request):
-    return
+    if request.method != 'GET':
+        return HttpResponse(status=404)
+    cursor = connection.cursor()
+    cursor.execute('SELECT userid, fname, lname FROM tasks ORDER BY lname DESC;')  # not sure what fields we wanted
+    rows = cursor.fetchall()
+
+    response = {}
+    response['tasks'] = rows
+    return JsonResponse(response)
+    
 def posttask(request):
-    return
+    if request.method != 'POST':
+        return HttpResponse(status=404)
+
+    json_data = json.loads(request.body)
+    userid = json_data['userid']
+    fname = json_data['fname']
+    lname = json_data['lname']
+
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO tasks (userid, fname, lname) VALUES '
+                   '(%s, %s, %s);', (userid, fname, lname))
+
+    return JsonResponse({})
+    
 def getevents(request):
-    return
+    if request.method != 'GET':
+        return HttpResponse(status=404)
+    cursor = connection.cursor()
+    cursor.execute('SELECT eventtype, endtime, starttime, note, eventid FROM events ORDER BY starttime DESC;')  # not sure what fields we wanted
+    rows = cursor.fetchall()
+
+    response = {}
+    response['events'] = rows
+    return JsonResponse(response)
+    
 def getgroups(request):
-    return
+    if request.method != 'GET':
+        return HttpResponse(status=404)
+    cursor = connection.cursor()
+    cursor.execute('SELECT groupid, title, userids FROM usergroups ORDER BY userids DESC;')  # not sure what fields we wanted
+    rows = cursor.fetchall()
+
+    response = {}
+    response['usergroups'] = rows
+    return JsonResponse(response)
+    
 def postgroups(request):
-    return
+    if request.method != 'POST':
+        return HttpResponse(status=404)
+
+    json_data = json.loads(request.body)
+    groupid = json_data['groupid']
+    title = json_data['title']
+    userids = json_data['userids']
+
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO usergroups (groupid, title, userids) VALUES '
+                   '(%s, %s, %s);', (groupid, title, userids))
+
+    return JsonResponse({})
+    
 def autoschedule(request):
     return
 
 scopes = ['https://www.googleapis.com/auth/calendar']
-
+@csrf_exempt
 def postgoogle(request):
     if request.method != 'POST':
         return HttpResponse(status=404)
