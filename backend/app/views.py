@@ -32,9 +32,27 @@ def posttask(request):
     return JsonResponse({})
     
 def getevents(request):
-    return
+    if request.method != 'GET':
+        return HttpResponse(status=404)
+    cursor = connection.cursor()
+    cursor.execute('SELECT eventtype, endtime, starttime, note, eventid FROM events ORDER BY starttime DESC;')  # not sure what fields we wanted
+    rows = cursor.fetchall()
+
+    response = {}
+    response['events'] = rows
+    return JsonResponse(response)
+    
 def getgroups(request):
-    return
+    if request.method != 'GET':
+        return HttpResponse(status=404)
+    cursor = connection.cursor()
+    cursor.execute('SELECT groupid, title, userids FROM usergroups ORDER BY userids DESC;')  # not sure what fields we wanted
+    rows = cursor.fetchall()
+
+    response = {}
+    response['usergroups'] = rows
+    return JsonResponse(response)
+    
 def postgroups(request):
     return
 def autoschedule(request):
