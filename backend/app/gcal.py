@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 from google.oauth2 import id_token
-from goolge_auth_oauthlib.flow import InstalledAppFlow
+from google_auth_oauthlib.flow import InstalledAppFlow
 from apiclient.discovery import build
 from google.auth.transport import requests
 import json
