@@ -9,7 +9,7 @@ def gettasks(request):
     if request.method != 'GET':
         return HttpResponse(status=404)
     cursor = connection.cursor()
-    cursor.execute('SELECT userid, fname, lname FROM tasks ORDER BY lname DESC;')  # not sure what fields we wanted
+    cursor.execute('SELECT taskid, tasktitle, groupid, timeneeded, duedate, description, userid FROM tasks ORDER BY userid DESC;')  # not sure what fields we wanted
     rows = cursor.fetchall()
 
     response = {}
