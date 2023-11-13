@@ -24,7 +24,7 @@ struct StatisticsView: View {
             
             // TODO: put graph diagram
             PieChartView(dataEntries: viewModel.dummyStats)
-                .frame(width: 200, height: 200)
+                .frame(width: 150, height: 150)
             
             VStack {
                 List(viewModel.dummyInsights, id: \.id) {
@@ -37,7 +37,6 @@ struct StatisticsView: View {
             }
            
         }
-        .padding(30)
     }
 }
 

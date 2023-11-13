@@ -34,9 +34,24 @@ class PieChartUIView: UIView {
             
             context.setFillColor(entry.color.cgColor)
             path.fill()
+            
+            drawText(entry.app, at: center, angle: startAngle + entry.value/2, radius: radius)
+
 
             startAngle = endAngle
         }
+    }
+    
+    private func drawText(_ text: String, at center: CGPoint, angle: CGFloat, radius: CGFloat) {
+        let labelRadius = radius * 0.75 // Adjust this multiplier to control the position of labels
+        let x = center.x + labelRadius * cos(angle)
+        let y = center.y + labelRadius * sin(angle)
+
+        let labelRect = CGRect(x: x - 50, y: y - 10, width: 100, height: 20) // Adjust the label size and position
+        let label = UILabel(frame: labelRect)
+        label.text = text
+        label.textAlignment = .center
+        self.addSubview(label)
     }
 }
 

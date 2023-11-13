@@ -11,19 +11,19 @@ import UIKit
 class StatisticsViewModel: ObservableObject {
     
     var dummyStats: [varChartDataEntry] = [
-        varChartDataEntry(app: "Instagram", value: 25, color: UIColor.red),
-        varChartDataEntry(app: "Focus", value: 25, color: UIColor.blue),
-        varChartDataEntry(app: "Snapchat", value: 25, color: UIColor.yellow),
-        varChartDataEntry(app: "YouTube", value: 25, color: UIColor.green),
+        varChartDataEntry(app: "Instagram", value: 55, color: UIColor.red),
+        varChartDataEntry(app: "Focus", value: 10, color: UIColor.blue),
+        varChartDataEntry(app: "Snapchat", value: 20, color: UIColor.yellow),
+        varChartDataEntry(app: "YouTube", value: 15, color: UIColor.green),
     ]
     
     lazy var dummyInsights: [varInsight] = [
-        varInsight(title: "Insight 1", insightDescription: "This is dummy insight 1"),
-        varInsight(title: "Insight 2", insightDescription: "This is dummy insight 2")
+        varInsight(title: "Insight 1", insightDescription: "It seems you have been distracted over the past few weeks"),
+        varInsight(title: "Insight 2", insightDescription: "More time spent on social media than in Focus time")
     ]
     
     lazy var dummySuggestions: [varSuggestion] = [
-        varSuggestion(title: "Suggestion 1", suggestionDescription: "This is a dummy suggestion 1"),
-        varSuggestion(title: "Suggestion 2", suggestionDescription: "This is a dummy suggestion 2")
+        varSuggestion(title: "Suggestion 1", suggestionDescription: "Set strict time limits: Allocate specific time blocks for social media and stick to them. Reserve the rest of your time for work."),
+        varSuggestion(title: "Suggestion 2", suggestionDescription: "Prioritize tasks: Create a daily to-do list, focusing on important work tasks first, and reward yourself with social media breaks after completing them.")
     ]
 }
