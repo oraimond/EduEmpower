@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app import views, autosched
+from app import views, autosched, gcal, tasks
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +25,6 @@ urlpatterns = [
     path('getevents/', views.getevents, name='getevents'),
     path('getgroups/', views.getgroups, name='getgroups'),
     path('postgroups/', views.postgroups, name='postgroups'),
-    path('autoschedule/', autosched.autoschedule, name='autoschedule'),
+    path('autoschedule/', views.autoschedule, name='autoschedule'),
     path('postgoogle/', views.postgoogle, name='postgoogle')
 ]
