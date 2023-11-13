@@ -43,7 +43,20 @@ struct EditTaskView: View {
                         Text(user.fname)
                     }
                 }
+                
+                Button(action: {
+                    // delete
+                }) {
+                    Text("Delete task")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
+            
             .navigationBarTitle("Edit Task", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

@@ -10,8 +10,13 @@ import UIKit
 
 struct varChartDataEntry {
     let id = UUID()
-    var app: String
+    let app: String
     var value: CGFloat
-    var color: UIColor
-}
+    let color: UIColor
 
+    init(app: String, value: CGFloat, color: UIColor) {
+        self.app = app
+        self.value = value * 2 * .pi / 100  // convert the value into radians
+        self.color = color
+    }
+}

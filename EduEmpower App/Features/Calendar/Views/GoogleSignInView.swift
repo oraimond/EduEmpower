@@ -25,6 +25,7 @@ struct GoogleSignInView: View {
             .frame(width:100, height:50, alignment: Alignment.center)
             .onAppear {
                 if let user = signinClient.currentUser {
+                    getEvents(user.accessToken.tokenString)
                     backendSignin(user.idToken?.tokenString)
                 } else {
                     signinClient.restorePreviousSignIn { user, error in
