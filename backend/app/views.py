@@ -15,7 +15,7 @@ def gettasks(request):
     response = {}
     response['tasks'] = rows
     return JsonResponse(response)
-    
+@csrf_exempt
 def posttask(request):
     if request.method != 'POST':
         return HttpResponse(status=404)
@@ -52,7 +52,8 @@ def getgroups(request):
     response = {}
     response['usergroups'] = rows
     return JsonResponse(response)
-    
+
+@csrf_exempt
 def postgroups(request):
     if request.method != 'POST':
         return HttpResponse(status=404)
