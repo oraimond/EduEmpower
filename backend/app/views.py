@@ -19,7 +19,7 @@ def autoschedule(request):
     return
 
 scopes = ['https://www.googleapis.com/auth/calendar']
-
+@csrf_exempt
 def postgoogle(request):
     if request.method != 'POST':
         return HttpResponse(status=404)
