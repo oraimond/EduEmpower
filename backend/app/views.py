@@ -54,7 +54,20 @@ def getgroups(request):
     return JsonResponse(response)
     
 def postgroups(request):
-    return
+    if request.method != 'POST':
+        return HttpResponse(status=404)
+
+    json_data = json.loads(request.body)
+    groupid = json_data['groupid']
+    title = json_data['title']
+    userids = json_data['userids']
+
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO usergroups (groupid, title, userids) VALUES '
+                   '(%s, %s, %s);', (groupid, title, userids))
+
+    return JsonResponse({})
+    
 def autoschedule(request):
     return
 
