@@ -6,9 +6,31 @@ import json
 
 
 def gettasks(request):
-    return
+    if request.method != 'GET':
+        return HttpResponse(status=404)
+    cursor = connection.cursor()
+    cursor.execute('SELECT userid, fname, lname FROM tasks ORDER BY lname DESC;')  # not sure what fields we wanted
+    rows = cursor.fetchall()
+
+    response = {}
+    response['tasks'] = rows
+    return JsonResponse(response)
+    
 def posttask(request):
-    return
+    if request.method != 'POST':
+        return HttpResponse(status=404)
+
+    json_data = json.loads(request.body)
+    userid = json_data['userid']
+    fname = json_data['fname']
+    lname = json_data['lname']
+
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO tasks (userid, fname, lname) VALUES '
+                   '(%s, %s, %s);', (userid, fname, lname))
+
+    return JsonResponse({})
+    
 def getevents(request):
     return
 def getgroups(request):
