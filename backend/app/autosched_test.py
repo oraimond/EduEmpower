@@ -1,9 +1,5 @@
-# CSP auto scheduling for calendar events for individual tasks (not group tasks)
-
-# need to assign a task to a specific time frame
-# variables are the user's calendar 
-# values is the specific task 
-# constraints are the task's timeNeeded, currently available time, must before due date,  
+# this file doesn't actually do anything for the app, just to mess around with the CSP alg.
+# actual backend autoscheduling things are located in 'autosched.py'
 
 from datetime import datetime, timedelta
 
