@@ -22,7 +22,7 @@ def posttask(request):
 
     json_data = json.loads(request.body)
     taskid = json_data['taskid']
-    tasktitle = json_data['tasktile']
+    tasktitle = json_data['tasktitle']
     groupid = json_data['groupid']
     timeneeded = json_data['timeneeded']
     duedate = json_data['duedate']
