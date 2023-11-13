@@ -10,7 +10,7 @@ import json
 
 scopes = ['https://www.googleapis.com/auth/calendar']
 
-def postgoogle(request):
+def postgooglerequest(request):
     if request.method != 'POST':
         return HttpResponse(status=404)
 
