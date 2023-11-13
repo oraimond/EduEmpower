@@ -29,7 +29,7 @@ def posttask(request):
     description = json_data['description']
     userid = json_data['userid']
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO tasks (taskid tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
+    cursor.execute('INSERT INTO tasks (taskid, tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
                    '(%s, %s, %s, %s, %s, %s, %s );', (taskid, tasktitle, groupid, timeneeded, duedate, description, userid))
 
     return JsonResponse({})

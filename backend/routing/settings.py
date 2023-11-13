@@ -74,14 +74,14 @@ WSGI_APPLICATION = 'routing.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'users',
-        'USER': 'empower',
-        'PASSWORD': 'eduempower1',
-        'HOST': 'localhost',
-        'PORT':'',
-    }
+  'default': {
+      'ENGINE': 'django.db.backends.postgresql',
+      'NAME': 'users',
+      'USER': 'chatter',
+      'PASSWORD': 'chattchatt',
+      'HOST': 'localhost',
+      'PORT': '',
+  }
 }
 
 
