@@ -9,8 +9,12 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var eventStore: EventStore
+    @ObservedObject var viewModel: HomeViewModel = HomeViewModel()
     @State private var dateSelected: DateComponents?
     @State private var displayEvents: Bool = false
+    @State private var displaySignIn: Bool = false
+    
+    
     
     var body: some View {
         NavigationStack {
@@ -19,10 +23,24 @@ struct HomeView: View {
                              eventStore: eventStore,
                              dateSelected: $dateSelected,
                              displayEvents: $displayEvents)
+                Button(action: {
+                    displaySignIn = true
+                }) {
+                    Text("Import Google Calendar")
+                        .font(.headline)
+                        .padding()
+                        .frame(alignment: .center)
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
             .sheet(isPresented: $displayEvents) {
                 DaysEventsListView(dateSelected: $dateSelected)
                     .presentationDetents([.medium, .large])
+            }
+            .sheet(isPresented: $displaySignIn) {
+                GoogleSignInView(isPresented: $displaySignIn)
             }
             .navigationTitle("Calendar")
         }
