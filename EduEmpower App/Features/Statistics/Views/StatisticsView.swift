@@ -44,3 +44,4 @@ struct StatisticsView: View {
 #Preview {
     StatisticsView()
 }
+

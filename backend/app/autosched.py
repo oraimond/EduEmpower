@@ -129,6 +129,20 @@ def autoschedule(request):
         results.append((timeslot_start, timeslot_duration, task_title, task_duration, task_duedate))
 
 
+    # put scheduled tasks into events table 
+    cursor = connection.cursor()
+
+    for result in results:
+        eventtype = "EventType"
+        endtime = timeslot_start + timeslot_duration
+        starttime = timeslot_start
+        note = "temp note"
+        eventid = 0
+        
+        cursor.execute('INSERT INTO events (eventtype, endtime, starttime, note, eventid) VALUES '
+                    '(%s %s %s %s %s);', (eventtype, endtime, starttime, note, eventid))
+
+
     response = {}
     response['task_to_timeslot'] = results
     return JsonResponse(response)

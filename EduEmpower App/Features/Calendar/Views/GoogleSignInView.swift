@@ -6,6 +6,7 @@ struct GoogleSignInView: View {
     @Binding var isPresented: Bool
     private let signinClient = GIDSignIn.sharedInstance
     private let additionalScopes = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/calendar.events"]
+    @ObservedObject var eventStore: EventStore
     
     var body: some View {
         if let rootVC = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.rootViewController {
@@ -64,29 +65,39 @@ struct GoogleSignInView: View {
                         return
                     }
                     
-                    print(jsonObj)
-                    
-                    
-                    
-                    struct Event: Codable {
-                        let id: String
+                    struct myEvent: Decodable {
+                        let created: String
+                        let end: DateTimeZone
+                        let start: DateTimeZone
                         let summary: String
-                        let description: String?
-                        let start: EventDate
-                        let end: EventDate
+
+                        struct DateTimeZone: Decodable {
+                            let dateTime: String
+                            let timeZone: String
+                        }
                     }
 
-                    struct EventDate: Codable {
-                        let dateTime: String
+                    struct Response: Decodable {
+                        let items: [myEvent]
                     }
 
-                    let decoder = JSONDecoder()
-                    let events = try decoder.decode([Event].self, from: data)
-                    
-                    print(events)
-                    
-                    
-                    
+                    let dictionary = jsonObj// this is your dictionary from your question
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: dictionary, options: [])
+                        let decoder = JSONDecoder()
+                        let response = try decoder.decode(Response.self, from: jsonData)
+                        for event in response.items {
+                            
+                            let dateFormatter = ISO8601DateFormatter()
+                            let start = dateFormatter.date(from: event.start.dateTime) ?? Date()
+                            let end = dateFormatter.date(from: event.end.dateTime) ?? nil
+                            
+                            eventStore.add(Event(start: start, end: end, note: event.summary))
+                            
+                        }
+                    } catch {
+                        print("Error: \(error)")
+                    }
                     
                 } catch {
                     print("getEvents: ERROR")
