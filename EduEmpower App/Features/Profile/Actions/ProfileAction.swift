@@ -1,19 +1,15 @@
 //
-//  LoginAction.swift
+//  ProfileAction.swift
 //  EduEmpower App
 //
-//  Created by Oli Raimond on 11/5/23.
+//  Created by Oli Raimond on 11/14/23.
 //
 
-import Foundation
+import SwiftUI
 
-struct LoginAction {
-    
-    var parameters: LoginRequest
-    
-    func call(completion: @escaping (LoginResponse) -> Void) {
-        
-        let path = "/login"
+struct ProfileAction {
+    func call(token: String?, completion: @escaping (ProfileResponse) -> Void) {
+        let path = "/user/profile"
         
         
         guard let url = URL(string: APIConstants.base_url + path) else {
@@ -21,26 +17,25 @@ struct LoginAction {
             return
         }
         
-        var request = URLRequest(url: url)
-        request.httpMethod = "post"
-        
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            request.httpBody = try JSONEncoder().encode(parameters)
-        } catch {
-            print("Error: Unable to encode request parameters")
+        guard let token else {
+            print("No auth token")
+            return
         }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "get"
+    
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             if let data = data {
-                let response = try? JSONDecoder().decode(LoginResponse.self, from: data)
+                let response = try? JSONDecoder().decode(ProfileResponse.self, from: data)
                 
                 if let response = response {
                     completion(response)
                 } else {
-                    // TODO failed login
-                    print("Incorrect details")
+                    print("Failed to decode login")
                 }
             } else {
                 // Error: API request failed

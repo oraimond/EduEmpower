@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 @MainActor
 class EventStore: ObservableObject {
     @Published var events = [Event]()

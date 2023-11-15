@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var authStore: AuthStore
     
-    @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
+    @ObservedObject var viewModel: LoginViewModel
+    
+    init(authStore: AuthStore) {
+        self.viewModel = LoginViewModel(authStore: authStore)
+    }
+    
     
     @State private var forgotPasswordPresenting = false
     @State private var signUpPresenting = false
@@ -94,6 +100,6 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    LoginView()
-}
+//#Preview {
+//    LoginView()
+//}

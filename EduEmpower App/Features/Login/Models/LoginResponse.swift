@@ -8,10 +8,7 @@
 import Foundation
 
 struct LoginResponse: Decodable {
-    let data: LoginResponseData
-}
-
-struct LoginResponseData: Decodable {
-    let accessToken: String
-    let refreshToken: String
+    let token: String
+    let user_id: String
+    let expires_at: String
 }
