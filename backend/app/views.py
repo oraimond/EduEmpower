@@ -90,7 +90,9 @@ def postgoogle(request):
     flow = Flow.from_client_secrets_file(CLIENT_SECRET_FILE, scopes)
     flow.redirect_uri = ""
     
-    auth_code = json.loads(request)['auth_code']
+    request_content = json.loads(request.body)
+
+    auth_code = request_content['auth_code']
 
     try:
         flow.fetch_token(code=auth_code)
@@ -118,6 +120,7 @@ def postgoogle(request):
 
 
     # Return chatterID and its lifetime
-    return events
+    return JsonResponse({})
+
 
 # Create your views here.
