@@ -10,7 +10,6 @@ import SwiftUI
 struct EditGroupView: View {
     @Binding var group: varGroup // Pass in the selected group
 
-    @State var groupId: Int
     @State var groupName: String
     @State var groupMembers: [User]
     
@@ -18,7 +17,6 @@ struct EditGroupView: View {
 
     init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
-        self._groupId = State(initialValue: group.wrappedValue.groupId)
         self._groupName = State(initialValue: group.wrappedValue.groupName)
         self._groupMembers = State(initialValue: group.wrappedValue.members)
     }
@@ -26,10 +24,7 @@ struct EditGroupView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Group Identification Number")) {
-                    TextField("Group ID", value: $groupId, formatter: NumberFormatter())
-                }
-                Section(header: Text("Group Details")) {
+                Section(header: Text("Group Name")) {
                     TextField("Group Name", text: $groupName)
                 }
                 
@@ -44,7 +39,6 @@ struct EditGroupView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         // Store locally
-                        group.groupId = groupId
                         group.groupName = groupName
                         group.members = groupMembers
                         

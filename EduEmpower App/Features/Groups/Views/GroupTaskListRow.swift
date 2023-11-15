@@ -14,7 +14,7 @@ struct GroupTaskListRow: View {
     @State private var presentingSingleTask = false
         
     var body: some View {
-        ForEach(task.filter { $0.groupId == group.groupId }, id: \.id) { task in
+        ForEach(task.filter { $0.id == group.id }, id: \.id) { task in
             NavigationLink(destination: SingleTaskView(task: task)) {
                 VStack(alignment: .leading) {
                     Text(task.title)

@@ -10,7 +10,7 @@ import SwiftUI
 struct GroupsView: View {
     @ObservedObject var viewModel: GroupViewModel = GroupViewModel()
     
-    @State var newGroup: varGroup = varGroup(groupId: -1, groupName: "", members: [])
+    @State var newGroup: varGroup = varGroup(groupName: "", members: [])
     
     @State var showingEditGroupView = false
     

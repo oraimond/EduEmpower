@@ -9,7 +9,6 @@ import Foundation
 
 struct varGroup {
     let id = UUID()
-    var groupId: Int
     var groupName: String
     var members: [User]
 }
