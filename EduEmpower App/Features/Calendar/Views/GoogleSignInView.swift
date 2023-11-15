@@ -5,18 +5,22 @@ import GoogleSignInSwift
 struct GoogleSignInView: View {
     @Binding var isPresented: Bool
     private let signinClient = GIDSignIn.sharedInstance
-    private let additionalScopes = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/calendar.events"]
+    private let additionalScopes = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/calendar.events"]
     @ObservedObject var eventStore: EventStore
+    private let serverUrl = "https://34.74.43.253/"
     
     var body: some View {
         if let rootVC = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.rootViewController {
             GoogleSignInButton {
                 signinClient.signIn(withPresenting: rootVC, hint: "test hint", additionalScopes: additionalScopes) { result, error in
+                    
+                    let authCode = result?.serverAuthCode
+                    print("authCode: ", authCode!)
                     if error != nil {
                         print("signIn: \(error!.localizedDescription)")
                     } else {
                         getEvents(result?.user.accessToken.tokenString)
-                        backendSignin(result?.user.idToken?.tokenString)
+                        backendSignin(authCode)
 
                         
                     }
@@ -137,14 +141,36 @@ struct GoogleSignInView: View {
         
     }
     
-    func backendSignin(_ token: String?) {
+    func backendSignin(_ authCode: String?) {
         Task {
-            if let validToken = token {
+            if let authCode = authCode {
                 // send token to backend
+                let jsonObj = ["auth_code": authCode]
+                guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonObj) else {
+                    print("backendSignin: jsonData serialization error")
+                    return
+                }
+                        
+                guard let apiUrl = URL(string: serverUrl+"postgoogle/") else {
+                    print("backendSignIn: Bad URL")
+                    return
+                }
+                
+                var request = URLRequest(url: apiUrl)
+                request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+                request.httpMethod = "POST"
+                request.httpBody = jsonData
+
+                do {
+                    let (_, response) = try await URLSession.shared.data(for: request)
+                    if let http = response as? HTTPURLResponse, http.statusCode != 200 {
+                        print("backendSignIn: \(HTTPURLResponse.localizedString(forStatusCode: http.statusCode))")
+                    }
+                } catch {
+                    print("backEndSignIn: NETWORKING ERROR")
+                }
             }
-//            if let _ = await ChattStore.shared.addUser(token) {
-//                await ChatterID.shared.save()
-//            }
+            
             isPresented.toggle()
         }
     }
