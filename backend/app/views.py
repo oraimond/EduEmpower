@@ -7,6 +7,7 @@ from apiclient.discovery import build
 from google_auth_oauthlib.flow import Flow
 from datetime import datetime
 from datetime import timedelta
+from app.autosched import *
 
 def gettasks(request):
     if request.method != 'GET':
