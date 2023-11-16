@@ -30,7 +30,7 @@ struct GroupsView: View {
                 }
             }
             .sheet(isPresented: $showingEditGroupView) {
-                EditGroupView(group: $newGroup)
+                CreateGroupView(group: $newGroup)
             }
         }
     }

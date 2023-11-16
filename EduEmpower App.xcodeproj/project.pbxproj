@@ -10,6 +10,7 @@
 		409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */; };
 		40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612292B0590CA0011650B /* GroupTasksView.swift */; };
 		40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */; };
+		40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122D2B05C4540011650B /* EditGroupView.swift */; };
 		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
 		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
 		AF2216482B0042F800CA4164 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2216472B0042F800CA4164 /* Group.swift */; };
@@ -30,7 +31,7 @@
 		AF97E0C32AFFCCE000759297 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0C22AFFCCE000759297 /* User.swift */; };
 		AF97E0C52AFFD12C00759297 /* SingleTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0C42AFFD12C00759297 /* SingleTaskView.swift */; };
 		AF97E0C72AFFD22E00759297 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0C62AFFD22E00759297 /* EditTaskView.swift */; };
-		AFD997AA2B0273C7004888DC /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A72B0273C7004888DC /* EditGroupView.swift */; };
+		AFD997AA2B0273C7004888DC /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A72B0273C7004888DC /* CreateGroupView.swift */; };
 		AFD997AB2B0273C7004888DC /* GroupListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A82B0273C7004888DC /* GroupListRow.swift */; };
 		AFD997AC2B0273C7004888DC /* GroupTaskListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */; };
 		AFD997B02B0273EA004888DC /* InsightListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997AD2B0273EA004888DC /* InsightListRow.swift */; };
@@ -64,6 +65,7 @@
 		409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		40C612292B0590CA0011650B /* GroupTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTasksView.swift; sourceTree = "<group>"; };
 		40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupTaskView.swift; sourceTree = "<group>"; };
+		40C6122D2B05C4540011650B /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		AF2216472B0042F800CA4164 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		AF97E0C22AFFCCE000759297 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AF97E0C42AFFD12C00759297 /* SingleTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleTaskView.swift; sourceTree = "<group>"; };
 		AF97E0C62AFFD22E00759297 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
-		AFD997A72B0273C7004888DC /* EditGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
+		AFD997A72B0273C7004888DC /* CreateGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		AFD997A82B0273C7004888DC /* GroupListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListRow.swift; sourceTree = "<group>"; };
 		AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTaskListRow.swift; sourceTree = "<group>"; };
 		AFD997AD2B0273EA004888DC /* InsightListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightListRow.swift; sourceTree = "<group>"; };
@@ -258,9 +260,10 @@
 			isa = PBXGroup;
 			children = (
 				AF44CF822AFE7F090087A57B /* GroupsView.swift */,
-				AFD997A72B0273C7004888DC /* EditGroupView.swift */,
+				AFD997A72B0273C7004888DC /* CreateGroupView.swift */,
 				AFD997A82B0273C7004888DC /* GroupListRow.swift */,
 				40C612292B0590CA0011650B /* GroupTasksView.swift */,
+				40C6122D2B05C4540011650B /* EditGroupView.swift */,
 				AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */,
 				40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */,
 			);
@@ -505,6 +508,7 @@
 				AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */,
 				AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */,
 				40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */,
+				40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */,
 				AF97E0C12AFFC94200759297 /* TasksViewModel.swift in Sources */,
 				AFD997B22B0273EA004888DC /* UsagePieView.swift in Sources */,
 				AF499CAE2B002B8400255F3A /* EventStore.swift in Sources */,
@@ -537,7 +541,7 @@
 				409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */,
 				AFD997B02B0273EA004888DC /* InsightListRow.swift in Sources */,
 				AF97E0BA2AFFC33300759297 /* Task.swift in Sources */,
-				AFD997AA2B0273C7004888DC /* EditGroupView.swift in Sources */,
+				AFD997AA2B0273C7004888DC /* CreateGroupView.swift in Sources */,
 				AFE05E762AF80D33003D22A2 /* LoginAction.swift in Sources */,
 				AFF150122B016C29000910C7 /* GoogleSignInView.swift in Sources */,
 			);

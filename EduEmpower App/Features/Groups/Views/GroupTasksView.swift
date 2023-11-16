@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct GroupTasksView: View {
-    let group: varGroup
+    @State var  group: varGroup
     @Binding var task: [varTask]
     @ObservedObject var viewModel: TasksViewModel = TasksViewModel()
     
     @State var newTask: varTask = varTask( title: "", timeNeeded: 0, dueDate: Date(), taskDescription: "", members: [])
     @State var showingEditTaskView = false
+    @State var showingEditGroupView = false
     
     var body: some View {
 
@@ -23,6 +24,13 @@ struct GroupTasksView: View {
                 }
                 .navigationTitle("Group Tasks")
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            showingEditGroupView = true
+                        }) {
+                            Image(systemName: "square.and.pencil")
+                        }
+                    }
                     ToolbarItem(placement:.navigationBarTrailing) {
                         Button {
                             showingEditTaskView = true
@@ -30,9 +38,13 @@ struct GroupTasksView: View {
                             Image(systemName: "plus.square")
                         }
                     }
+
                 }
                 .sheet(isPresented: $showingEditTaskView) {
                     EditGroupTaskView(group: group, task: $newTask)
+                }
+                .sheet(isPresented: $showingEditGroupView) {
+                    EditGroupView(group: $group)
                 }
             }
     }
