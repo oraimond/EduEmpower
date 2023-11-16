@@ -13,5 +13,5 @@ class ProfileViewModel: ObservableObject {
         return Color.blue
     }
     
-    let dummyUser: User = User(fname: "John", lname: "Doe")
+    let dummyUser: User = User(fname: "John", lname: "Doe", email: "johndoe@umich.edu")
 }

@@ -28,7 +28,7 @@ struct EditGroupView: View {
                     TextField("Group Name", text: $groupName)
                 }
                 
-                Section(header: Text("Group Members")) {
+                Section(header: Text("Group Members Emails")) {
                     ForEach(groupMembers, id: \.id) { user in
                         Text(user.fname)
                     }

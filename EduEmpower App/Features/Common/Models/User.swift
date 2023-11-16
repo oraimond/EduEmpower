@@ -11,4 +11,5 @@ struct User {
     let id = UUID()
     var fname: String
     var lname: String
+    var email: String
 }

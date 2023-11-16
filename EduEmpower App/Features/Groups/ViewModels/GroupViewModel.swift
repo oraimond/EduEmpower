@@ -9,11 +9,11 @@ import Foundation
 
 class GroupViewModel: ObservableObject {
     let dummyUsers: [User] = [
-        User(fname: "John", lname: "Doe"),
-        User(fname: "Jane", lname: "Smith"),
-        User(fname: "Tom", lname: "Johnson"),
-        User(fname: "Emily", lname: "Brown"),
-        User(fname: "Michael", lname: "Williams")
+        User(fname: "John", lname: "Doe", email: "johndoe@umich.edu"),
+        User(fname: "Jane", lname: "Smith", email: "janesmith@umich.edu"),
+        User(fname: "Tom", lname: "Johnson", email: "tomjohnson@umich.edu"),
+        User(fname: "Emily", lname: "Brown", email: "emilybrown@umich.edu"),
+        User(fname: "Michael", lname: "Williams", email: "michaelwilliams@umich.edu")
     ]
 
     lazy var dummyGroups: [varGroup] = [
