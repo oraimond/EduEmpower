@@ -16,10 +16,10 @@ struct GroupTasksView: View {
     @State var showingEditTaskView = false
     
     var body: some View {
-//        ForEach(task.filter { $0.groupName == group.groupName }, id: \.id) { task in
+
             NavigationStack{
-                List(viewModel.dummyTasks, id: \.id) { task in
-                    GroupTaskListRow (group: group, task: $task)
+                List(viewModel.dummyTasks.filter { $0.groupName == group.groupName }, id: \.id) { task in
+                    GroupTaskListRow (group: group, task: task)
                 }
                 .navigationTitle("Group Tasks")
                 .toolbar {
@@ -35,7 +35,6 @@ struct GroupTasksView: View {
                     EditTaskView(task: $newTask)
                 }
             }
-//        }
     }
 }
 
