@@ -48,7 +48,7 @@ struct CreateGroupView: View {
                     }
                 }
             }
-            .navigationBarTitle("Edit group", displayMode: .inline)
+            .navigationBarTitle("Create group", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {

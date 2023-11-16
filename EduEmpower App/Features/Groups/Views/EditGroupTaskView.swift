@@ -39,27 +39,9 @@ struct EditGroupTaskView: View {
                     TextField("Description", text: $taskDescription, axis: .vertical)
                         .lineLimit(5...10)
                 }
-                
-                Section(header: Text("Assigned Users")) {
-                    ForEach(members, id: \.id) { user in
-                        Text(user.fname)
-                    }
-                }
-                
-                Button(action: {
-                    // delete
-                }) {
-                    Text("Delete task")
-                        .font(.headline)
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .background(Color.red)
-                        .foregroundColor(.white)
-                        .cornerRadius(10)
-                }
             }
             
-            .navigationBarTitle("Edit Task", displayMode: .inline)
+            .navigationBarTitle("Add Group Task", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
