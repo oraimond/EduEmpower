@@ -5,6 +5,9 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 def getgroupsDB(request):
+    """
+    TODO: Ensure that groups returned are for specific user
+    """
     if request.method != 'GET':
         return HttpResponse(status=404)
     cursor = connection.cursor()
@@ -16,6 +19,12 @@ def getgroupsDB(request):
     return JsonResponse(response)
 
 def postgroupsDB(request):
+    """
+    TODO: Only parameters passed through are title and users.
+    Have to generate groupid. 
+    userids aren't passed in request, just usernames. 
+    Will change to store usernames in DB
+    """
     if request.method != 'POST':
         return HttpResponse(status=404)
 
@@ -28,4 +37,16 @@ def postgroupsDB(request):
     cursor.execute('INSERT INTO usergroups (groupid, title, userids) VALUES '
                    '(%s, %s, %s);', (groupid, title, userids))
 
+    return JsonResponse({})
+
+def editgroupDB(request, groupid):
+    """
+    TODO: Implement this function
+    """
+    return JsonResponse({})
+
+def deletegroupDB(request, groupid):
+    """
+    TODO: Implement this function
+    """
     return JsonResponse({})

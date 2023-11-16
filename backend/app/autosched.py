@@ -75,7 +75,12 @@ def is_consistent(task, slot, assignment, constraints):
 
 
 # output is a time slot mapped to a task
-def autoschedule(request):
+def autoscheduleDB(request, taskid):
+
+    """
+    TODO: Implement using taskid. Generate events for this taskid.
+    """
+
     if request.method != 'GET':
         return HttpResponse(status=404)
     
