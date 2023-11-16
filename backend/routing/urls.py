@@ -20,11 +20,19 @@ from app import views, autosched, tasks
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('gettasks/', views.gettasks, name='gettasks'),
-    path('posttask/', views.posttask, name='posttask'),
-    path('getevents/', views.getevents, name='getevents'),
-    path('getgroups/', views.getgroups, name='getgroups'),
-    path('postgroups/', views.postgroups, name='postgroups'),
-    path('autoschedule/', views.autoschedule, name='autoschedule'),
-    path('postgoogle/', views.postgoogle, name='postgoogle')
+    path('tasks/', views.gettasks, name='gettasks'),
+    path('task/', views.posttask, name='posttask'),
+    path('events/', views.getevents, name='getevents'),
+    path('groups/', views.getgroups, name='getgroups'),
+    path('group/', views.postgroups, name='postgroups'),
+    path('task/<string:taskid>/generate_events/', views.autoschedule, name='autoschedule'),
+    path('postgoogle/', views.postgoogle, name='postgoogle'),
+    path('task/<string:taskid>', views.editorDeleteTask, name='updatetask'),
+    path('group/<string:groupid>', views.editOrDeleteGroups, name='editOrDelete'),
+    path('event', views.createevent, name='createevent'),
+    path('event/<string:eventid>', views.editorDeleteEvent, name='editOrDeleteEvents'),
+    path('task/<string:taskid>/event/', views.getEventsForTask, name='getEventsForTask'),
+    path('/login', views.login, name='login'),
+    path('/signup', views.signup, name='signup'),
+    path('/user/profile', views.getProfileInfo, name='getProfileInfo')
 ]
