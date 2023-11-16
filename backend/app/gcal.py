@@ -6,6 +6,7 @@ import json
 from google_auth_oauthlib.flow import Flow
 from datetime import datetime
 from datetime import timedelta
+import requests
 
 def postgoogleDB(request):
     if request.method != 'POST':
@@ -21,11 +22,10 @@ def postgoogleDB(request):
 
     auth_code = request_content['auth_code']
 
-    try:
-        flow.fetch_token(code=auth_code)
-    except Error as e:
-        return e
-    
+
+    flow.fetch_token(code=auth_code)
+
+
     sess = flow.authorized_session()
     
     timeMin = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
