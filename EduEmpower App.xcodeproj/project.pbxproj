@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */; };
+		40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612292B0590CA0011650B /* GroupTasksView.swift */; };
 		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
 		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
 		AF2216482B0042F800CA4164 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2216472B0042F800CA4164 /* Group.swift */; };
@@ -60,6 +61,7 @@
 
 /* Begin PBXFileReference section */
 		409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		40C612292B0590CA0011650B /* GroupTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTasksView.swift; sourceTree = "<group>"; };
 		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		AF2216472B0042F800CA4164 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -253,10 +255,11 @@
 		AF44CF812AFE7EFC0087A57B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AF44CF822AFE7F090087A57B /* GroupsView.swift */,
 				AFD997A72B0273C7004888DC /* EditGroupView.swift */,
 				AFD997A82B0273C7004888DC /* GroupListRow.swift */,
+				40C612292B0590CA0011650B /* GroupTasksView.swift */,
 				AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */,
-				AF44CF822AFE7F090087A57B /* GroupsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */,
 				AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */,
 				AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */,
+				40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */,
 				AF97E0C12AFFC94200759297 /* TasksViewModel.swift in Sources */,
 				AFD997B22B0273EA004888DC /* UsagePieView.swift in Sources */,
 				AF499CAE2B002B8400255F3A /* EventStore.swift in Sources */,
