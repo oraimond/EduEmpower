@@ -32,7 +32,7 @@ struct GroupTasksView: View {
                     }
                 }
                 .sheet(isPresented: $showingEditTaskView) {
-                    EditTaskView(task: $newTask)
+                    EditGroupTaskView(group: group, task: $newTask)
                 }
             }
     }
