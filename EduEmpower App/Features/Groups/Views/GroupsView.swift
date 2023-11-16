@@ -49,7 +49,7 @@ struct GroupsView: View {
             }
             .padding()
             .sheet(isPresented: $showingInvitationView) {
-                
+                GroupInvitationView()
             }
         }
     }
