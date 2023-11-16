@@ -11,6 +11,8 @@
 		40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612292B0590CA0011650B /* GroupTasksView.swift */; };
 		40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */; };
 		40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122D2B05C4540011650B /* EditGroupView.swift */; };
+		40C612302B05CFC90011650B /* GroupInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122F2B05CFC80011650B /* GroupInvitationView.swift */; };
+		40C612322B05D70A0011650B /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612312B05D70A0011650B /* Invitation.swift */; };
 		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
 		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
 		AF2216482B0042F800CA4164 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2216472B0042F800CA4164 /* Group.swift */; };
@@ -66,6 +68,8 @@
 		40C612292B0590CA0011650B /* GroupTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTasksView.swift; sourceTree = "<group>"; };
 		40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupTaskView.swift; sourceTree = "<group>"; };
 		40C6122D2B05C4540011650B /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
+		40C6122F2B05CFC80011650B /* GroupInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInvitationView.swift; sourceTree = "<group>"; };
+		40C612312B05D70A0011650B /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
 		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		AF2216472B0042F800CA4164 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -266,6 +270,7 @@
 				40C6122D2B05C4540011650B /* EditGroupView.swift */,
 				AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */,
 				40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */,
+				40C6122F2B05CFC80011650B /* GroupInvitationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 				AF97E0C22AFFCCE000759297 /* User.swift */,
 				AF499CAD2B002B8400255F3A /* EventStore.swift */,
 				AF2216472B0042F800CA4164 /* Group.swift */,
+				40C612312B05D70A0011650B /* Invitation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -500,6 +506,7 @@
 				AF97E0C72AFFD22E00759297 /* EditTaskView.swift in Sources */,
 				AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */,
 				AFF150022B014BFF000910C7 /* HomeViewModel.swift in Sources */,
+				40C612302B05CFC90011650B /* GroupInvitationView.swift in Sources */,
 				AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */,
 				AFD997BB2B0274E9004888DC /* ChartDataEntry.swift in Sources */,
 				AF97E0C52AFFD12C00759297 /* SingleTaskView.swift in Sources */,
@@ -531,6 +538,7 @@
 				AFD997BC2B0274E9004888DC /* Suggestion.swift in Sources */,
 				AFD997BD2B0274E9004888DC /* Insight.swift in Sources */,
 				AFE05E802AF812CC003D22A2 /* PasswordAction.swift in Sources */,
+				40C612322B05D70A0011650B /* Invitation.swift in Sources */,
 				AF44CF792AFE7E7E0087A57B /* ContentView.swift in Sources */,
 				AFE05E7E2AF81273003D22A2 /* PasswordRequest.swift in Sources */,
 				AF499CB22B00346700255F3A /* EventListViewRow.swift in Sources */,

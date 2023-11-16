@@ -7,7 +7,10 @@
 
 import Foundation
 
-struct User {
+struct User: Equatable {
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.email == rhs.email
+    }
     let id = UUID()
     var fname: String
     var lname: String

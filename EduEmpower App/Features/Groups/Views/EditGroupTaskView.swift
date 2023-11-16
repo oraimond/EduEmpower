@@ -47,7 +47,7 @@ struct EditGroupTaskView: View {
                     Button(action: {
                         // Store locally
                         task.title = taskTitle
-                        task.groupName = group.groupName
+                        task.group = group
                         task.timeNeeded = taskDuration
                         task.dueDate = taskDueDate
                         task.taskDescription = taskDescription

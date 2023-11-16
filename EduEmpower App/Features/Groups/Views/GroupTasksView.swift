@@ -19,7 +19,7 @@ struct GroupTasksView: View {
     var body: some View {
 
             NavigationStack{
-                List(viewModel.dummyTasks.filter { $0.groupName == group.groupName }, id: \.id) { task in
+                List(viewModel.dummyTasks.filter { $0.group == group }, id: \.id) { task in
                     GroupTaskListRow (group: group, task: task)
                 }
                 .navigationTitle("Group Tasks")

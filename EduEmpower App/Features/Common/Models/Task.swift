@@ -9,7 +9,7 @@ import Foundation
 
 struct varTask {
     let id = UUID()
-    var groupName: String?
+    var group: varGroup?
     var title: String
     var timeNeeded: Int
     var dueDate: Date

@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct varGroup {
+struct varGroup: Equatable {
+    static func == (lhs: varGroup, rhs: varGroup) -> Bool {
+        return lhs.groupName == rhs.groupName
+    }
+    
     let id = UUID()
     var groupName: String
     var members: [User]

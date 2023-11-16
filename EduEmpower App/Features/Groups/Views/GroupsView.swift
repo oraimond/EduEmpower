@@ -13,6 +13,7 @@ struct GroupsView: View {
     @State var newGroup: varGroup = varGroup(groupName: "", members: [])
     
     @State var showingEditGroupView = false
+    @State var showingInvitationView = false
     
     var body: some View {
         NavigationStack{
@@ -31,6 +32,24 @@ struct GroupsView: View {
             }
             .sheet(isPresented: $showingEditGroupView) {
                 CreateGroupView(group: $newGroup)
+            }
+            
+            Spacer()
+            
+            Button(action: {
+                showingInvitationView = true
+            }) {
+                Text("Invitation")
+                    .font(.headline)
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .background(Color.green)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
+            .padding()
+            .sheet(isPresented: $showingInvitationView) {
+                
             }
         }
     }
