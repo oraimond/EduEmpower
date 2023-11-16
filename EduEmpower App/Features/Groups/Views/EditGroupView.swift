@@ -12,6 +12,7 @@ struct EditGroupView: View {
 
     @State var groupName: String
     @State var groupMembers: [User]
+    @State var newMemberEmail: String
     
     @Environment(\.presentationMode) var presentationMode
 
@@ -19,6 +20,7 @@ struct EditGroupView: View {
         self._group = group
         self._groupName = State(initialValue: group.wrappedValue.groupName)
         self._groupMembers = State(initialValue: group.wrappedValue.members)
+        self._newMemberEmail = State(initialValue: "")
     }
 
     var body: some View {
@@ -29,8 +31,20 @@ struct EditGroupView: View {
                 }
                 
                 Section(header: Text("Group Members Emails")) {
-                    ForEach(groupMembers, id: \.id) { user in
-                        Text(user.fname)
+                    List {
+                        ForEach(groupMembers, id: \.id) { member in
+                            TextField("Email", text: $groupMembers[getIndex(for: member)].email)
+                                .onChange(of: groupMembers[getIndex(for: member)].email) { newEmail in
+                                    if let user = findUser(with: newEmail) {
+                                        groupMembers[getIndex(for: member)] = user
+                                    }
+                                }
+                        }
+                        TextField("Add New Member", text: $newMemberEmail)
+                            .onChange(of: newMemberEmail) { newEmail in
+                                let newUser = User(fname: "", lname: "", email: newEmail)
+                                groupMembers.append(newUser)
+                            }
                     }
                 }
             }
@@ -54,4 +68,18 @@ struct EditGroupView: View {
             }
         }
     }
+    
+    private func getIndex(for user: User) -> Int {
+        if let index = groupMembers.firstIndex(where: { $0.id == user.id }) {
+            return index
+        }
+        return 0
+    }
+    
+    // TODO find a user based on email
+    private func findUser(with email: String) -> User? {
+        // Return the corresponding user or nil if not found
+        return nil
+    }
+
 }
