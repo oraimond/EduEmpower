@@ -3,7 +3,6 @@ from django.http import JsonResponse, HttpResponse
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 import json
-from apiclient.discovery import build
 from google_auth_oauthlib.flow import Flow
 from datetime import datetime
 from datetime import timedelta
