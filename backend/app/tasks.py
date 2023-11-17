@@ -52,4 +52,6 @@ def deletetaskDB(request, taskid):
     """
     TODO: Implement this function
     """
+    member = Member.objects.get(id=id)  # needs testing
+    member.delete()
     return JsonResponse({})
