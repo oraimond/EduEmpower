@@ -21,7 +21,7 @@ def postgoogleDB(request):
     request_content = json.loads(request.body)
 
     auth_code = request_content['auth_code']
-
+    username = [request_content['username']]
 
     flow.fetch_token(code=auth_code)
 
@@ -37,22 +37,20 @@ def postgoogleDB(request):
     except requests.exceptions.HTTPError as e:
         return e
     
-    username = request_content['username']
-
 
 
     calendar = response.json()["items"]
 
     for event in calendar:
         try:
-            start = event['start']['dateTime']
-            end = event['end']['dateTime']
+            start = event['start']['dateTime'].replace("T", " ")
+            end = event['end']['dateTime'].replace("T", " ")
             summary = event['summary']
         except TypeError as e:
             print(e)
             return
         query = f"""
-        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', \'username\')
+        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{username}])
         """
         cursor = connection.cursor()
         cursor.execute(query)
