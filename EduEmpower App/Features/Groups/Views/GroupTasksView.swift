@@ -35,7 +35,7 @@ struct GroupTasksView: View {
                         Button {
                             showingEditTaskView = true
                         } label: {
-                            Image(systemName: "plus.square")
+                            Image(systemName: "plus")
                         }
                     }
 
