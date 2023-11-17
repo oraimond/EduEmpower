@@ -74,85 +74,187 @@ def is_consistent(task, slot, assignment, constraints):
 
 
 
-# output is a time slot mapped to a task
 def autoscheduleDB(request, taskid):
-
-    """
-    TODO: Implement using taskid. Generate events for this taskid.
-    """
-
-    if request.method != 'GET':
+    if request.method != 'POST':
         return HttpResponse(status=404)
     
     # get tasks from database 
     cursor = connection.cursor()
-    cursor.execute('SELECT taskid, tasktitle, timeneeded, duedate FROM tasks;')
+    cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE taskid = %s;', (taskid))
     rows = cursor.fetchall()
 
-    tasks = []
-    for row in rows:
-        tasks.append(Task(row[0], timedelta(hours=row[2]), datetime(row[3])))
+    if len(rows) != 8:
+        print('The resulting query from the Tasks table has one or more missing attributes.')
+        return HttpResponse(status=500)
 
-    # get time slots from database 
+    task_title = rows[0]
+    task_duration = rows[1]
+    task_due_date = rows[2]
+    task_description = rows[3]
+    task_userids = rows[4]
+    task_group_id = rows[5]
+    task_scheduled = rows[6]
+
+    if rows[7] != taskid:
+        print('TaskID from front end does not match TaskID retreived from database.')
+        return HttpResponse(status=500)
+    
+    if task_scheduled == True:
+        print('The given TaskID has already been scheduled.')
+        return HttpResponse(status=500)
+
+    # get calendar events from database 
     cursor1 = connection.cursor()
-    cursor1.execute('SELECT eventid, starttime, endtime FROM events ORDER BY starttime ASC;')
+    cursor1.execute('SELECT title, start, end, type, users, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', (task_due_date))
     rows = cursor1.fetchall()
 
-    for row1, row2 in zip(rows, rows[1:]):
-        eventid_1 = row1[0]
-        start_1 = row1[1]
-        end_1 = row1[2]
+    # only get events that contain users who are included in the given TaskID
+    relevant_events = []
+    for row in rows: 
+        event_users = row[4]
 
-        eventid_2 = row2[0]
-        start_2 = row2[1]
-        end_2 = row2[2]
+        for userid in task_userids:
+            if userid in event_users:
+                relevant_events.append(row)
 
-        row1[1] = end_1 # start time of open timeslot 
-        row1[2] = start_2 - end_1 # duration of open timeslot
+    relevant_events = sorted(relevant_events, key=lambda x: x[1])
 
-    if rows:
-        lastrow = rows.pop()
+    # merge overlapping events into a single time intervals "merged_event_intervals[]"
+    event_intervals = []
+    for event in relevant_events:
+        event_intervals.append((event[1], event[2]))
 
+    merged_event_intervals = [event_intervals[0]]
+
+    for current_interval in event_intervals[1:]:
+        previous_interval = merged_event_intervals[-1]
+
+        if current_interval[0] <= previous_interval[1]:
+            merged_event_intervals[-1] = (previous_interval[0], max(previous_interval[1], current_interval[1]))
+       
+        else:
+            merged_event_intervals.append(current_interval)
+
+    del event_intervals
+    del merged_event_intervals
+    del relevant_events
+    del rows
+
+    # get open time slots "open_timeslots[]"
     open_timeslots = []
-    for row in rows:
-        open_timeslots.append(TimeSlot(datetime(row[1])), row1[2])
+    for i in range(len(merged_event_intervals) - 1):
+        current_interval_end = merged_event_intervals[i][1]
+        next_interval_start = merged_event_intervals[i + 1][0]
 
-    # call backtracking search 
-    solution = schedule_tasks(open_timeslots, tasks)
+        interval_between = (current_interval_end, next_interval_start)
+        open_timeslots.append(interval_between)
 
-    results = []
-    for timeslot in solution:
-        task = solution[timeslot]
+    # add something to prevent time slots from going into 11pm to 8am
 
-        timeslot_start = timeslot.start_time
-        timeslot_duration = timeslot.duration
+    viable_timeslots = []
+    for timeslot in open_timeslots:
+        if task_duration > timeslot[1] - timeslot[0]:
+            continue
 
-        task_title = task.name
-        task_duration = task.duration
-        task_duedate = task.due_date
+        if task_due_date > timeslot[1]:
+            continue
 
-        results.append((timeslot_start, timeslot_duration, task_title, task_duration, task_duedate))
+        viable_timeslots.append(timeslot)
 
+    def timeslot_duration(timeslot_interval):
+        return timeslot_interval[1] - timeslot_interval[0]
+    
+    viable_timeslots = sorted(viable_timeslots, key=timeslot_duration, reverse=True)
 
-    # put scheduled tasks into events table 
+    # add new event to the events database table 
     cursor = connection.cursor()
-
-    for result in results:
-        eventtype = "EventType"
-        endtime = timeslot_start + timeslot_duration
-        starttime = timeslot_start
-        note = "temp note"
-        eventid = 0
-        
-        cursor.execute('INSERT INTO events (eventtype, endtime, starttime, note, eventid) VALUES '
-                    '(%s %s %s %s %s);', (eventtype, endtime, starttime, note, eventid))
-
+    cursor.execute('INSERT INTO events (title, start, end, type, users, taskid) VALUES '
+                   '(%s, %s, %s, %s, %s, %s, %s);', (task_title, viable_timeslots[0][0], viable_timeslots[0][1], None, task_userids, taskid))
+    
 
     response = {}
-    response['task_to_timeslot'] = results
+    response['task_to_timeslot'] = [taskid, viable_timeslots[0][0], viable_timeslots[0][1]]
     return JsonResponse(response)
+        
 
 
+
+
+
+    
+
+
+# def autoschedule_old(request):
+#     if request.method != 'GET':
+#         return HttpResponse(status=404)
+    
+#     # get tasks from database 
+#     cursor = connection.cursor()
+#     cursor.execute('SELECT taskid, tasktitle, timeneeded, duedate FROM tasks;')
+#     rows = cursor.fetchall()
+
+#     tasks = []
+#     for row in rows:
+#         tasks.append(Task(row[0], timedelta(hours=row[2]), datetime(row[3])))
+
+#     # get time slots from database 
+#     cursor1 = connection.cursor()
+#     cursor1.execute('SELECT eventid, starttime, endtime FROM events ORDER BY starttime ASC;')
+#     rows = cursor1.fetchall()
+
+#     for row1, row2 in zip(rows, rows[1:]):
+#         eventid_1 = row1[0]
+#         start_1 = row1[1]
+#         end_1 = row1[2]
+
+#         eventid_2 = row2[0]
+#         start_2 = row2[1]
+#         end_2 = row2[2]
+
+#         row1[1] = end_1 # start time of open timeslot 
+#         row1[2] = start_2 - end_1 # duration of open timeslot
+
+#     if rows:
+#         lastrow = rows.pop()
+
+#     open_timeslots = []
+#     for row in rows:
+#         open_timeslots.append(TimeSlot(datetime(row[1])), row1[2])
+
+#     # call backtracking search 
+#     solution = schedule_tasks(open_timeslots, tasks)
+
+#     results = []
+#     for timeslot in solution:
+#         task = solution[timeslot]
+
+#         timeslot_start = timeslot.start_time
+#         timeslot_duration = timeslot.duration
+
+#         task_title = task.name
+#         task_duration = task.duration
+#         task_duedate = task.due_date
+
+#         results.append((timeslot_start, timeslot_duration, task_title, task_duration, task_duedate))
+
+
+#     # put scheduled tasks into events table 
+#     cursor = connection.cursor()
+
+#     for result in results:
+#         eventtype = "EventType"
+#         endtime = timeslot_start + timeslot_duration
+#         starttime = timeslot_start
+#         note = "temp note"
+#         eventid = 0
+        
+#         cursor.execute('INSERT INTO events (eventtype, endtime, starttime, note, eventid) VALUES '
+#                     '(%s %s %s %s %s);', (eventtype, endtime, starttime, note, eventid))
+
+
+#     response = {}
+#     response['task_to_timeslot'] = results
+#     return JsonResponse(response)
 
 
     
