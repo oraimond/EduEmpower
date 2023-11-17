@@ -9,12 +9,12 @@ import SwiftUI
 
 struct GroupTaskListRow: View {
     let group: varGroup
-    @Binding var task: [varTask]
+    let task: varTask
     @ObservedObject var viewModel: TasksViewModel = TasksViewModel()
     @State private var presentingSingleTask = false
         
     var body: some View {
-        ForEach(task.filter { $0.groupId == group.groupId }, id: \.id) { task in
+
             NavigationLink(destination: SingleTaskView(task: task)) {
                 VStack(alignment: .leading) {
                     Text(task.title)
@@ -34,7 +34,6 @@ struct GroupTaskListRow: View {
                     }
                 }
             }
-        }
     }
 
 }

@@ -16,15 +16,23 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from app import views, autosched, gcal, tasks
+from app import views, autosched, tasks
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('gettasks/', views.gettasks, name='gettasks'),
-    path('posttask/', views.posttask, name='posttask'),
-    path('getevents/', views.getevents, name='getevents'),
-    path('getgroups/', views.getgroups, name='getgroups'),
-    path('postgroups/', views.postgroups, name='postgroups'),
-    path('autoschedule/', views.autoschedule, name='autoschedule'),
-    path('postgoogle/', views.postgoogle, name='postgoogle')
+    path('tasks/', views.gettasks, name='gettasks'),
+    path('task/', views.posttask, name='posttask'),
+    path('events/', views.getevents, name='getevents'),
+    path('groups/', views.getgroups, name='getgroups'),
+    path('group/', views.postgroups, name='postgroups'),
+    path('task/<str:taskid>/generate_events/', views.autoschedule, name='autoschedule'),
+    path('postgoogle/', views.postgoogle, name='postgoogle'),
+    path('task/<str:taskid>', views.editorDeleteTask, name='updatetask'),
+    path('group/<str:groupid>', views.editOrDeleteGroups, name='editOrDelete'),
+    path('event', views.createevent, name='createevent'),
+    path('event/<str:eventid>', views.editorDeleteEvent, name='editOrDeleteEvents'),
+    path('task/<str:taskid>/event/', views.getEventsForTask, name='getEventsForTask'),
+    path('/login', views.login, name='login'),
+    path('/signup', views.signup, name='signup'),
+    path('/user/profile', views.getProfileInfo, name='getProfileInfo')
 ]

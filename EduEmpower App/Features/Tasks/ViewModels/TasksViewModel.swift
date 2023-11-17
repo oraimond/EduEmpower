@@ -33,8 +33,4 @@ class TasksViewModel: ObservableObject {
 //        varTask(groupId: 4, title: "Task 4", timeNeeded: 120, dueDate: Date().addingTimeInterval(60 * 60 * 4), taskDescription: "This is a description for task 4", members: [dummyUsers[0], dummyUsers[2], dummyUsers[4]]),
 //        varTask(groupId: 3, title: "Task 5", timeNeeded: 150, dueDate: Date().addingTimeInterval(60 * 60 * 5), taskDescription: "This is a description for task 5", members: [dummyUsers[1], dummyUsers[4]]),
 //    ]
-    
-    func deleteTask() {
-        
-    }
 }

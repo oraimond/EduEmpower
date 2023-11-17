@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */; };
+		40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612292B0590CA0011650B /* GroupTasksView.swift */; };
+		40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */; };
+		40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122D2B05C4540011650B /* EditGroupView.swift */; };
+		40C612302B05CFC90011650B /* GroupInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122F2B05CFC80011650B /* GroupInvitationView.swift */; };
+		40C612322B05D70A0011650B /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612312B05D70A0011650B /* Invitation.swift */; };
 		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
 		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
 		AF2216482B0042F800CA4164 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2216472B0042F800CA4164 /* Group.swift */; };
@@ -43,6 +48,7 @@
 		AFC1FC732B0456B50086F846 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1FC722B0456B50086F846 /* ProfileResponse.swift */; };
 		AFC1FC782B04570F0086F846 /* ProfileAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1FC772B04570F0086F846 /* ProfileAction.swift */; };
 		AFD997AA2B0273C7004888DC /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A72B0273C7004888DC /* EditGroupView.swift */; };
+		AFD997AA2B0273C7004888DC /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A72B0273C7004888DC /* CreateGroupView.swift */; };
 		AFD997AB2B0273C7004888DC /* GroupListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A82B0273C7004888DC /* GroupListRow.swift */; };
 		AFD997AC2B0273C7004888DC /* GroupTaskListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */; };
 		AFD997B02B0273EA004888DC /* InsightListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997AD2B0273EA004888DC /* InsightListRow.swift */; };
@@ -74,6 +80,11 @@
 
 /* Begin PBXFileReference section */
 		409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		40C612292B0590CA0011650B /* GroupTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTasksView.swift; sourceTree = "<group>"; };
+		40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupTaskView.swift; sourceTree = "<group>"; };
+		40C6122D2B05C4540011650B /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
+		40C6122F2B05CFC80011650B /* GroupInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInvitationView.swift; sourceTree = "<group>"; };
+		40C612312B05D70A0011650B /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
 		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		AF2216472B0042F800CA4164 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -109,6 +120,7 @@
 		AFC1FC722B0456B50086F846 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		AFC1FC772B04570F0086F846 /* ProfileAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAction.swift; sourceTree = "<group>"; };
 		AFD997A72B0273C7004888DC /* EditGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
+		AFD997A72B0273C7004888DC /* CreateGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		AFD997A82B0273C7004888DC /* GroupListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListRow.swift; sourceTree = "<group>"; };
 		AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTaskListRow.swift; sourceTree = "<group>"; };
 		AFD997AD2B0273EA004888DC /* InsightListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightListRow.swift; sourceTree = "<group>"; };
@@ -285,10 +297,14 @@
 		AF44CF812AFE7EFC0087A57B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				AFD997A72B0273C7004888DC /* EditGroupView.swift */,
-				AFD997A82B0273C7004888DC /* GroupListRow.swift */,
-				AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */,
 				AF44CF822AFE7F090087A57B /* GroupsView.swift */,
+				AFD997A72B0273C7004888DC /* CreateGroupView.swift */,
+				AFD997A82B0273C7004888DC /* GroupListRow.swift */,
+				40C612292B0590CA0011650B /* GroupTasksView.swift */,
+				40C6122D2B05C4540011650B /* EditGroupView.swift */,
+				AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */,
+				40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */,
+				40C6122F2B05CFC80011650B /* GroupInvitationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +350,7 @@
 				AF97E0BB2AFFC4C600759297 /* Event.swift */,
 				AF97E0C22AFFCCE000759297 /* User.swift */,
 				AF2216472B0042F800CA4164 /* Group.swift */,
+				40C612312B05D70A0011650B /* Invitation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -584,6 +601,7 @@
 				AF9641CB2B0445D0000608FD /* APIConstants.swift in Sources */,
 				AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */,
 				AFF150022B014BFF000910C7 /* HomeViewModel.swift in Sources */,
+				40C612302B05CFC90011650B /* GroupInvitationView.swift in Sources */,
 				AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */,
 				AF6F453A2B05B7DD00FA4B9A /* TaskPostAction.swift in Sources */,
 				AFD997BB2B0274E9004888DC /* ChartDataEntry.swift in Sources */,
@@ -592,12 +610,15 @@
 				AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */,
 				AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */,
 				AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */,
+				40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */,
+				40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */,
 				AF97E0C12AFFC94200759297 /* TasksViewModel.swift in Sources */,
 				AF6F45402B05B84500FA4B9A /* TaskPostRequest.swift in Sources */,
 				AFD997B22B0273EA004888DC /* UsagePieView.swift in Sources */,
 				AF499CAE2B002B8400255F3A /* EventStore.swift in Sources */,
 				AF44CF852AFE7F260087A57B /* TasksView.swift in Sources */,
 				AFE05E682AF80995003D22A2 /* LoginViewModel.swift in Sources */,
+				40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */,
 				AFD997AB2B0273C7004888DC /* GroupListRow.swift in Sources */,
 				AF97E0BE2AFFC7E500759297 /* TaskListRow.swift in Sources */,
 				AFD997B52B0273F3004888DC /* StatisticsViewModel.swift in Sources */,
@@ -619,6 +640,7 @@
 				AFD997BD2B0274E9004888DC /* Insight.swift in Sources */,
 				AFC1FC732B0456B50086F846 /* ProfileResponse.swift in Sources */,
 				AFE05E802AF812CC003D22A2 /* PasswordAction.swift in Sources */,
+				40C612322B05D70A0011650B /* Invitation.swift in Sources */,
 				AF44CF792AFE7E7E0087A57B /* ContentView.swift in Sources */,
 				AFC1FC782B04570F0086F846 /* ProfileAction.swift in Sources */,
 				AFE05E7E2AF81273003D22A2 /* PasswordRequest.swift in Sources */,
@@ -633,7 +655,7 @@
 				409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */,
 				AFD997B02B0273EA004888DC /* InsightListRow.swift in Sources */,
 				AF97E0BA2AFFC33300759297 /* Task.swift in Sources */,
-				AFD997AA2B0273C7004888DC /* EditGroupView.swift in Sources */,
+				AFD997AA2B0273C7004888DC /* CreateGroupView.swift in Sources */,
 				AFE05E762AF80D33003D22A2 /* LoginAction.swift in Sources */,
 				AFF150122B016C29000910C7 /* GoogleSignInView.swift in Sources */,
 			);

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-nx5#qfeahcd7cg)!#&a!i3#bfaxslzqrnwo+=wo_o2d%i^fkxd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['34.74.43.253', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['34.16.135.240', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'routing.wsgi.application'
 DATABASES = {
   'default': {
       'ENGINE': 'django.db.backends.postgresql',
-      'NAME': 'users',
+      'NAME': 'eduempower',
       'USER': 'chatter',
       'PASSWORD': 'chattchatt',
       'HOST': 'localhost',
@@ -119,7 +119,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT=BASE_DIR / 'static'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

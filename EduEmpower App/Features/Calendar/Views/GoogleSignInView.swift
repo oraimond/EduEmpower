@@ -7,7 +7,7 @@ struct GoogleSignInView: View {
     private let signinClient = GIDSignIn.sharedInstance
     private let additionalScopes = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/calendar.events"]
     @ObservedObject var eventStore: EventStore
-    private let serverUrl = "https://34.74.43.253/"
+    private let serverUrl = "https://34.16.135.240/"
     
     var body: some View {
         if let rootVC = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.rootViewController {
