@@ -46,8 +46,8 @@
             filePath = "EduEmpower App/Features/Login/ViewModels/LoginViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "24"
-            endingLineNumber = "24"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "LoginViewModel"
             landmarkType = "3">
          </BreakpointContent>

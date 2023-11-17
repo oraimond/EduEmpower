@@ -11,6 +11,7 @@ struct SingleTaskView: View {
     @ObservedObject var viewModel: TasksViewModel = TasksViewModel()
     @State var task: varTask
     @State var showEditView: Bool = false
+    
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -43,18 +44,30 @@ struct SingleTaskView: View {
             
             Spacer()
             
-            Button(action: {
-                // auto schedule
-            }) {
-                Text("Auto Schedule")
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            if task.scheduled {
+                Button(action: {}) {
+                    Text("Scheduled")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(Color.gray)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }.disabled(true)
+            } else {
+                Button(action: {
+                    TaskStore.shared.generate_events(task_id: task.id, server_id: task.server_id)
+                    task.scheduled = true
+                }) {
+                    Text("Auto Schedule")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
-            .padding(.top, 10)
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

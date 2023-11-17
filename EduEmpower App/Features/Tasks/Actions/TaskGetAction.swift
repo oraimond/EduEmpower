@@ -1,15 +1,15 @@
 //
-//  ProfileAction.swift
+//  TaskGetAction.swift
 //  EduEmpower App
 //
-//  Created by Oli Raimond on 11/14/23.
+//  Created by Oli Raimond on 11/15/23.
 //
 
 import Foundation
 
-struct ProfileAction {
-    func call(completion: @escaping (ProfileResponse) -> Void) {
-        let path = "/user/profile"
+struct TaskGetAction {
+    func call(completion: @escaping ([TaskGetResponse]) -> Void) {
+        let path = "/tasks"
         
         
         guard let url = URL(string: APIConstants.base_url + path) else {
@@ -25,12 +25,11 @@ struct ProfileAction {
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             if let data = data {
-                let response = try? JSONDecoder().decode(ProfileResponse.self, from: data)
-                
-                if let response = response {
+                do {
+                    let response = try JSONDecoder().decode([TaskGetResponse].self, from: data)
                     completion(response)
-                } else {
-                    print("Failed to decode login")
+                } catch let jsonError {
+                    print("Failed to decode tasks, error: \(jsonError)")
                 }
             } else {
                 // Error: API request failed
@@ -41,4 +40,6 @@ struct ProfileAction {
         }
         task.resume()
     }
+    
+    
 }

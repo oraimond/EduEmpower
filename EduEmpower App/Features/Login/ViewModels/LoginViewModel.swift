@@ -12,12 +12,6 @@ class LoginViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var password: String = ""
     
-    var authStore: AuthStore
-    
-    init(authStore: AuthStore) {
-        self.authStore = authStore
-    }
-    
     var buttonColor: Color {
         return ready() ? Color.blue :  Color.gray
     }
@@ -34,12 +28,14 @@ class LoginViewModel: ObservableObject {
             )
         ).call { response in
             print("Login successful, navigate to the Home screen")
-            self.authStore.loggedIn.toggle()
-            self.authStore.token = response.token
-            self.authStore.user_id = response.user_id
-            self.authStore.expires_at = response.expires_at
+            AuthStore.shared.loggedIn.toggle()
+            AuthStore.shared.token = response.token
+            AuthStore.shared.user_id = response.user_id
+            AuthStore.shared.expires_at = response.expires_at
             
-            self.authStore.getProfile()
+            // Get info from database
+            AuthStore.shared.getProfile()
+            TaskStore.shared.fetchTasks()
         }
     }
 }

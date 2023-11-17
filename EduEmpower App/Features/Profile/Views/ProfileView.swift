@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel = ProfileViewModel()
-    @ObservedObject var authStore: AuthStore
+    @ObservedObject var authStore: AuthStore = AuthStore.shared
     
     @State private var logOutActive = false
     

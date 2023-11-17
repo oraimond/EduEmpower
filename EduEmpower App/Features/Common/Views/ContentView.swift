@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State private var selectedTab = 0
     
-    @ObservedObject var authStore: AuthStore = AuthStore()
+    @ObservedObject var authStore: AuthStore = AuthStore.shared
     
     var body: some View {
         
@@ -41,16 +41,14 @@ struct ContentView: View {
                         Text("Statistics")
                     }.tag(3)
                 
-                ProfileView(authStore: authStore)
-                    .environmentObject(authStore)
+                ProfileView()
                     .tabItem {
                         Image(systemName: "person.crop.circle.fill")
                         Text("Profile")
                     }.tag(4)
             }
         } else {
-            LoginView(authStore: authStore)
-                .environmentObject(authStore)
+            LoginView()
         }
     }
 }

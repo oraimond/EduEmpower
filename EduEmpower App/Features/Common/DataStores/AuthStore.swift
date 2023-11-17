@@ -8,6 +8,8 @@
 import Foundation
 
 class AuthStore: ObservableObject {
+    static let shared = AuthStore()
+    
     @Published var loggedIn: Bool = false
     var token: String?
     var user_id: String?
@@ -17,13 +19,22 @@ class AuthStore: ObservableObject {
     @Published var lname: String?
     @Published var email: String?
 
+    private init() {} // ensure that only one instance of AuthStore can be created
     
     func getProfile() {
-        ProfileAction().call(token: token) { response in
+        ProfileAction().call() { response in
             self.fname = response.first_name
             self.lname = response.last_name
             self.email = response.email
         }
+    }
+    
+    func getToken() -> String {
+        if let token {
+            return token
+        }
+        print("No Auth Token")
+        return "NoToken"
     }
     
     func getFname() -> String {
@@ -38,5 +49,9 @@ class AuthStore: ObservableObject {
             return lname
         }
         return "Unknown"
+    }
+    
+    func logout() {
+        // TODO clear all data stores
     }
 }

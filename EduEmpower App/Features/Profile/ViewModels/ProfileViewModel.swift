@@ -12,6 +12,4 @@ class ProfileViewModel: ObservableObject {
     var buttonColor: Color {
         return Color.blue
     }
-    
-    let dummyUser: User = User(fname: "John", lname: "Doe")
 }
