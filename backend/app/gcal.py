@@ -37,14 +37,24 @@ def postgoogleDB(request):
     except requests.exceptions.HTTPError as e:
         return e
     
+    username = request_content['username']
+
+
 
     calendar = response.json()["items"]
 
-    
+    for event in calendar:
+        try:
+            start = event['start']['dateTime']
+            end = event['end']['dateTime']
+            summary = event['summary']
+        except TypeError as e:
+            print(e)
+            return
+        query = f"""
+        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', \'username\')
+        """
+        cursor = connection.cursor()
+        cursor.execute(query)
 
-
-
-
-
-    # Return chatterID and its lifetime
     return JsonResponse({})
