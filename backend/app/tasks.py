@@ -12,7 +12,7 @@ def gettasksDB(request):
         return HttpResponse(status=404)
     cursor = connection.cursor()
     #cursor.execute('SELECT taskid, tasktitle, groupid, timeneeded, duedate, description, userid FROM tasks ORDER BY userid DESC;')  # not sure what fields we wanted
-    cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userid DESC;')
+    cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
     rows = cursor.fetchall()
 
     response = {}
@@ -28,17 +28,18 @@ def posttasksDB(request):
     if request.method != 'POST':
         return HttpResponse(status=404)
     json_data = json.loads(request.body)
-    taskid = json_data['taskid']
-    tasktitle = json_data['tasktitle']
-    groupid = json_data['groupid']
-    timeneeded = json_data['timeneeded']
-    duedate = json_data['duedate']
+    title = json_data['title']
+    duration = json_data['duration']
+    due_date = json_data['due_date']
     description = json_data['description']
-    userid = json_data['userid']
+    userids = json_data['userids']
+    scheduled = json_data['scheduled']
     cursor = connection.cursor()
     #cursor.execute('INSERT INTO tasks (taskid, tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
            #        '(%s, %s, %s, %s, %s, %s, %s );', (taskid, tasktitle, groupid, timeneeded, duedate, description, userid))
-
+    cursor.execute('INSERT INTO tasks (title, duration, due_date, description, userids, scheduled) VALUES '
+                   '(%s, %s, %s, %s, %s, %s );', (title, duration, due_date, description, userids, scheduled))
+    
     return JsonResponse({})
 
 def edittasksDB(request, taskid):
