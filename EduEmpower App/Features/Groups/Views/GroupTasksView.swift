@@ -10,7 +10,7 @@ import SwiftUI
 struct GroupTasksView: View {
     @State var  group: varGroup
     @Binding var task: [varTask]
-    @ObservedObject var viewModel: TasksViewModel = TasksViewModel()
+    @ObservedObject var viewModel: GroupViewModel = GroupViewModel()
     
     @State var newTask: varTask = varTask( title: "", timeNeeded: 0, dueDate: Date(), taskDescription: "", members: [])
     @State var showingEditTaskView = false

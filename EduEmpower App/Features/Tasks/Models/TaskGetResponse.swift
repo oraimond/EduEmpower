@@ -15,7 +15,7 @@ struct TaskGetResponse: Decodable {
     let description: String
     let assigned_users: [AssignedUser]
     let scheduled: Bool
-    let group_id: String?
+    let group_id: Int?
 }
 
 struct AssignedUser: Decodable {

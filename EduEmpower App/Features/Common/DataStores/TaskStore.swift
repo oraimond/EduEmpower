@@ -19,10 +19,13 @@ class TaskStore: ObservableObject {
             
             for task in response {
                 let members = task.assigned_users.map {
-                    User(id: $0.user_id, fname: $0.fname, lname: $0.lname)
+                    User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
                 }
-                print(task.title)
-                print(task.id)
+                
+                var group: varGroup?
+                if let group_id = task.group_id {
+                    group = varGroup(server_id: group_id, groupName: "TODO", members: [])
+                }
 
                 
                 self.save(varTask(
@@ -33,8 +36,8 @@ class TaskStore: ObservableObject {
                     dueDate: DateFormatter().date(from: task.due_date) ?? Date(),
                     taskDescription: task.description,
                     members: members,
-                    scheduled: task.scheduled
-                    //group: varGroup?
+                    scheduled: task.scheduled,
+                    group: group
                 ), fetching: true)
             }
         }

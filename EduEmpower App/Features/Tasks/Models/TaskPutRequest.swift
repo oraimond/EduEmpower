@@ -17,5 +17,5 @@ struct TaskPutRequest: Encodable {
     let description: String
     let assigned_users: [String]
     let scheduled: Bool
-    let group_id: String?
+    let group_id: Int?
 }

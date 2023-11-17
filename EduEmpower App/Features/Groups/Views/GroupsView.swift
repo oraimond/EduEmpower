@@ -26,7 +26,7 @@ struct GroupsView: View {
                     Button {
                         showingEditGroupView = true
                     } label: {
-                        Image(systemName: "plus.square")
+                        Image(systemName: "plus")
                     }
                 }
             }

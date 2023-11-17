@@ -36,6 +36,7 @@
 		AF872EE32B06728A006154DD /* TaskResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF872EE22B06728A006154DD /* TaskResponse.swift */; };
 		AF872EE52B067A98006154DD /* TaskPutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF872EE42B067A98006154DD /* TaskPutRequest.swift */; };
 		AF872EE92B0703C8006154DD /* TaskAutoGenerateAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF872EE82B0703C8006154DD /* TaskAutoGenerateAction.swift */; };
+		AF872EEB2B070B17006154DD /* GroupStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF872EEA2B070B17006154DD /* GroupStore.swift */; };
 		AF9641CB2B0445D0000608FD /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF9641CA2B0445D0000608FD /* APIConstants.swift */; };
 		AF97E0BA2AFFC33300759297 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0B92AFFC33300759297 /* Task.swift */; };
 		AF97E0BC2AFFC4C600759297 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF97E0BB2AFFC4C600759297 /* Event.swift */; };
@@ -47,7 +48,6 @@
 		AFC1FC702B044DCC0086F846 /* AuthStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1FC6F2B044DCC0086F846 /* AuthStore.swift */; };
 		AFC1FC732B0456B50086F846 /* ProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1FC722B0456B50086F846 /* ProfileResponse.swift */; };
 		AFC1FC782B04570F0086F846 /* ProfileAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC1FC772B04570F0086F846 /* ProfileAction.swift */; };
-		AFD997AA2B0273C7004888DC /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A72B0273C7004888DC /* EditGroupView.swift */; };
 		AFD997AA2B0273C7004888DC /* CreateGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A72B0273C7004888DC /* CreateGroupView.swift */; };
 		AFD997AB2B0273C7004888DC /* GroupListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A82B0273C7004888DC /* GroupListRow.swift */; };
 		AFD997AC2B0273C7004888DC /* GroupTaskListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */; };
@@ -108,6 +108,7 @@
 		AF872EE22B06728A006154DD /* TaskResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskResponse.swift; sourceTree = "<group>"; };
 		AF872EE42B067A98006154DD /* TaskPutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPutRequest.swift; sourceTree = "<group>"; };
 		AF872EE82B0703C8006154DD /* TaskAutoGenerateAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAutoGenerateAction.swift; sourceTree = "<group>"; };
+		AF872EEA2B070B17006154DD /* GroupStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupStore.swift; sourceTree = "<group>"; };
 		AF9641CA2B0445D0000608FD /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		AF97E0B92AFFC33300759297 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		AF97E0BB2AFFC4C600759297 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -119,7 +120,6 @@
 		AFC1FC6F2B044DCC0086F846 /* AuthStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStore.swift; sourceTree = "<group>"; };
 		AFC1FC722B0456B50086F846 /* ProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponse.swift; sourceTree = "<group>"; };
 		AFC1FC772B04570F0086F846 /* ProfileAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAction.swift; sourceTree = "<group>"; };
-		AFD997A72B0273C7004888DC /* EditGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		AFD997A72B0273C7004888DC /* CreateGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupView.swift; sourceTree = "<group>"; };
 		AFD997A82B0273C7004888DC /* GroupListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupListRow.swift; sourceTree = "<group>"; };
 		AFD997A92B0273C7004888DC /* GroupTaskListRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTaskListRow.swift; sourceTree = "<group>"; };
@@ -369,6 +369,7 @@
 				AF499CAD2B002B8400255F3A /* EventStore.swift */,
 				AFC1FC6F2B044DCC0086F846 /* AuthStore.swift */,
 				AF55F14A2B0518B900D85E2A /* TaskStore.swift */,
+				AF872EEA2B070B17006154DD /* GroupStore.swift */,
 			);
 			path = DataStores;
 			sourceTree = "<group>";
@@ -652,6 +653,7 @@
 				AF55F14E2B051E4E00D85E2A /* TaskGetAction.swift in Sources */,
 				AF2216482B0042F800CA4164 /* Group.swift in Sources */,
 				AFC1FC702B044DCC0086F846 /* AuthStore.swift in Sources */,
+				AF872EEB2B070B17006154DD /* GroupStore.swift in Sources */,
 				409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */,
 				AFD997B02B0273EA004888DC /* InsightListRow.swift in Sources */,
 				AF97E0BA2AFFC33300759297 /* Task.swift in Sources */,
