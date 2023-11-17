@@ -12,10 +12,11 @@ def gettasksDB(request):
         return HttpResponse(status=404)
     cursor = connection.cursor()
     #cursor.execute('SELECT taskid, tasktitle, groupid, timeneeded, duedate, description, userid FROM tasks ORDER BY userid DESC;')  # not sure what fields we wanted
-    #rows = cursor.fetchall()
+    cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userid DESC;')
+    rows = cursor.fetchall()
 
     response = {}
-    #response['tasks'] = rows
+    response['tasks'] = rows
     return JsonResponse(response)
 
 def posttasksDB(request):
