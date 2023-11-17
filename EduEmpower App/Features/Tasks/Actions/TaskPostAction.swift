@@ -13,7 +13,7 @@ struct TaskPostAction {
     
     func call(completion: @escaping (TaskResponse) -> Void) {
         
-        let path = "/task"
+        let path = "/task/"
         
         
         guard let url = URL(string: APIConstants.base_url + path) else {

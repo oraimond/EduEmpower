@@ -7,15 +7,13 @@
 
 import Foundation
 
-import Foundation
-
 struct TaskAutoGenerateAction {
     let server_id: Int
     
     func call() {
         
         let initial_path = "/task/"
-        let final_path = "/generate_events"
+        let final_path = "/generate_events/"
         
         
         guard let url = URL(string: APIConstants.base_url + initial_path + String(server_id) + final_path) else {

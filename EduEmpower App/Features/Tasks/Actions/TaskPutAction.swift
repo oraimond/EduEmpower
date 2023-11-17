@@ -13,10 +13,9 @@ struct TaskPutAction {
     
     func call(completion: @escaping (TaskResponse) -> Void) {
         
-        let path = "/task"
+        let path = "/task/"
         
-        
-        guard let url = URL(string: APIConstants.base_url + path) else {
+        guard let url = URL(string: APIConstants.base_url + path + String(parameters.id)) else {
             print("URL Error")
             return
         }

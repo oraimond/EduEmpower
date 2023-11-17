@@ -9,7 +9,7 @@ import Foundation
 
 struct TaskGetAction {
     func call(completion: @escaping ([TaskGetResponse]) -> Void) {
-        let path = "/tasks"
+        let path = "/tasks/"
         
         
         guard let url = URL(string: APIConstants.base_url + path) else {
