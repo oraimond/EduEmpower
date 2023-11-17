@@ -169,7 +169,7 @@ def autoscheduleDB(request, taskid):
     # add new event to the events database table 
     cursor = connection.cursor()
     cursor.execute('INSERT INTO events (title, start, end, type, users, taskid) VALUES '
-                   '(%s, %s, %s, %s, %s, %s, %s);', (task_title, viable_timeslots[0][0], viable_timeslots[0][1], None, task_userids, taskid))
+                   '(%s, %s, %s, %s, %s, %s, %s);', (task_title, viable_timeslots[0][0], viable_timeslots[0][0] + task_duration, 'automatedTask', task_userids, taskid))
     
 
     response = {}
