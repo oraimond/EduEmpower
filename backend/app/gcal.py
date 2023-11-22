@@ -17,15 +17,24 @@ def postgoogleDB(request):
     
     flow = Flow.from_client_secrets_file(CLIENT_SECRET_FILE, scopes)
     flow.redirect_uri = ""
-    
+    cursor = connection.cursor()
     request_content = json.loads(request.body)
 
     auth_code = request_content['auth_code']
     username = [request_content['username']]
 
     flow.fetch_token(code=auth_code)
+    credentials = flow.credentials
 
+    fetch_token = credentials['fetch_token']
 
+    query = f"""
+    UPDATE users
+    SET fetch_token = \'{fetch_token}\'
+    WHERE userid = {username}
+    """
+    cursor.execute(query)
+    
     sess = flow.authorized_session()
     
     timeMin = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -52,7 +61,6 @@ def postgoogleDB(request):
         query = f"""
         INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{username}])
         """
-        cursor = connection.cursor()
         cursor.execute(query)
 
     return JsonResponse({})
