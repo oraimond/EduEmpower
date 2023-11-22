@@ -21,17 +21,17 @@ def postgoogleDB(request):
     request_content = json.loads(request.body)
 
     auth_code = request_content['auth_code']
-    username = [request_content['username']]
+    username = request_content['username']
 
     flow.fetch_token(code=auth_code)
     credentials = flow.credentials
 
-    fetch_token = credentials['fetch_token']
+    refresh_token = credentials.refresh_token
 
     query = f"""
     UPDATE users
-    SET fetch_token = \'{fetch_token}\'
-    WHERE userid = {username}
+    SET refresh_token = \'{refresh_token}\'
+    WHERE userid =\'{username}\';
     """
     cursor.execute(query)
     
