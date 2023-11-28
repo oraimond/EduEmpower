@@ -46,6 +46,23 @@ def edittasksDB(request, taskid):
     """
     TODO: Implement this function
     """
+
+    if request.method != 'POST':
+        return HttpResponse(status=404)
+    json_data = json.loads(request.body)
+    title = json_data['title']
+    duration = json_data['duration']
+    due_date = json_data['due_date']
+    description = json_data['description']
+    userids = json_data['userids']
+    scheduled = json_data['scheduled']
+    cursor = connection.cursor()
+
+    cursor.execute('UPDATE tasks SET (title, duration, due_date, description, userids, scheduled) VALUES '
+                   '(%s, %s, %s, %s, %s, %s ) WHERE taskid = %s;', (title, duration, due_date, description, userids, scheduled), 
+                   (taskid)) # this might need to be edited !!!!!!!!
+                   
+    
     return JsonResponse({})
 
 def deletetaskDB(request, taskid):
