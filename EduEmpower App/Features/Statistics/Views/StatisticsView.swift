@@ -8,12 +8,27 @@
 import SwiftUI
 import UIKit
 import DeviceActivity
+import Foundation
 
 extension DeviceActivityReport.Context {
     static let pieChart = Self("Pie Chart")
 }
 
 struct StatisticsView: View {
+    private var currentDate: Date { Date() }
+    
+    private var startOfWeek: Date {
+        Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate))!
+    }
+    
+    private var endOfWeek: Date {
+        Calendar.current.date(byAdding: .weekOfYear, value: 1, to: startOfWeek)!
+    }
+    
+    private var thisWeek: DateInterval {
+        DateInterval(start: startOfWeek, end: endOfWeek)
+    }
+    
     @ObservedObject var viewModel: StatisticsViewModel = StatisticsViewModel()
     
     @State var newInsight: varInsight = varInsight(title: "", insightDescription: "")
