@@ -68,7 +68,7 @@ def edittasksDB(request, taskid):
 def deletetaskDB(request, taskid):
     """
     TODO: Implement this function
-    """
+    """ #change this to a DELETE staements where it searches for the specifc task in table
     member = Member.objects.get(id=id)  # needs testing
     member.delete()
     return JsonResponse({})
