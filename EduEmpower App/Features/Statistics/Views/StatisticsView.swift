@@ -15,19 +15,8 @@ extension DeviceActivityReport.Context {
 }
 
 struct StatisticsView: View {
-    private var currentDate: Date { Date() }
-    
-    private var startOfWeek: Date {
-        Calendar.current.date(from: Calendar.current.dateComponents([.yearForWeekOfYear, .weekOfYear], from: currentDate))!
-    }
-    
-    private var endOfWeek: Date {
-        Calendar.current.date(byAdding: .weekOfYear, value: 1, to: startOfWeek)!
-    }
-    
-    private var thisWeek: DateInterval {
-        DateInterval(start: startOfWeek, end: endOfWeek)
-    }
+    @State private var context: DeviceActivityReport.Context = .pieChart
+    @State private var filter = DeviceActivityFilter(segment: .daily(during: DateInterval(start: Date(), end: Date())))
     
     @ObservedObject var viewModel: StatisticsViewModel = StatisticsViewModel()
     
