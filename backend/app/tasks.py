@@ -7,7 +7,7 @@ import json
 def gettasksDB(request):
     """
     TODO: Edit function so that it returns tasks for authenticated user.
-    User authentication must be completed first"""
+    User authentication must be completed first""" # need to search the table for tasks that match the userid !!!!!!!!
     if request.method != 'GET':
         return HttpResponse(status=404)
     cursor = connection.cursor()
@@ -24,7 +24,7 @@ def posttasksDB(request):
     TODO: Edit fields so that it matches API definition on Github page. 
     Postgres table needs to be updated with assigned_users and group.
     taskid isn't passed in the request, it is generated here or in postgres. 
-    """
+    """  # generate the taskid similar to userid on signup !!!!!!!!
     if request.method != 'POST':
         return HttpResponse(status=404)
     json_data = json.loads(request.body)
