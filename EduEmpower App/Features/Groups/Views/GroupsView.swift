@@ -9,29 +9,33 @@ import SwiftUI
 
 struct GroupsView: View {
     @ObservedObject var viewModel: GroupViewModel = GroupViewModel()
+    @ObservedObject var groupsStore: GroupStore = GroupStore.shared
+    @ObservedObject var tasksStore: TaskStore = TaskStore.shared
     
-    @State var newGroup: varGroup = varGroup(groupName: "", members: [])
+    @State var newGroup: varGroup?
     
     @State var showingEditGroupView = false
     @State var showingInvitationView = false
     
     var body: some View {
         NavigationStack{
-            List(viewModel.dummyGroups, id: \.id) { group in
-                GroupListRow(group: group, task: $viewModel.dummyTasks)
+            List(groupsStore.groups, id: \.id) { group in
+                GroupListRow(group: group, task: $tasksStore.tasks)
             }
             .navigationTitle("Groups")
             .toolbar {
                 ToolbarItem(placement:.navigationBarTrailing) {
                     Button {
+                        newGroup = varGroup()
                         showingEditGroupView = true
                     } label: {
-                        Image(systemName: "plus.square")
+                        Image(systemName: "plus")
                     }
                 }
             }
-            .sheet(isPresented: $showingEditGroupView) {
-                CreateGroupView(group: $newGroup)
+            .sheet(item: $newGroup, onDismiss: { newGroup = nil }) {
+                group in
+                CreateGroupView(group: Binding.constant(group))
             }
             
             Spacer()

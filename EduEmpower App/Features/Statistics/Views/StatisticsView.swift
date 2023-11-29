@@ -35,6 +35,7 @@ struct StatisticsView: View {
             PieChartView(dataEntries: viewModel.dummyStats)
                 .frame(width: 150, height: 150)
             
+            
             VStack {
                 List(viewModel.dummyInsights, id: \.id) {
                     insight in InsightListRow(insight: insight)

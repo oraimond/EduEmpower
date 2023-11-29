@@ -58,6 +58,13 @@ struct CreateGroupView: View {
                         
                         // send to database
                         // TODO
+                        let newGroup = varGroup(
+                            id: group.id,
+                            server_id: group.server_id,
+                            groupName: groupName,
+                            members: groupMembers
+                        )
+                        GroupStore.shared.save(newGroup)
                         
                         // exit
                         presentationMode.wrappedValue.dismiss()
