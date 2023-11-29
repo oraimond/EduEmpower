@@ -7,6 +7,11 @@
 
 import SwiftUI
 import UIKit
+import DeviceActivity
+
+extension DeviceActivityReport.Context {
+    static let pieChart = Self("Pie Chart")
+}
 
 struct StatisticsView: View {
     @ObservedObject var viewModel: StatisticsViewModel = StatisticsViewModel()
