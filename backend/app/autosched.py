@@ -85,7 +85,7 @@ def autoscheduleDB(request, taskid):
 
     if len(rows) != 8:
         print('The resulting query from the Tasks table has one or more missing attributes.')
-        return HttpResponse(status=500)
+        return HttpResponse("CUSTOM MESSAGE", status=500, headers={"CUSTOM MESSAGE": "Result of query from Tasks table has missing attributes."})
 
     task_title = rows[0]
     task_duration = rows[1]
@@ -97,11 +97,11 @@ def autoscheduleDB(request, taskid):
 
     if rows[7] != taskid:
         print('TaskID from front end does not match TaskID retreived from database.')
-        return HttpResponse(status=500)
+        return HttpResponse("CUSTOM MESSAGE", status=500, headers={"CUSTOM MESSAGE": "TaskID from front end does not match TaskID retreived from database."})
     
     if task_scheduled == True:
         print('The given TaskID has already been scheduled.')
-        return HttpResponse(status=500)
+        return HttpResponse("CUSTOM MESSAGE", status=500, headers={"CUSTOM MESSAGE": "The given TaskID has already been scheduled."})
 
     # get calendar events from database 
     cursor1 = connection.cursor()
