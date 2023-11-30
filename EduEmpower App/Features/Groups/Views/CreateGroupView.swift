@@ -64,8 +64,7 @@ struct CreateGroupView: View {
                         group.invitees = invitees
                         group.members.append(inviter)
                         
-                        // send to database
-                        // TODO
+
                         let newGroup = varGroup(
                             id: group.id,
                             server_id: group.server_id,
@@ -75,6 +74,8 @@ struct CreateGroupView: View {
                             members: group.members
                         )
                         GroupStore.shared.save(newGroup)
+                        
+                        //TODO: for each invitees, update user's invitations (append this specific group)
                         
                         // exit
                         presentationMode.wrappedValue.dismiss()
