@@ -12,6 +12,7 @@ struct GroupGetResponse: Decodable {
     let groupName: String
     let inviter: GroupUser
     let invitees: [GroupUser]
+    let members: [GroupUser]
 }
 
 struct GroupUser: Decodable {

@@ -7,9 +7,16 @@
 
 import Foundation
 
-struct GroupPutRequest: Encodable {
+struct GroupPutRequest {
     let id: Int
     let groupName: String
-    let inviter: String
-    let invitees: [String]
+    let inviter: User
+    let invitees: [User]
+    let members: [User]
 }
+
+//struct GroupUser: Decodable {
+//    let user_id: String
+//    let fname: String
+//    let lname: String
+//}

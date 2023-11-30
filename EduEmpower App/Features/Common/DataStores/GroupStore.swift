@@ -17,15 +17,21 @@ class GroupStore: ObservableObject {
     func fetchGroups() {
         GroupGetAction().call() { response in
             for group in response {
-                let invitees = group.group_users.map {
+                let inviter = User(username: group.inviter.user_id, fname: group.inviter.fname, lname: group.inviter.lname, email: "TODO")
+                let invitees = group.invitees.map {
                     User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
                 }
+                var members = [User]()
+                members.append(inviter)
+                //TODO: append members who accepted invitations
                 
                 self.save(varGroup(
                     id: UUID(),
                     server_id: group.id,
                     groupName: group.groupName,
-                    invitees: group.invitees
+                    inviter: inviter,
+                    invitees: invitees,
+                    members: members
                 ), fetching: true)
                 
             }
@@ -39,7 +45,7 @@ class GroupStore: ObservableObject {
                 GroupDeleteAction(server_id: server_id).call()
             }
         } else {
-            print("Unable to delete task")
+            print("Unable to delete group")
         }
     }
     
@@ -56,7 +62,9 @@ class GroupStore: ObservableObject {
                     GroupPutAction(parameters: GroupPutRequest(
                         id: server_id,
                         groupName: group.groupName,
-                        group_users: [] //TODO
+                        inviter: group.inviter,
+                        invitees: group.invitees,
+                        members: group.members
                     )).call() { response in
                         if response.id == server_id {
                             self.groups[index] = group
@@ -68,7 +76,9 @@ class GroupStore: ObservableObject {
             } else {
                 GroupPostAction(parameters: GroupPostRequest(
                     groupName: group.groupName,
-                    group_users: [] //TODO
+                    inviter: group.inviter,
+                    invitees: group.invitees,
+                    members: group.members
                 )).call() { response in
                     var groupCopy = group
                     groupCopy.server_id = response.id

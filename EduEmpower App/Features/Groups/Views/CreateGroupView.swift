@@ -9,10 +9,11 @@ import SwiftUI
 
 struct CreateGroupView: View {
     @Binding var group: varGroup // Pass in the selected group
-
+    // TODO: Pass in logged-in user info to set as inviter
     @State var groupName: String
     @State var inviter: User
     @State var invitees: [User]
+    @State var members: [User]
     @State var newMemberEmail: String
     
     @Environment(\.presentationMode) var presentationMode
@@ -23,6 +24,8 @@ struct CreateGroupView: View {
         //TODO: logged-in user is the inviter
         self._inviter = State(initialValue: group.wrappedValue.inviter)
         self._invitees = State(initialValue: group.wrappedValue.invitees)
+        //TODO: members should include inviter as default
+        self._members = State(initialValue: group.wrappedValue.members)
         self._newMemberEmail = State(initialValue: "")
     }
 
@@ -57,7 +60,9 @@ struct CreateGroupView: View {
                     Button(action: {
                         // Store locally
                         group.groupName = groupName
+                        group.inviter = inviter
                         group.invitees = invitees
+                        group.members.append(inviter)
                         
                         // send to database
                         // TODO
@@ -66,7 +71,8 @@ struct CreateGroupView: View {
                             server_id: group.server_id,
                             groupName: groupName,
                             inviter: inviter,
-                            invitees: invitees
+                            invitees: invitees,
+                            members: group.members
                         )
                         GroupStore.shared.save(newGroup)
                         

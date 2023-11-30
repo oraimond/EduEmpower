@@ -15,7 +15,6 @@
 		406684492B17E15F00394CC7 /* GroupPostAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684482B17E15F00394CC7 /* GroupPostAction.swift */; };
 		4066844B2B17E26800394CC7 /* GroupPutAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844A2B17E26800394CC7 /* GroupPutAction.swift */; };
 		4066844D2B17E31200394CC7 /* GroupDeleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */; };
-		4066844F2B17F7BE00394CC7 /* InvitationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844E2B17F7BE00394CC7 /* InvitationStore.swift */; };
 		409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */; };
 		40C34F102B17CEFB00E9110F /* PieChartReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */; };
 		40C34F122B17CF2600E9110F /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C34F112B17CF2500E9110F /* PieChartView.swift */; };
@@ -98,7 +97,6 @@
 		406684482B17E15F00394CC7 /* GroupPostAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostAction.swift; sourceTree = "<group>"; };
 		4066844A2B17E26800394CC7 /* GroupPutAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPutAction.swift; sourceTree = "<group>"; };
 		4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDeleteAction.swift; sourceTree = "<group>"; };
-		4066844E2B17F7BE00394CC7 /* InvitationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationStore.swift; sourceTree = "<group>"; };
 		409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartReport.swift; sourceTree = "<group>"; };
 		40C34F112B17CF2500E9110F /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -418,7 +416,6 @@
 				AFC1FC6F2B044DCC0086F846 /* AuthStore.swift */,
 				AF55F14A2B0518B900D85E2A /* TaskStore.swift */,
 				AF872EEA2B070B17006154DD /* GroupStore.swift */,
-				4066844E2B17F7BE00394CC7 /* InvitationStore.swift */,
 			);
 			path = DataStores;
 			sourceTree = "<group>";
@@ -682,7 +679,6 @@
 				4066843F2B17DD3800394CC7 /* GroupPostRequest.swift in Sources */,
 				AF499CAC2B001E6D00255F3A /* CalendarView.swift in Sources */,
 				40C34F122B17CF2600E9110F /* PieChartView.swift in Sources */,
-				4066844F2B17F7BE00394CC7 /* InvitationStore.swift in Sources */,
 				AF872EE52B067A98006154DD /* TaskPutRequest.swift in Sources */,
 				AF44CF872AFE7F420087A57B /* ProfileView.swift in Sources */,
 				AF97E0BC2AFFC4C600759297 /* Event.swift in Sources */,
