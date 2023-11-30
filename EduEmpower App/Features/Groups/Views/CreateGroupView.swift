@@ -11,7 +11,8 @@ struct CreateGroupView: View {
     @Binding var group: varGroup // Pass in the selected group
 
     @State var groupName: String
-    @State var groupMembers: [User]
+    @State var inviter: User
+    @State var invitees: [User]
     @State var newMemberEmail: String
     
     @Environment(\.presentationMode) var presentationMode
@@ -19,7 +20,9 @@ struct CreateGroupView: View {
     init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
         self._groupName = State(initialValue: group.wrappedValue.groupName)
-        self._groupMembers = State(initialValue: group.wrappedValue.members)
+        //TODO: logged-in user is the inviter
+        self._inviter = State(initialValue: group.wrappedValue.inviter)
+        self._invitees = State(initialValue: group.wrappedValue.invitees)
         self._newMemberEmail = State(initialValue: "")
     }
 
@@ -32,18 +35,18 @@ struct CreateGroupView: View {
                 
                 Section(header: Text("Group Members Emails")) {
                     List {
-                        ForEach(groupMembers, id: \.id) { member in
-                            TextField("Email", text: $groupMembers[getIndex(for: member)].email)
-                                .onChange(of: groupMembers[getIndex(for: member)].email) { newEmail in
+                        ForEach(invitees, id: \.id) { invitee in
+                            TextField("Email", text: $invitees[getIndex(for: invitee)].email)
+                                .onChange(of: invitees[getIndex(for: invitee)].email) { newEmail in
                                     if let user = findUser(with: newEmail) {
-                                        groupMembers[getIndex(for: member)] = user
+                                        invitees[getIndex(for: invitee)] = user
                                     }
                                 }
                         }
                         TextField("Add New Member", text: $newMemberEmail)
                             .onChange(of: newMemberEmail) { newEmail in
                                 let newUser = User(fname: "", lname: "", email: newEmail)
-                                groupMembers.append(newUser)
+                                invitees.append(newUser)
                             }
                     }
                 }
@@ -54,7 +57,7 @@ struct CreateGroupView: View {
                     Button(action: {
                         // Store locally
                         group.groupName = groupName
-                        group.members = groupMembers
+                        group.invitees = invitees
                         
                         // send to database
                         // TODO
@@ -62,7 +65,8 @@ struct CreateGroupView: View {
                             id: group.id,
                             server_id: group.server_id,
                             groupName: groupName,
-                            members: groupMembers
+                            inviter: inviter,
+                            invitees: invitees
                         )
                         GroupStore.shared.save(newGroup)
                         
@@ -77,7 +81,7 @@ struct CreateGroupView: View {
     }
     
     private func getIndex(for user: User) -> Int {
-        if let index = groupMembers.firstIndex(where: { $0.id == user.id }) {
+        if let index = invitees.firstIndex(where: { $0.id == user.id }) {
             return index
         }
         return 0
