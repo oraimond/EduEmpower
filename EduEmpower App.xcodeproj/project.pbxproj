@@ -16,8 +16,6 @@
 		4066844B2B17E26800394CC7 /* GroupPutAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844A2B17E26800394CC7 /* GroupPutAction.swift */; };
 		4066844D2B17E31200394CC7 /* GroupDeleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */; };
 		4066844F2B17F7BE00394CC7 /* InvitationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844E2B17F7BE00394CC7 /* InvitationStore.swift */; };
-		406684512B17F84F00394CC7 /* InvitationPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684502B17F84F00394CC7 /* InvitationPostRequest.swift */; };
-		406684532B17FC1A00394CC7 /* InvitationGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684522B17FC1A00394CC7 /* InvitationGetResponse.swift */; };
 		409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */; };
 		40C34F102B17CEFB00E9110F /* PieChartReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */; };
 		40C34F122B17CF2600E9110F /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C34F112B17CF2500E9110F /* PieChartView.swift */; };
@@ -101,8 +99,6 @@
 		4066844A2B17E26800394CC7 /* GroupPutAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPutAction.swift; sourceTree = "<group>"; };
 		4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDeleteAction.swift; sourceTree = "<group>"; };
 		4066844E2B17F7BE00394CC7 /* InvitationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationStore.swift; sourceTree = "<group>"; };
-		406684502B17F84F00394CC7 /* InvitationPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationPostRequest.swift; sourceTree = "<group>"; };
-		406684522B17FC1A00394CC7 /* InvitationGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationGetResponse.swift; sourceTree = "<group>"; };
 		409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartReport.swift; sourceTree = "<group>"; };
 		40C34F112B17CF2500E9110F /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -196,8 +192,6 @@
 				406684402B17DE7500394CC7 /* GroupGetResponse.swift */,
 				406684422B17DF8300394CC7 /* GroupPutRequest.swift */,
 				406684442B17DFD400394CC7 /* GroupResponse.swift */,
-				406684502B17F84F00394CC7 /* InvitationPostRequest.swift */,
-				406684522B17FC1A00394CC7 /* InvitationGetResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -670,7 +664,6 @@
 				40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */,
 				406684452B17DFD400394CC7 /* GroupResponse.swift in Sources */,
 				40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */,
-				406684532B17FC1A00394CC7 /* InvitationGetResponse.swift in Sources */,
 				AF97E0C12AFFC94200759297 /* TasksViewModel.swift in Sources */,
 				AF6F45402B05B84500FA4B9A /* TaskPostRequest.swift in Sources */,
 				AFD997B22B0273EA004888DC /* UsagePieView.swift in Sources */,
@@ -679,7 +672,6 @@
 				AFE05E682AF80995003D22A2 /* LoginViewModel.swift in Sources */,
 				40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */,
 				AFD997AB2B0273C7004888DC /* GroupListRow.swift in Sources */,
-				406684512B17F84F00394CC7 /* InvitationPostRequest.swift in Sources */,
 				AF97E0BE2AFFC7E500759297 /* TaskListRow.swift in Sources */,
 				AFD997B52B0273F3004888DC /* StatisticsViewModel.swift in Sources */,
 				AF44CF752AFE7D560087A57B /* HomeView.swift in Sources */,

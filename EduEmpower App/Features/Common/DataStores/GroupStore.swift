@@ -17,7 +17,7 @@ class GroupStore: ObservableObject {
     func fetchGroups() {
         GroupGetAction().call() { response in
             for group in response {
-                let members = group.group_users.map {
+                let invitees = group.group_users.map {
                     User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
                 }
                 
@@ -25,7 +25,7 @@ class GroupStore: ObservableObject {
                     id: UUID(),
                     server_id: group.id,
                     groupName: group.groupName,
-                    members: members
+                    invitees: group.invitees
                 ), fetching: true)
                 
             }

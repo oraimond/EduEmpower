@@ -9,5 +9,6 @@ import Foundation
 
 struct GroupPostRequest: Encodable {
     let groupName: String
-    let group_users: [String]
+    let inviter: String
+    let invitees: [String]
 }
