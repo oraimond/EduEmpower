@@ -57,7 +57,7 @@ def edittasksDB(request, taskid):
     TODO: Implement this function
     """
 
-    if request.method != 'POST':
+    if request.method != 'PUT':
         return HttpResponse(status=404)
     json_data = json.loads(request.body)
     title = json_data['title']
@@ -79,6 +79,13 @@ def deletetaskDB(request, taskid):
     """
     TODO: Implement this function
     """ #change this to a DELETE staements where it searches for the specifc task in table
-    member = Member.objects.get(id=id)  # needs testing
-    member.delete()
-    return JsonResponse({})
+
+    if request.method != 'DELETE':
+        return HttpResponse(status=404)
+
+    cursor = connection.cursor()
+    cursor.execute('DELETE FROM tasks WHERE taskid = %s;' (taskid,))
+    
+    
+    
+    return JsonResponse({"message": "Task successfully deleted", "taskid": taskid })
