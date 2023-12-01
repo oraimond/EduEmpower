@@ -1,12 +1,116 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.db import connection
-from django.views.decorators.csrf import csrf_exempt
+from google.oauth2.credentials import Credentials
 import json
 from google_auth_oauthlib.flow import Flow
+from google_auth_oauthlib.flow import InstalledAppFlow
 from datetime import datetime
 from datetime import timedelta
 import requests
+
+
+def insertGCal(userid, name, start, end):
+    scopes = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/userinfo.email',
+              'https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/calendar.events',
+              'openid']
+    CLIENT_SECRET_FILE = "app/client_secret.json"
+
+    flow = InstalledAppFlow.from_client_secrets_file(
+        CLIENT_SECRET_FILE,
+        scopes=scopes
+    )
+    cursor = connection.cursor()
+
+    query = f'''
+        SELECT * FROM users WHERE userid = \'{userid}\';
+        '''
+    user = cursor.execute(query).fetchone()
+    refresh_token = user['refresh_token']
+    if refresh_token == "":
+        return
+    params = {
+        'refresh_token': refresh_token,
+        'client_id': flow.client_config['client_id'],
+        'client_secret': flow.client_config['client_secret'],
+        'grant_type': 'refresh_token'
+    }
+
+    r = requests.post(
+        url='https://oauth2.googleapis.com/token',
+        params=params
+    )
+
+    requestURL = "https://www.googleapis.com/calendar/v3/calendars/primary/events"
+
+    event = {
+        "summary": name,
+        "start": {
+            'dateTime': start,
+            'timeZone': 'America/Los_Angeles',
+        },
+        'end': {
+            'dateTime': end,
+            'timeZone': 'America/Los_Angeles',
+        },
+    }
+
+    creds = r.json()
+    auth_header = {'Authorization': f'Bearer {creds["access_token"]}'}
+    response = requests.get(url=requestURL, params=event, headers=auth_header)
+
+def updateCalendar(userid):
+    scopes = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/userinfo.email',
+              'https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/calendar.events',
+              'openid']
+    CLIENT_SECRET_FILE = "app/client_secret.json"
+
+    flow = InstalledAppFlow.from_client_secrets_file(
+        CLIENT_SECRET_FILE,
+        scopes=scopes
+    )
+    cursor = connection.cursor()
+
+    query = f'''
+    SELECT * FROM users WHERE userid = \'{userid}\';
+    '''
+    user = cursor.execute(query).fetchone()
+    refresh_token = user['refresh_token']
+    if refresh_token == "":
+        return
+    params = {
+        'refresh_token': refresh_token,
+        'client_id': flow.client_config['client_id'],
+        'client_secret': flow.client_config['client_secret'],
+        'grant_type': 'refresh_token'
+    }
+
+    r = requests.post(
+        url='https://oauth2.googleapis.com/token',
+        params=params
+    )
+    timeMin = datetime.now().strftime("%Y-%m-%dT%H:%M:%SZ")
+    timeMax = (datetime.now() + timedelta(365)).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    creds = r.json()
+    calendarRequest = f"https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin={timeMin}&timeMax={timeMax}&singleEvents=true&orderBy=startTime"
+    auth_header = {'Authorization': f'Bearer {creds["access_token"]}'}
+    response = requests.get(url=calendarRequest, headers=auth_header)
+    events = response.json()['items']
+
+    for event in events:
+        try:
+            start = event['start']['dateTime'].replace("T", " ")
+            end = event['end']['dateTime'].replace("T", " ")
+            summary = event['summary']
+        except TypeError as e:
+            print(e)
+            return
+        query = f"""
+        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{username}])
+        """
+        cursor.execute(query)
+
 
 def postgoogleDB(request):
     if request.method != 'POST':
@@ -21,7 +125,7 @@ def postgoogleDB(request):
     request_content = json.loads(request.body)
 
     auth_code = request_content['auth_code']
-    username = request_content['username']
+    username = request_content['userid']
 
     flow.fetch_token(code=auth_code)
     credentials = flow.credentials

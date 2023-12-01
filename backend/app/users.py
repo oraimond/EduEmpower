@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
 from django.db import connection
+from django.core.exceptions import ValidationError
 from django.views.decorators.csrf import csrf_exempt
 import json
+import uuid
 from google.oauth2 import id_token
 from google.auth.transport import requests
 
@@ -13,7 +15,29 @@ def loginDB(request):
     """
     TODO: Implement this
     """
-    return JsonResponse({})
+    username = request['userid']
+    password = request['password']
+
+    cursor = connection.cursor()
+
+    data = connection.execute(
+        f'''SELECT password FROM users WHERE userid = \'{username}\''''
+    )
+    user = data.fetchone()
+
+    if not user:
+        raise ValidationError
+
+    index1 = user['password'].find('$')
+    index2 = user['password'].rfind('$')
+    salt = user['password'][index1 + 1:index2]
+    # print(user)
+    if not user or user['password'] != hash_password(password, salt):
+        raise ValidationError
+
+    request.session['userid'] = username
+
+    return JsonResponse({"userid": username})
 
 def signupDB(request):
     """
@@ -24,54 +48,35 @@ def signupDB(request):
         return HttpResponse(status=404)
 
     json_data = json.loads(request.body)
-    clientID = json_data['clientID']   # the front end app's OAuth 2.0 Client ID
-    idToken = json_data['idToken']     # user's OpenID ID Token, a JSon Web Token (JWT)
+
 
     now = time.time()                  # secs since epoch (1/1/70, 00:00:00 UTC)
 
-    try:
-        # Collect user info from the Google idToken, verify_oauth2_token checks
-        # the integrity of idToken and throws a "ValueError" if idToken or
-        # clientID is corrupted or if user has been disconnected from Google
-        # OAuth (requiring user to log back in to Google).
-        # idToken has a lifetime of about 1 hour
-        idinfo = id_token.verify_oauth2_token(idToken, requests.Request(), clientID)
-    except ValueError:
-        # Invalid or expired token
-        return HttpResponse(status=511)  # 511 Network Authentication Required
+    fname = json_data['fname']
+    lname = json_data['lname']
+    userid = json_data['userid']
+    password = json_data['password']
+    email = json_data['email']
 
-    # get password and everything else - NOT SURE WHAT TO PUT in IDINFOR '' !!!!!!!!!!
-    try:
-        password = idinfo['password']
-        fname = idinfo['fname']
-        lname = = idinfo['lname']
-        email = idinfo['email']
-    except:
-        password = "Profile NA"
-        fname = "Profile NA"
-        lname = "Profile NA"
-        email = "Profile NA"
 
     # Compute userid and add to database
     backendSecret = "callmeishmael"   # or server's private key MIGHT NEED To CHANGE THIS !!!!!!!!!
     nonce = str(now)
-    hashable = idToken + backendSecret + nonce
-    userid = hashlib.sha256(hashable.strip().encode('utf-8')).hexdigest()
+    password = hash_password(password, 'false')
 
     # Lifetime of userid is minimum of time to idToken expiration and
     # target lifetime, which should be less than idToken lifetime (~1 hour). 
-    # (int()+1 == ceil()) 
-    lifetime = min(int(idinfo['exp']-now)+1, 60) # secs, up to idToken's lifetime
+    # (int()+1 == ceil())
 
     cursor = connection.cursor()
-    # clean up db table of expired chatterIDs
-    cursor.execute('DELETE FROM users WHERE %s > expiration;', (now, ))
+    # clean up db table of expired chatterIDs MIGHT IMPLEMENT THIS LATER
+    #cursor.execute('DELETE FROM users WHERE %s > expiration;', (now, ))
 
     # insert new userid
     # Ok for userid to expire about 1 sec beyond idToken expiration
     cursor.execute('INSERT INTO users (password, fname, lname, email, userid) VALUES '
                    '(%s, %s, %s);', (password, fname, lname, email, userid))
-
+    request.session['userid'] = userid
     # Return userid etc
     return JsonResponse({'userid': userid, 'first_name': fname, 'last_name': lname, 'email': email})
     
@@ -82,3 +87,18 @@ def getUserProfileInfoDB(request):
     TODO: Implement this
     """
     return JsonResponse({})
+
+
+def hash_password(password, saltvar):
+    """Make a docstring."""
+    algorithm = 'sha512'
+    if saltvar == 'false':
+        salt = uuid.uuid4().hex
+    else:
+        salt = saltvar
+    hash_obj = hashlib.new(algorithm)
+    password_salted = salt + password
+    hash_obj.update(password_salted.encode('utf-8'))
+    password_hash = hash_obj.hexdigest()
+    password_db_string = "$".join([algorithm, salt, password_hash])
+    return password_db_string

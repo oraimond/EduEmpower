@@ -145,7 +145,7 @@ struct GoogleSignInView: View {
                     return
                 }
                 // send token to backend
-                let jsonObj = ["auth_code": authCode]
+                let jsonObj = ["auth_code": authCode, "userid": ""]
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonObj) else {
                     print("backendSignin: jsonData serialization error")
                     return
