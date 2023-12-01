@@ -38,4 +38,23 @@ class LoginViewModel: ObservableObject {
             TaskStore.shared.fetchTasks()
         }
     }
+    
+    func login_demo() {
+        LoginAction(
+            parameters: LoginRequest(
+                username: "test",
+                password: "test"
+            )
+        ).call { response in
+            print("Login successful, navigate to the Home screen")
+            AuthStore.shared.loggedIn.toggle()
+            AuthStore.shared.token = response.token
+            AuthStore.shared.user_id = response.user_id
+            AuthStore.shared.expires_at = response.expires_at
+            
+            // Get info from database
+            AuthStore.shared.getProfile()
+            TaskStore.shared.fetchTasks()
+        }
+    }
 }

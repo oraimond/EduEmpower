@@ -33,7 +33,7 @@ class TaskStore: ObservableObject {
                     server_id: task.id,
                     title: task.title,
                     timeNeeded: task.duration,
-                    dueDate: DateFormatter().date(from: task.due_date) ?? Date(),
+                    dueDate: ISO8601DateFormatter().date(from: task.due_date) ?? Date(),
                     taskDescription: task.description,
                     members: members,
                     scheduled: task.scheduled,

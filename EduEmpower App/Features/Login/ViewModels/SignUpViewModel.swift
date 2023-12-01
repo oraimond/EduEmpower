@@ -11,6 +11,7 @@ class SignUpViewModel: ObservableObject {
     
     @Published var fname: String = ""
     @Published var lname: String = ""
+    @Published var username: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var confirmPassword: String = ""

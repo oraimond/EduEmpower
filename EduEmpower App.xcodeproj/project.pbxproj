@@ -59,6 +59,8 @@
 		AFD997BB2B0274E9004888DC /* ChartDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997B82B0274E9004888DC /* ChartDataEntry.swift */; };
 		AFD997BC2B0274E9004888DC /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997B92B0274E9004888DC /* Suggestion.swift */; };
 		AFD997BD2B0274E9004888DC /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997BA2B0274E9004888DC /* Insight.swift */; };
+		AFDC73B42B16681100DBD53C /* EventGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDC73B32B16681100DBD53C /* EventGetResponse.swift */; };
+		AFDC73B82B16699D00DBD53C /* EventGetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDC73B72B16699D00DBD53C /* EventGetAction.swift */; };
 		AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */; };
 		AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E592AF8060E003D22A2 /* LoginView.swift */; };
 		AFE05E5C2AF8060F003D22A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE05E5B2AF8060F003D22A2 /* Assets.xcassets */; };
@@ -131,6 +133,8 @@
 		AFD997B82B0274E9004888DC /* ChartDataEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDataEntry.swift; sourceTree = "<group>"; };
 		AFD997B92B0274E9004888DC /* Suggestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
 		AFD997BA2B0274E9004888DC /* Insight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Insight.swift; sourceTree = "<group>"; };
+		AFDC73B32B16681100DBD53C /* EventGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventGetResponse.swift; sourceTree = "<group>"; };
+		AFDC73B72B16699D00DBD53C /* EventGetAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventGetAction.swift; sourceTree = "<group>"; };
 		AFE05E542AF8060E003D22A2 /* EduEmpower App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EduEmpower App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduEmpowerApp.swift; sourceTree = "<group>"; };
 		AFE05E592AF8060E003D22A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 		AF44CF722AFE7CF60087A57B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AFDC73B32B16681100DBD53C /* EventGetResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 		AF44CF732AFE7D030087A57B /* Actions */ = {
 			isa = PBXGroup;
 			children = (
+				AFDC73B72B16699D00DBD53C /* EventGetAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -625,8 +631,10 @@
 				AFD997B52B0273F3004888DC /* StatisticsViewModel.swift in Sources */,
 				AF44CF752AFE7D560087A57B /* HomeView.swift in Sources */,
 				AF499CB02B00319900255F3A /* DaysEventsListView.swift in Sources */,
+				AFDC73B42B16681100DBD53C /* EventGetResponse.swift in Sources */,
 				AFD997B72B027431004888DC /* GroupViewModel.swift in Sources */,
 				AFD997B12B0273EA004888DC /* SuggestionListRow.swift in Sources */,
+				AFDC73B82B16699D00DBD53C /* EventGetAction.swift in Sources */,
 				AFD997AC2B0273C7004888DC /* GroupTaskListRow.swift in Sources */,
 				AF499CAC2B001E6D00255F3A /* CalendarView.swift in Sources */,
 				AF872EE52B067A98006154DD /* TaskPutRequest.swift in Sources */,

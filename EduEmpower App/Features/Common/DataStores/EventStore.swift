@@ -23,7 +23,24 @@ class EventStore: ObservableObject {
         if preview {
             events = Event.sampleEvents
         } else {
-            // load from persistence store
+            EventGetAction().call() { response in
+                for event in response {
+                    var type = Event.EventType.unspecified
+                    if event.type == "gcal" {
+                        type = .gcal
+                    } else if event.type == "automatedTask" {
+                        type = .automatedTask
+                    }
+                    
+                    self.events.append(Event(
+                        id: String(event.eventid),
+                        eventType: type,
+                        start: ISO8601DateFormatter().date(from: event.start) ?? Date(),
+                        end: ISO8601DateFormatter().date(from: event.end),
+                        note: event.title
+                    ))
+                }
+            }
         }
     }
 

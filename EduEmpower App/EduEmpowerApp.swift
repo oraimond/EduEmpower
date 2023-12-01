@@ -13,7 +13,6 @@ struct EduEmpower_AppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(EventStore(preview: true))
         }
     }
 }
