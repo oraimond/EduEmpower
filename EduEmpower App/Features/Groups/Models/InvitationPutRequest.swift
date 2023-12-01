@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct InvitationPutRequest {
+struct InvitationPutRequest: Encodable {
     let id: Int
     let groupName: String
-    let inviter: User
-    let invitees: [User]
+    let inviter: String
+    let invitees: [String]
 }

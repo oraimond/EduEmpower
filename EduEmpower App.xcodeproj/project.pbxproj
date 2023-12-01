@@ -19,6 +19,10 @@
 		406684572B195B3F00394CC7 /* InvitationGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684562B195B3F00394CC7 /* InvitationGetResponse.swift */; };
 		406684592B195D7100394CC7 /* InvitationPutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684582B195D7100394CC7 /* InvitationPutRequest.swift */; };
 		4066845B2B195DD500394CC7 /* InvitationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066845A2B195DD500394CC7 /* InvitationResponse.swift */; };
+		4066845D2B195E4200394CC7 /* InvitationGetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066845C2B195E4200394CC7 /* InvitationGetAction.swift */; };
+		4066845F2B195EA400394CC7 /* InvitationPostAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066845E2B195EA300394CC7 /* InvitationPostAction.swift */; };
+		406684612B1965DB00394CC7 /* InvitationPutAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684602B1965DB00394CC7 /* InvitationPutAction.swift */; };
+		406684632B19668B00394CC7 /* InvitationDeleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684622B19668B00394CC7 /* InvitationDeleteAction.swift */; };
 		409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */; };
 		40C34F102B17CEFB00E9110F /* PieChartReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */; };
 		40C34F122B17CF2600E9110F /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C34F112B17CF2500E9110F /* PieChartView.swift */; };
@@ -105,6 +109,10 @@
 		406684562B195B3F00394CC7 /* InvitationGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationGetResponse.swift; sourceTree = "<group>"; };
 		406684582B195D7100394CC7 /* InvitationPutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationPutRequest.swift; sourceTree = "<group>"; };
 		4066845A2B195DD500394CC7 /* InvitationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationResponse.swift; sourceTree = "<group>"; };
+		4066845C2B195E4200394CC7 /* InvitationGetAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationGetAction.swift; sourceTree = "<group>"; };
+		4066845E2B195EA300394CC7 /* InvitationPostAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationPostAction.swift; sourceTree = "<group>"; };
+		406684602B1965DB00394CC7 /* InvitationPutAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationPutAction.swift; sourceTree = "<group>"; };
+		406684622B19668B00394CC7 /* InvitationDeleteAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitationDeleteAction.swift; sourceTree = "<group>"; };
 		409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartReport.swift; sourceTree = "<group>"; };
 		40C34F112B17CF2500E9110F /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
@@ -213,6 +221,10 @@
 				406684482B17E15F00394CC7 /* GroupPostAction.swift */,
 				4066844A2B17E26800394CC7 /* GroupPutAction.swift */,
 				4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */,
+				4066845C2B195E4200394CC7 /* InvitationGetAction.swift */,
+				4066845E2B195EA300394CC7 /* InvitationPostAction.swift */,
+				406684602B1965DB00394CC7 /* InvitationPutAction.swift */,
+				406684622B19668B00394CC7 /* InvitationDeleteAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -660,6 +672,7 @@
 				AF97E0C72AFFD22E00759297 /* EditTaskView.swift in Sources */,
 				AF9641CB2B0445D0000608FD /* APIConstants.swift in Sources */,
 				AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */,
+				4066845D2B195E4200394CC7 /* InvitationGetAction.swift in Sources */,
 				AFF150022B014BFF000910C7 /* HomeViewModel.swift in Sources */,
 				40C612302B05CFC90011650B /* GroupInvitationView.swift in Sources */,
 				AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */,
@@ -672,6 +685,7 @@
 				AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */,
 				AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */,
 				AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */,
+				4066845F2B195EA400394CC7 /* InvitationPostAction.swift in Sources */,
 				40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */,
 				406684452B17DFD400394CC7 /* GroupResponse.swift in Sources */,
 				406684592B195D7100394CC7 /* InvitationPutRequest.swift in Sources */,
@@ -689,6 +703,7 @@
 				AFD997B52B0273F3004888DC /* StatisticsViewModel.swift in Sources */,
 				AF44CF752AFE7D560087A57B /* HomeView.swift in Sources */,
 				AF499CB02B00319900255F3A /* DaysEventsListView.swift in Sources */,
+				406684632B19668B00394CC7 /* InvitationDeleteAction.swift in Sources */,
 				AFD997B72B027431004888DC /* GroupViewModel.swift in Sources */,
 				AFD997B12B0273EA004888DC /* SuggestionListRow.swift in Sources */,
 				AFD997AC2B0273C7004888DC /* GroupTaskListRow.swift in Sources */,
@@ -713,6 +728,7 @@
 				40C612322B05D70A0011650B /* Invitation.swift in Sources */,
 				AF44CF792AFE7E7E0087A57B /* ContentView.swift in Sources */,
 				AFC1FC782B04570F0086F846 /* ProfileAction.swift in Sources */,
+				406684612B1965DB00394CC7 /* InvitationPutAction.swift in Sources */,
 				AFE05E7E2AF81273003D22A2 /* PasswordRequest.swift in Sources */,
 				AF872EE32B06728A006154DD /* TaskResponse.swift in Sources */,
 				AF499CB22B00346700255F3A /* EventListViewRow.swift in Sources */,

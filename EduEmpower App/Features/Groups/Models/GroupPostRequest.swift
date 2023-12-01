@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct GroupPostRequest {
+struct GroupPostRequest: Encodable {
     let groupName: String
-    let inviter: User
-    let invitees: [User]
-    let members: [User]
+    let inviter: String
+    let invitees: [String]
+    let members: [String]
 }
