@@ -69,11 +69,11 @@ def edittasksDB(request, taskid):
     cursor = connection.cursor()
 
     cursor.execute('UPDATE tasks SET (title, duration, due_date, description, userids, scheduled) VALUES '
-                   '(%s, %s, %s, %s, %s, %s ) WHERE taskid = %s;', (title, duration, due_date, description, userids, scheduled), 
-                   (taskid)) # this might need to be edited !!!!!!!!
+                   '(%s, %s, %s, %s, %s, %s ) WHERE taskid = %s;', (title, duration, due_date, description, userids, scheduled, taskid) 
+                   ) # this might need to be edited !!!!!!!!
                    
     
-    return JsonResponse({})
+    return JsonResponse({'id': taskid})
 
 def deletetaskDB(request, taskid):
     """
