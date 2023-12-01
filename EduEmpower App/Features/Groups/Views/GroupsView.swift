@@ -36,7 +36,7 @@ struct GroupsView: View {
             }
             .sheet(item: $newGroup, onDismiss: { newGroup = nil }) {
                 group in
-                CreateGroupView(group: Binding.constant(group), loggedInUser: $authStore)
+                CreateGroupView(group: Binding.constant(group))
             }
             
             Spacer()

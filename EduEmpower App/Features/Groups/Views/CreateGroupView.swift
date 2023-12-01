@@ -8,24 +8,23 @@
 import SwiftUI
 
 struct CreateGroupView: View {
+    @ObservedObject var authStore: AuthStore = AuthStore.shared
     @Binding var group: varGroup // Pass in the selected group
-    // TODO: Pass in logged-in user info to set as inviter
-    @Binding var loggedInUser: User
     
     @State var groupName: String
-//    @State var inviter: User
+    @ObservedObject var inviter: AuthStore
     @State var invitees: [User]
     @State var members: [User]
     @State var newMemberEmail: String
     
     @Environment(\.presentationMode) var presentationMode
 
-    init(group: Binding<varGroup>, loggedInUser: Binding<User>) {    // Initialize state variables with existing group properties
+    init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
-        self._loggedInUser = loggedInUser
+//        self._loggedInUser = loggedInUser
         self._groupName = State(initialValue: group.wrappedValue.groupName)
         //TODO: logged-in user is the inviter
-//        self._inviter = State(initialValue: loggedInUser.wrappedValue)
+        self._inviter = ObservedObject(wrappedValue: authStore)
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         //TODO: members should include inviter as default
         self._members = State(initialValue: group.wrappedValue.members)
@@ -63,16 +62,18 @@ struct CreateGroupView: View {
                     Button(action: {
                         // Store locally
                         group.groupName = groupName
-                        group.inviter = loggedInUser
+                        group.inviter = inviter
                         group.invitees = invitees
-                        group.members.append(loggedInUser)
+                        group.members.append(User(fname: inviter.fname ?? "",
+                                                  lname: inviter.lname ?? "",
+                                                  email: inviter.email ?? ""))
                         
 
                         let newGroup = varGroup(
                             id: group.id,
                             server_id: group.server_id,
                             groupName: groupName,
-                            inviter: loggedInUser,
+                            inviter: inviter,
                             invitees: invitees,
                             members: group.members
                         )
@@ -80,6 +81,7 @@ struct CreateGroupView: View {
                         
                         //TODO: for each invitees, update user's group_invitations (append this specific group)
                         //TODO: for inviter, append this group to user's groups array
+                        
                         
                         // exit
                         presentationMode.wrappedValue.dismiss()
