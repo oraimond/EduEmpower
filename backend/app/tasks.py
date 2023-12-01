@@ -10,9 +10,14 @@ def gettasksDB(request):
     User authentication must be completed first""" # need to search the table for tasks that match the userid ?????
     if request.method != 'GET':
         return HttpResponse(status=404)
+
+    username, token = request.headers["authorization"]
+
+    # do authorization ?????
+    
     cursor = connection.cursor()
-    cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
-    # cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks WHERE ;')
+    #cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
+    cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks WHERE \'{username}\' IN userids;')
     rows = cursor.fetchall()
 
     response = {}
