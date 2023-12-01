@@ -24,7 +24,15 @@ class AuthStore: ObservableObject {
     private init() {} // ensure that only one instance of AuthStore can be created
     
     func fetchInvitations() {
-        
+        InvitationGetAction().call() { response in
+            for invitation in response {
+                let invitees = invitation.invitees.map {
+                    User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
+                }
+                
+                
+            }
+        }
     }
     
     func getProfile() {

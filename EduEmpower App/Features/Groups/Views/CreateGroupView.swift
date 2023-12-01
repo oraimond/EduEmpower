@@ -19,12 +19,12 @@ struct CreateGroupView: View {
     
     @Environment(\.presentationMode) var presentationMode
 
-    init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
+    init(group: Binding<varGroup>, inviter: AuthStore) {    // Initialize state variables with existing group properties
         self._group = group
 //        self._loggedInUser = loggedInUser
         self._groupName = State(initialValue: group.wrappedValue.groupName)
         //TODO: logged-in user is the inviter
-        self._inviter = ObservedObject(wrappedValue: authStore)
+        self._inviter = ObservedObject(wrappedValue: inviter)
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         //TODO: members should include inviter as default
         self._members = State(initialValue: group.wrappedValue.members)
