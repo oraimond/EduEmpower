@@ -44,6 +44,9 @@ def loginDB(request):
 
     expires_at = now + 60
 
+    #cursor.execute('INSERT INTO users (refresh_token, expiresat) VALUES '
+                   #'(%s, %s) WHERE userid = (%s);', (unique_token, expires_at, username))
+
     return JsonResponse({'Token': unique_token, 'userid': username, 'expiresat': expires_at})
 
 def signupDB(request):
