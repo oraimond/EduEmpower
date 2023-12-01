@@ -7,12 +7,12 @@ import json
 def gettasksDB(request):
     """
     TODO: Edit function so that it returns tasks for authenticated user.
-    User authentication must be completed first""" # need to search the table for tasks that match the userid !!!!!!!!
+    User authentication must be completed first""" # need to search the table for tasks that match the userid ?????
     if request.method != 'GET':
         return HttpResponse(status=404)
     cursor = connection.cursor()
-    #cursor.execute('SELECT taskid, tasktitle, groupid, timeneeded, duedate, description, userid FROM tasks ORDER BY userid DESC;')  # not sure what fields we wanted
     cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
+    # cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks WHERE ;')
     rows = cursor.fetchall()
 
     response = {}
