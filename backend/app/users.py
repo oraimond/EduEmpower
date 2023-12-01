@@ -7,6 +7,7 @@ import json
 import uuid
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from django.utils.crypto import get_random_string
 
 import hashlib, time
 
@@ -37,7 +38,13 @@ def loginDB(request):
 
     request.session['userid'] = username
 
-    return JsonResponse({"userid": username})
+    unique_token = get_random_string(length=10)
+
+    now = time.time()
+
+    expires_at = now + 60
+
+    return JsonResponse({'Token': unique_token, 'userid': username, 'expiresat': expires_at})
 
 def signupDB(request):
     """
