@@ -17,7 +17,7 @@ def gettasksDB(request):
     
     cursor = connection.cursor()
     #cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
-    cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks WHERE \'{username}\' IN userids;')
+    cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks WHERE (%s) IN userids;', (username,))
     rows = cursor.fetchall()
 
     response = {}
