@@ -15,7 +15,6 @@ struct GoogleSignInView: View {
                 signinClient.signIn(withPresenting: rootVC, hint: "test hint", additionalScopes: additionalScopes) { result, error in
                     
                     let authCode = result?.serverAuthCode
-                    print("authCode: ", authCode!)
                     if error != nil {
                         print("signIn: \(error!.localizedDescription)")
                     } else {
@@ -30,14 +29,12 @@ struct GoogleSignInView: View {
             .onAppear {
                 if let user = signinClient.currentUser {
                     getEvents(user.accessToken.tokenString)
-                    backendSignin(user.idToken?.tokenString)
                 } else {
                     signinClient.restorePreviousSignIn { user, error in
                         if error != nil {
                             print("restorePreviousSignIn: \(error!.localizedDescription)")
                         } else {
                             getEvents(user?.accessToken.tokenString)
-                            backendSignin(user?.idToken?.tokenString)
                         }
                     }
                 }
@@ -144,8 +141,11 @@ struct GoogleSignInView: View {
     func backendSignin(_ authCode: String?) {
         Task {
             if let authCode = authCode {
+                if authCode == "" {
+                    return
+                }
                 // send token to backend
-                let jsonObj = ["auth_code": authCode]
+                let jsonObj = ["auth_code": authCode, "userid": ""]
                 guard let jsonData = try? JSONSerialization.data(withJSONObject: jsonObj) else {
                     print("backendSignin: jsonData serialization error")
                     return

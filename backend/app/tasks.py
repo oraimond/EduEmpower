@@ -7,12 +7,12 @@ import json
 def gettasksDB(request):
     """
     TODO: Edit function so that it returns tasks for authenticated user.
-    User authentication must be completed first"""
+    User authentication must be completed first""" # need to search the table for tasks that match the userid ?????
     if request.method != 'GET':
         return HttpResponse(status=404)
     cursor = connection.cursor()
-    #cursor.execute('SELECT taskid, tasktitle, groupid, timeneeded, duedate, description, userid FROM tasks ORDER BY userid DESC;')  # not sure what fields we wanted
     cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
+    # cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks WHERE ;')
     rows = cursor.fetchall()
 
     response = {}
@@ -24,7 +24,7 @@ def posttasksDB(request):
     TODO: Edit fields so that it matches API definition on Github page. 
     Postgres table needs to be updated with assigned_users and group.
     taskid isn't passed in the request, it is generated here or in postgres. 
-    """
+    """  # generate the taskid similar to userid on signup !!!!!!!!
     if request.method != 'POST':
         return HttpResponse(status=404)
     json_data = json.loads(request.body)
@@ -46,10 +46,29 @@ def edittasksDB(request, taskid):
     """
     TODO: Implement this function
     """
+
+    if request.method != 'POST':
+        return HttpResponse(status=404)
+    json_data = json.loads(request.body)
+    title = json_data['title']
+    duration = json_data['duration']
+    due_date = json_data['due_date']
+    description = json_data['description']
+    userids = json_data['userids']
+    scheduled = json_data['scheduled']
+    cursor = connection.cursor()
+
+    cursor.execute('UPDATE tasks SET (title, duration, due_date, description, userids, scheduled) VALUES '
+                   '(%s, %s, %s, %s, %s, %s ) WHERE taskid = %s;', (title, duration, due_date, description, userids, scheduled), 
+                   (taskid)) # this might need to be edited !!!!!!!!
+                   
+    
     return JsonResponse({})
 
 def deletetaskDB(request, taskid):
     """
     TODO: Implement this function
-    """
+    """ #change this to a DELETE staements where it searches for the specifc task in table
+    member = Member.objects.get(id=id)  # needs testing
+    member.delete()
     return JsonResponse({})

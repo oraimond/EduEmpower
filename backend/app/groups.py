@@ -7,7 +7,7 @@ import json
 def getgroupsDB(request):
     """
     TODO: Ensure that groups returned are for specific user
-    """
+    """ # similar to tasks, ensure that we search in the table for userid and not all groups !!!!!!
     if request.method != 'GET':
         return HttpResponse(status=404)
     cursor = connection.cursor()
@@ -42,11 +42,11 @@ def postgroupsDB(request):
 def editgroupDB(request, groupid):
     """
     TODO: Implement this function
-    """
+    """ #should be similar to task equivalent 
     return JsonResponse({})
 
 def deletegroupDB(request, groupid):
     """
     TODO: Implement this function
-    """
+    """ #should be same as task equivalent 
     return JsonResponse({})
