@@ -18,12 +18,14 @@ class GroupStore: ObservableObject {
     func fetchGroups() {
         GroupGetAction().call() { response in
             for group in response {
-                let inviter = User(username: group.inviter.user_id, fname: group.inviter.fname, lname: group.inviter.lname, email: "TODO")
+                let inviter = AuthStore.shared
                 let invitees = group.invitees.map {
                     User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
                 }
                 var members = [User]()
-                members.append(inviter)
+                members.append(User(fname: inviter.fname ?? "",
+                                   lname: inviter.lname ?? "",
+                                   email: inviter.email ?? ""))
                 //TODO: append members who accepted invitations
                 
                 self.save(varGroup(
