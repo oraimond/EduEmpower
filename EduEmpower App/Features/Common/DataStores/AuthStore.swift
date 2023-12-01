@@ -18,8 +18,14 @@ class AuthStore: ObservableObject {
     @Published var fname: String?
     @Published var lname: String?
     @Published var email: String?
+    
+    @Published var group_invitations = [varGroup]()
 
     private init() {} // ensure that only one instance of AuthStore can be created
+    
+    func fetchInvitations() {
+        
+    }
     
     func getProfile() {
         ProfileAction().call() { response in

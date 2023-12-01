@@ -75,7 +75,8 @@ struct CreateGroupView: View {
                         )
                         GroupStore.shared.save(newGroup)
                         
-                        //TODO: for each invitees, update user's invitations (append this specific group)
+                        //TODO: for each invitees, update user's group_invitations (append this specific group)
+                        //TODO: for inviter, append this group to user's groups array
                         
                         // exit
                         presentationMode.wrappedValue.dismiss()
