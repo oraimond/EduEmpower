@@ -93,7 +93,18 @@ def getUserProfileInfoDB(request):
     """
     TODO: Implement this
     """
-    return JsonResponse({})
+    json_data = json.loads(request.body)
+
+    user_id = json_data['userid']
+
+    cursor = connection.cursor()
+    cursor.execute('SELECT userid, first_name, last_name, email FROM users WHERE (%s) = userid;', (user_id,))
+    rows = cursor.fetchall()
+
+    response = {}
+    response['user'] = rows
+    
+    return JsonResponse({response})
 
 
 def hash_password(password, saltvar):
