@@ -11,6 +11,7 @@ struct GroupsView: View {
     @ObservedObject var viewModel: GroupViewModel = GroupViewModel()
     @ObservedObject var groupsStore: GroupStore = GroupStore.shared
     @ObservedObject var tasksStore: TaskStore = TaskStore.shared
+    @ObservedObject var authStore: AuthStore = AuthStore.shared
     
     @State var newGroup: varGroup?
     
@@ -35,7 +36,7 @@ struct GroupsView: View {
             }
             .sheet(item: $newGroup, onDismiss: { newGroup = nil }) {
                 group in
-                CreateGroupView(group: Binding.constant(group))
+                CreateGroupView(group: Binding.constant(group), loggedInUser: $authStore)
             }
             
             Spacer()

@@ -14,6 +14,7 @@ class GroupStore: ObservableObject {
     
     private init() {}
     
+    
     func fetchGroups() {
         GroupGetAction().call() { response in
             for group in response {
@@ -62,9 +63,9 @@ class GroupStore: ObservableObject {
                     GroupPutAction(parameters: GroupPutRequest(
                         id: server_id,
                         groupName: group.groupName,
-                        inviter: group.inviter,
-                        invitees: group.invitees,
-                        members: group.members
+                        inviter: "", //TODO
+                        invitees: [], //TODO
+                        members: [] //TODO
                     )).call() { response in
                         if response.id == server_id {
                             self.groups[index] = group
@@ -76,9 +77,9 @@ class GroupStore: ObservableObject {
             } else {
                 GroupPostAction(parameters: GroupPostRequest(
                     groupName: group.groupName,
-                    inviter: group.inviter,
-                    invitees: group.invitees,
-                    members: group.members
+                    inviter: "", //TODO
+                    invitees: [], //TODO
+                    members: [] //TODO
                 )).call() { response in
                     var groupCopy = group
                     groupCopy.server_id = response.id

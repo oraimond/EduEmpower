@@ -10,19 +10,22 @@ import SwiftUI
 struct CreateGroupView: View {
     @Binding var group: varGroup // Pass in the selected group
     // TODO: Pass in logged-in user info to set as inviter
+    @Binding var loggedInUser: User
+    
     @State var groupName: String
-    @State var inviter: User
+//    @State var inviter: User
     @State var invitees: [User]
     @State var members: [User]
     @State var newMemberEmail: String
     
     @Environment(\.presentationMode) var presentationMode
 
-    init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
+    init(group: Binding<varGroup>, loggedInUser: Binding<User>) {    // Initialize state variables with existing group properties
         self._group = group
+        self._loggedInUser = loggedInUser
         self._groupName = State(initialValue: group.wrappedValue.groupName)
         //TODO: logged-in user is the inviter
-        self._inviter = State(initialValue: group.wrappedValue.inviter)
+//        self._inviter = State(initialValue: loggedInUser.wrappedValue)
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         //TODO: members should include inviter as default
         self._members = State(initialValue: group.wrappedValue.members)
@@ -60,16 +63,16 @@ struct CreateGroupView: View {
                     Button(action: {
                         // Store locally
                         group.groupName = groupName
-                        group.inviter = inviter
+                        group.inviter = loggedInUser
                         group.invitees = invitees
-                        group.members.append(inviter)
+                        group.members.append(loggedInUser)
                         
 
                         let newGroup = varGroup(
                             id: group.id,
                             server_id: group.server_id,
                             groupName: groupName,
-                            inviter: inviter,
+                            inviter: loggedInUser,
                             invitees: invitees,
                             members: group.members
                         )
