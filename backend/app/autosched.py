@@ -78,6 +78,8 @@ def autoscheduleDB(request, taskid):
     if request.method != 'POST':
         return HttpResponse(status=404)
     
+    # TODO: call calendar update function 
+    
     # get tasks from database 
     cursor = connection.cursor()
     cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE taskid = %s;', (taskid))
@@ -108,7 +110,7 @@ def autoscheduleDB(request, taskid):
     cursor1.execute('SELECT title, start, end, type, users, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', (task_due_date))
     rows = cursor1.fetchall()
 
-    # only get events that contain users who are included in the given TaskID
+        # only get events that contain users who are included in the given TaskID
     relevant_events = []
     for row in rows: 
         event_users = row[4]
@@ -116,6 +118,7 @@ def autoscheduleDB(request, taskid):
         for userid in task_userids:
             if userid in event_users:
                 relevant_events.append(row)
+                break
 
     relevant_events = sorted(relevant_events, key=lambda x: x[1])
 
@@ -136,7 +139,6 @@ def autoscheduleDB(request, taskid):
             merged_event_intervals.append(current_interval)
 
     del event_intervals
-    del merged_event_intervals
     del relevant_events
     del rows
 
@@ -153,10 +155,11 @@ def autoscheduleDB(request, taskid):
 
     viable_timeslots = []
     for timeslot in open_timeslots:
+        # print((timeslot[1] - timeslot[0]))
         if task_duration > timeslot[1] - timeslot[0]:
             continue
 
-        if task_due_date > timeslot[1]:
+        if task_due_date < timeslot[0]:
             continue
 
         viable_timeslots.append(timeslot)
@@ -166,10 +169,41 @@ def autoscheduleDB(request, taskid):
     
     viable_timeslots = sorted(viable_timeslots, key=timeslot_duration, reverse=True)
 
+    # # TODO: stuff for the user preferences of work time for auto schedule task 
+    time_preference = request.POST.get("time_preference")
+
+    final_timeslot = viable_timeslots[0][0]
+    if time_preference == "morning":
+        for timeslot in viable_timeslots:
+            # TODO: find preferred time slot 
+            if (timeslot[0] + task_duration).hour < 12 and (timeslot[0]).hour > 7:
+                final_timeslot = timeslot
+                break
+
+    elif time_preference == "afternoon":
+        for timeslot in viable_timeslots:
+            # TODO: find preferred time slot 
+            if (timeslot[0]).hour >= 12 and (timeslot[0] + task_duration).hour < 18:
+                final_timeslot = timeslot
+                break
+
+    elif time_preference == "evening":
+        for timeslot in viable_timeslots:
+            # TODO: find preferred time slot 
+            if (timeslot[0]).hour >= 18 and (timeslot[0] + task_duration).hour < 22:
+                final_timeslot = timeslot
+                break
+
+    else:
+        print('Invalid value for time preference.')
+        return HttpResponse("CUSTOM MESSAGE", status=500, headers={"CUSTOM MESSAGE": "Invalid value for time preference."})
+
+
+
     # add new event to the events database table 
     cursor = connection.cursor()
     cursor.execute('INSERT INTO events (title, start, end, type, users, taskid) VALUES '
-                   '(%s, %s, %s, %s, %s, %s, %s);', (task_title, viable_timeslots[0][0], viable_timeslots[0][0] + task_duration, 'automatedTask', task_userids, taskid))
+                   '(%s, %s, %s, %s, %s, %s, %s);', (task_title, final_timeslot, final_timeslot + task_duration, 'automatedTask', task_userids, taskid))
     
 
     response = {}
