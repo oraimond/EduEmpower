@@ -23,17 +23,7 @@ class AuthStore: ObservableObject {
 
     private init() {} // ensure that only one instance of AuthStore can be created
     
-    func fetchInvitations() {
-        InvitationGetAction().call() { response in
-            for invitation in response {
-                let invitees = invitation.invitees.map {
-                    User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
-                }
-                
-                
-            }
-        }
-    }
+
     
     func getProfile() {
         ProfileAction().call() { response in
@@ -67,5 +57,19 @@ class AuthStore: ObservableObject {
     
     func logout() {
         // TODO clear all data stores
+    }
+    
+    func fetchInvitations() {
+        InvitationGetAction().call() { response in
+            let filteredInvitations = response.filter { invitation in
+                invitation.invitees.contains {
+                    invitee in
+                    invitee.email == self.email
+                }
+            }
+        
+            //TODO store filteredInvitations to self.group_invitations, but since group_invitations is an array of varGroup, find varGroup object using response's group_id and varGroup's server_id that are matching
+            
+        }
     }
 }

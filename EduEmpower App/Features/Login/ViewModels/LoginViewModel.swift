@@ -36,6 +36,7 @@ class LoginViewModel: ObservableObject {
             // Get info from database
             AuthStore.shared.getProfile()
             TaskStore.shared.fetchTasks()
+            GroupStore.shared.fetchGroups()
         }
     }
 }
