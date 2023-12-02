@@ -18,9 +18,22 @@ struct GroupsView: View {
     @State var showingEditGroupView = false
     @State var showingInvitationView = false
     
+    var loggedInUser: User {
+            User(
+                fname: authStore.fname ?? "",
+                lname: authStore.lname ?? "",
+                email: authStore.email ?? "",
+                invitations: authStore.group_invitations
+            )
+        }
+    
     var body: some View {
         NavigationStack{
-            List(groupsStore.groups, id: \.id) { group in
+            // TODO: filter groups and only show if the authStore user is in group's inviter or userids of groupStore.groups
+            List(groupsStore.groups.filter { group in
+                group.inviter == loggedInUser ||
+                group.members.contains(loggedInUser) },
+                 id: \.id) { group in
                 GroupListRow(group: group, task: $tasksStore.tasks)
             }
             .navigationTitle("Groups")
