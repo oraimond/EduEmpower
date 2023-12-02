@@ -33,6 +33,12 @@ struct GroupInvitationView: View {
                     HStack {
                         Button(action: {
                             // TODO add to groups
+                            var mutableGroup = group
+                            mutableGroup.members.append(loggedInUser)
+                            mutableGroup.invitees = mutableGroup.invitees.filter { invitee in
+                                invitee != loggedInUser
+                            }
+                            GroupStore.shared.save(mutableGroup)
                         }) {
                             Text("Accept")
                                 .font(.caption)
@@ -45,6 +51,11 @@ struct GroupInvitationView: View {
                         .padding(.top, 10)
                         Button(action: {
                             // Delete from Invitations
+                            var mutableGroup = group
+                            mutableGroup.invitees = mutableGroup.invitees.filter { invitee in
+                                invitee != loggedInUser
+                            }
+                            GroupStore.shared.save(mutableGroup)
                         }) {
                             Text("Decline")
                                 .font(.caption)
