@@ -66,10 +66,48 @@ def editgroupDB(request, groupid):
     """
     TODO: Implement this function
     """ #should be similar to task equivalent 
-    return JsonResponse({})
+    if request.method != 'PUT':
+        return HttpResponse(status=404)
+    json_data = json.loads(request.body)
+
+    title = json_data['title']
+    inviter = json_data['inviter']
+    emails = json_data['invitees']
+    cursor = connection.cursor()
+    invitees = []
+    for user in emails:
+        query = f"""
+        SELECT userid FROM USERS WHERE email = \'{user}\';
+        """
+        userid = cursor.execute(query).fetchone()
+        invitees.append(userid['userid'])
+
+        query = f"""
+            UPDATE users
+            SET groups_invitations = ARRAY_APPEND(group_invitations, userid['userid'])
+            WHERE userid =\'{userid['userid']}\';
+            """
+        cursor.execute(query)
+
+    cursor.execute(f'UPDATE groups SET (title, inviter, invitees) VALUES '
+                   '(%s, %s, ARRAY[%s]) WHERE groupid = %s;', (title, inviter, invitees, groupid))
+
+    rows = cursor.fetchall()
+
+    response = {}
+    response['groups'] = rows
+    
+    return JsonResponse({response})
 
 def deletegroupDB(request, groupid):
     """
     TODO: Implement this function
     """ #should be same as task equivalent 
-    return JsonResponse({})
+    if request.method != 'DELETE':
+        return HttpResponse(status=404)
+
+    cursor = connection.cursor()
+    cursor.execute('DELETE FROM groups WHERE groupid = %s;' (groupid,))
+
+    
+    return JsonResponse({"message": "Group successfully deleted", "id": groupid})
