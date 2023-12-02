@@ -22,8 +22,7 @@ struct GroupsView: View {
             User(
                 fname: authStore.fname ?? "",
                 lname: authStore.lname ?? "",
-                email: authStore.email ?? "",
-                invitations: authStore.group_invitations
+                email: authStore.email ?? ""
             )
         }
     

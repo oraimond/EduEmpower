@@ -21,8 +21,7 @@ class GroupStore: ObservableObject {
                 let inviter = (User(
                     fname: AuthStore.shared.fname ?? "",
                     lname: AuthStore.shared.lname ?? "",
-                    email: AuthStore.shared.email ?? "",
-                    invitations: AuthStore.shared.group_invitations
+                    email: AuthStore.shared.email ?? ""
                 ))
                 let invitees = group.invitees.map {
                     User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
@@ -31,7 +30,6 @@ class GroupStore: ObservableObject {
                 members.append(User(fname: inviter.fname ,
                                     lname: inviter.lname ,
                                     email: inviter.email ))
-                //TODO: append members who accepted invitations
                 
                 self.save(varGroup(
                     id: UUID(),

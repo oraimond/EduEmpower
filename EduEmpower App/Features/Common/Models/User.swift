@@ -16,5 +16,4 @@ struct User: Equatable {
     var fname: String
     var lname: String
     var email: String
-    var invitations = [varGroup]()
 }

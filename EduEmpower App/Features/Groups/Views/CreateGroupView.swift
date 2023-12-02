@@ -65,8 +65,7 @@ struct CreateGroupView: View {
                         group.inviter = (User(
                             fname: authStore.fname ?? "",
                             lname: authStore.lname ?? "",
-                            email: authStore.email ?? "",
-                            invitations: authStore.group_invitations
+                            email: authStore.email ?? ""
                         ))
                         group.invitees = invitees
                         group.members.append(User(
@@ -85,11 +84,6 @@ struct CreateGroupView: View {
                             members: group.members
                         )
                         GroupStore.shared.save(newGroup)
-                        
-                        //TODO: for each invitees, update user's group_invitations (append this specific group)
-                        for index in invitees.indices {
-                            invitees[index].invitations.append(group)
-                        }
 
                         
                         // exit

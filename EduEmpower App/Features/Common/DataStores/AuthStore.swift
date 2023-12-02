@@ -19,8 +19,6 @@ class AuthStore: ObservableObject {
     @Published var lname: String?
     @Published var email: String?
     
-    @Published var group_invitations = [varGroup]()
-
     private init() {} // ensure that only one instance of AuthStore can be created
     
 
@@ -58,18 +56,5 @@ class AuthStore: ObservableObject {
     func logout() {
         // TODO clear all data stores
     }
-    
-    func fetchInvitations() {
-        InvitationGetAction().call() { response in
-            let filteredInvitations = response.filter { invitation in
-                invitation.invitees.contains {
-                    invitee in
-                    invitee.email == self.email
-                }
-            }
-        
-            //TODO store filteredInvitations to self.group_invitations, but since group_invitations is an array of varGroup, find varGroup object using response's group_id and varGroup's server_id that are matching
-            
-        }
-    }
+
 }
