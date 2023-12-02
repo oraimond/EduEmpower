@@ -9,10 +9,10 @@ import Foundation
 
 struct GroupGetResponse: Decodable {
     let id: Int
-    let groupName: String
+    let title: String
     let inviter: GroupUser
     let invitees: [GroupUser]
-    let members: [GroupUser]
+    let userids: [GroupUser]
 }
 
 struct GroupUser: Decodable {

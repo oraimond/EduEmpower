@@ -9,10 +9,10 @@ import Foundation
 
 struct GroupPutRequest: Encodable {
     let id: Int
-    let groupName: String
+    let title: String
     let inviter: String
     let invitees: [String]
-    let members: [String]
+    let userids: [String]
 }
 
 //struct GroupUser: Decodable {
