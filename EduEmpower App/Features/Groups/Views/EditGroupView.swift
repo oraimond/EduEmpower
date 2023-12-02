@@ -8,35 +8,55 @@
 import SwiftUI
 
 struct EditGroupView: View {
+    @ObservedObject var authStore: AuthStore = AuthStore.shared
     @Binding var group: varGroup // Pass in the selected group
 
     @State var groupName: String
-    @State var groupMembers: [User]
+    @State var inviter: User
+    @State var invitees: [User]
+    @State var members: [User]
+    @State var newMemberEmail: String
     
+    var loggedInUser: User {
+        User(
+            fname: authStore.fname ?? "",
+            lname: authStore.lname ?? "",
+            email: authStore.email ?? ""
+        )
+    }
+
     @Environment(\.presentationMode) var presentationMode
 
     init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
         self._groupName = State(initialValue: group.wrappedValue.groupName)
-        self._groupMembers = State(initialValue: group.wrappedValue.members)
+        self._inviter = State(initialValue: group.wrappedValue.inviter)
+        self._invitees = State(initialValue: group.wrappedValue.invitees)
+        self._members = State(initialValue: group.wrappedValue.members)
+        self._newMemberEmail = State(initialValue: "")
     }
 
     var body: some View {
         NavigationView {
             Form {
+                //only allow editing group name for simplification
                 Section(header: Text("Group Name")) {
                     TextField("Group Name", text: $groupName)
                 }
                 
                 Section(header: Text("Group Members Emails")) {
                     List {
-                        ForEach($groupMembers, id: \.id) { member in
-                            TextField("Email", text: member.email)
+                        ForEach(group.members, id: \.id) { member in
+                            TextField("Email", text: $members[getIndex(for: member)].email)
+                                .disabled(true)
                         }
                     }
                 }
                 Button(action: {
                     // delete
+                    var mutableGroup = group
+                    mutableGroup.members = mutableGroup.members.filter { userid in userid != loggedInUser }
+                    GroupStore.shared.save(mutableGroup)
                 }) {
                     Text("Delete Group")
                         .font(.headline)
@@ -55,10 +75,18 @@ struct EditGroupView: View {
                     Button(action: {
                         // Store locally
                         group.groupName = groupName
-                        group.members = groupMembers
                         
                         // send to database
                         // TODO
+                        let newGroup = varGroup(
+                            id: group.id,
+                            server_id: group.server_id,
+                            groupName: groupName,
+                            inviter: inviter,
+                            invitees: invitees,
+                            members: group.members
+                        )
+                        GroupStore.shared.save(newGroup)
                         
                         // exit
                         presentationMode.wrappedValue.dismiss()
@@ -68,6 +96,13 @@ struct EditGroupView: View {
                 }
             }
         }
+    }
+    
+    private func getIndex(for user: User) -> Int {
+        if let index = members.firstIndex(where: { $0.id == user.id }) {
+            return index
+        }
+        return 0
     }
 
 }

@@ -21,12 +21,9 @@ struct CreateGroupView: View {
 
     init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
-//        self._loggedInUser = loggedInUser
         self._groupName = State(initialValue: group.wrappedValue.groupName)
-        //TODO: logged-in user is the inviter
         self._inviter = State(initialValue: group.wrappedValue.inviter)
         self._invitees = State(initialValue: group.wrappedValue.invitees)
-        //TODO: members should include inviter as default
         self._members = State(initialValue: group.wrappedValue.members)
         self._newMemberEmail = State(initialValue: "")
     }
