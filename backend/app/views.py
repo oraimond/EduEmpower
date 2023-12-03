@@ -71,19 +71,23 @@ def createevent(request):
 def editorDeleteEvent(request, eventid):
     return editorDeleteEventDB(request, eventid)
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def getEventsForTask(request, taskid):
     return getEventsForTaskDB(request, taskid)
 
 # USER AUTHENTICATION CALLS
+@csrf_exempt
 @require_http_methods(["POST"])
 def login(request):
     return loginDB(request)
 
+@csrf_exempt
 @require_http_methods(["POST"])
 def signup(request):
     return signupDB(request)
 
+@csrf_exempt
 @require_http_methods(["GET"])
 def getProfileInfo(request):
     return getUserProfileInfoDB(request)
