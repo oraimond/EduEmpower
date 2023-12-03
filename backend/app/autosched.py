@@ -89,13 +89,15 @@ def autoscheduleDB(request, taskid):
     #     print('The resulting query from the Tasks table has one or more missing attributes.')
     #     return HttpResponse("error1", status=500, headers={"error1": "Result of query from Tasks table has missing attributes (less than 5 attributes)."})
 
-    task_title = rows[0][0]
-    task_duration = rows[0][1]
-    task_due_date = rows[0][2]
-    task_description = rows[0][3]
-    task_userids = rows[0][4]
-    task_group_id = rows[0][5]
-    task_scheduled = rows[0][6]
+    query_result = rows[0]
+
+    task_title = query_result[0]
+    task_duration = query_result[1]
+    task_due_date = query_result[2]
+    task_description = query_result[3]
+    task_userids = query_result[4]
+    task_group_id = query_result[5]
+    task_scheduled = query_result[6]
 
     if rows[7] != taskid:
         print('TaskID from front end does not match TaskID retreived from database.')
