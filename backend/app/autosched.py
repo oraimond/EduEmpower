@@ -85,7 +85,7 @@ def autoscheduleDB(request, taskid):
     cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE taskid = %s;', [taskid])
     rows = cursor.fetchall()
 
-    if len(rows) != 8:
+    if len(rows) != 5:
         print('The resulting query from the Tasks table has one or more missing attributes.')
         return HttpResponse("error1", status=500, headers={"error1": "Result of query from Tasks table has missing attributes."})
 
