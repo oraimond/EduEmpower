@@ -85,7 +85,7 @@ def signupDB(request):
     # insert new userid
     # Ok for userid to expire about 1 sec beyond idToken expiration
     cursor.execute('INSERT INTO users (password, fname, lname, email, userid) VALUES '
-                   '(%s, %s, %s);', (password, fname, lname, email, userid))
+                   '(%s, %s, %s, %s, %s);', (password, fname, lname, email, userid))
     request.session['userid'] = userid
     # Return userid etc
     return JsonResponse({'userid': userid, 'first_name': fname, 'last_name': lname, 'email': email})
