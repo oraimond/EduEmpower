@@ -99,9 +99,9 @@ def autoscheduleDB(request, taskid):
     task_group_id = query_result[5]
     task_scheduled = query_result[6]
 
-    if query_result[-1] != str(taskid):
-        print('TaskID from front end does not match TaskID retreived from database.')
-        return HttpResponse("error2", status=500, headers={"error2": "TaskID from front end does not match TaskID retreived from database."})
+    # if query_result[-1] != str(taskid):
+    #     print('TaskID from front end does not match TaskID retreived from database.')
+    #     return HttpResponse("error2", status=500, headers={"error2": "TaskID from front end does not match TaskID retreived from database."})
     
     if task_scheduled == True:
         print('The given TaskID has already been scheduled.')
