@@ -101,6 +101,7 @@ def autoscheduleDB(request, taskid):
     task_scheduled = query_result[6]
 
     task_due_date_string = str(task_due_date.year) + '-' + str(task_due_date.month) + '-' + str(task_due_date.day)
+    today_date = datetime.today()
 
     # if query_result[-1] != str(taskid):
     #     print('TaskID from front end does not match TaskID retreived from database.')
@@ -119,7 +120,15 @@ def autoscheduleDB(request, taskid):
     cursor1.execute('SELECT title, start, end, type, userids, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date_string])
     rows = cursor1.fetchall()
 
-        # only get events that contain users who are included in the given TaskID
+    if len(rows) == 0:
+         # add new event to the events database table 
+        start_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day)
+        today_date += task_duration
+        end_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day)
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO events (title, start, end, type, users, taskid) VALUES (%s, %s, %s, %s, %s, %s, %s);", [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
+
+    # only get events that contain users who are included in the given TaskID
     relevant_events = []
     for row in rows: 
         event_users = row[4]
