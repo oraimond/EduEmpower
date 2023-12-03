@@ -6,6 +6,7 @@ import json
 
 
 from datetime import datetime, timedelta
+import gcal
 
 class Task:
     def __init__(self, name, duration, due_date, priority):
@@ -78,7 +79,7 @@ def autoscheduleDB(request, taskid):
     if request.method != 'POST':
         return HttpResponse(status=404)
     
-    # TODO: call calendar update function 
+
     
     # get tasks from database 
     cursor = connection.cursor()
@@ -106,6 +107,10 @@ def autoscheduleDB(request, taskid):
     if task_scheduled == True:
         print('The given TaskID has already been scheduled.')
         return HttpResponse("error3", status=500, headers={"error3": "The given TaskID has already been scheduled."})
+
+    # TODO: call calendar update function
+    for user in task_userids:
+        gcal.updateCalendar(user)
 
     # get calendar events from database 
     cursor1 = connection.cursor()
