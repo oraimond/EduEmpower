@@ -16,12 +16,14 @@ def loginDB(request):
     """
     TODO: Implement this
     """
-    username = request['userid']
-    password = request['password']
+    json_data = json.loads(request.body)
+    
+    username = json_data['userid']
+    password = json_data['password']
 
     cursor = connection.cursor()
 
-    data = connection.execute(
+    data = cursor.execute(
         f'''SELECT password FROM users WHERE userid = \'{username}\''''
     )
     user = data.fetchone()
