@@ -82,7 +82,7 @@ def autoscheduleDB(request, taskid):
     
     # get tasks from database 
     cursor = connection.cursor()
-    cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE taskid = %s;', (taskid))
+    cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE taskid = %s;', [taskid])
     rows = cursor.fetchall()
 
     if len(rows) != 8:
@@ -107,7 +107,7 @@ def autoscheduleDB(request, taskid):
 
     # get calendar events from database 
     cursor1 = connection.cursor()
-    cursor1.execute('SELECT title, start, end, type, users, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', (task_due_date))
+    cursor1.execute('SELECT title, start, end, type, users, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date])
     rows = cursor1.fetchall()
 
         # only get events that contain users who are included in the given TaskID
@@ -202,8 +202,7 @@ def autoscheduleDB(request, taskid):
 
     # add new event to the events database table 
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO events (title, start, end, type, users, taskid) VALUES '
-                   '(%s, %s, %s, %s, %s, %s, %s);', (task_title, final_timeslot, final_timeslot + task_duration, 'automatedTask', task_userids, taskid))
+    cursor.execute("INSERT INTO events (title, start, end, type, users, taskid) VALUES (%s, %s, %s, %s, %s, %s, %s);", [task_title, final_timeslot, final_timeslot + task_duration, 'automatedTask', task_userids, taskid])
     
 
     response = {}
