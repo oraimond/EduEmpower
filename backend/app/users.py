@@ -23,7 +23,7 @@ def loginDB(request):
 
     cursor = connection.cursor()
 
-    data = connection.execute(
+    data = cursor.execute(
         f'''SELECT password FROM users WHERE userid = \'{username}\''''
     )
     user = data.fetchone()
