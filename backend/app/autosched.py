@@ -87,7 +87,7 @@ def autoscheduleDB(request, taskid):
 
     if len(rows) != 8:
         print('The resulting query from the Tasks table has one or more missing attributes.')
-        return HttpResponse("CUSTOM MESSAGE 1", status=500, headers={"CUSTOM MESSAGE 1": "Result of query from Tasks table has missing attributes."})
+        return HttpResponse("error1", status=500, headers={"error1": "Result of query from Tasks table has missing attributes."})
 
     task_title = rows[0]
     task_duration = rows[1]
@@ -99,11 +99,11 @@ def autoscheduleDB(request, taskid):
 
     if rows[7] != taskid:
         print('TaskID from front end does not match TaskID retreived from database.')
-        return HttpResponse("CUSTOM MESSAGE 2", status=500, headers={"CUSTOM MESSAGE 2": "TaskID from front end does not match TaskID retreived from database."})
+        return HttpResponse("error2", status=500, headers={"error2": "TaskID from front end does not match TaskID retreived from database."})
     
     if task_scheduled == True:
         print('The given TaskID has already been scheduled.')
-        return HttpResponse("CUSTOM MESSAGE 3", status=500, headers={"CUSTOM MESSAGE 3": "The given TaskID has already been scheduled."})
+        return HttpResponse("error3", status=500, headers={"error3": "The given TaskID has already been scheduled."})
 
     # get calendar events from database 
     cursor1 = connection.cursor()
@@ -196,7 +196,7 @@ def autoscheduleDB(request, taskid):
 
     else:
         print('Invalid value for time preference.')
-        return HttpResponse("CUSTOM MESSAGE 4", status=500, headers={"CUSTOM MESSAGE 4": "Invalid value for time preference."})
+        return HttpResponse("error4", status=500, headers={"error4": "Invalid value for time preference."})
 
 
 
