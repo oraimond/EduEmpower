@@ -100,6 +100,8 @@ def autoscheduleDB(request, taskid):
     task_group_id = query_result[5]
     task_scheduled = query_result[6]
 
+    task_due_date_string = str(task_due_date.year) + '-' + str(task_due_date.month) + '-' + str(task_due_date.day)
+
     # if query_result[-1] != str(taskid):
     #     print('TaskID from front end does not match TaskID retreived from database.')
     #     return HttpResponse("error2", status=500, headers={"error2": "TaskID from front end does not match TaskID retreived from database."})
@@ -114,7 +116,7 @@ def autoscheduleDB(request, taskid):
 
     # get calendar events from database 
     cursor1 = connection.cursor()
-    cursor1.execute('SELECT title, start, end, type, userids, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date])
+    cursor1.execute('SELECT title, start, end, type, userids, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date_string])
     rows = cursor1.fetchall()
 
         # only get events that contain users who are included in the given TaskID
