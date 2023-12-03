@@ -109,7 +109,7 @@ def autoscheduleDB(request, taskid):
 
     # get calendar events from database 
     cursor1 = connection.cursor()
-    cursor1.execute('SELECT title, start, end, type, users, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date])
+    cursor1.execute('SELECT title, start, end, type, userids, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date])
     rows = cursor1.fetchall()
 
         # only get events that contain users who are included in the given TaskID
