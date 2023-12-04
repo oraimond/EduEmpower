@@ -12,6 +12,7 @@ struct User: Equatable {
         return lhs.email == rhs.email
     }
     let id = UUID()
+    var username: String?
     var fname: String
     var lname: String
     var email: String

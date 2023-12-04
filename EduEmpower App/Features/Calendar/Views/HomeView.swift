@@ -44,6 +44,12 @@ struct HomeView: View {
             }
             .navigationTitle("Calendar")
         }
+        .refreshable {
+            eventStore.fetchEvents()
+        }
+        .task {
+            eventStore.fetchEvents()
+        }
     }
 }
 
