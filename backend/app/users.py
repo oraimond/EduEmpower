@@ -23,9 +23,10 @@ def loginDB(request):
 
     cursor = connection.cursor()
 
-    data = cursor.execute(
-        f'''SELECT password FROM users WHERE userid = \'{username}\''''
-    )
+    #data = cursor.execute(
+        #f'''SELECT password FROM users WHERE userid = \'{username}\''''
+    #)
+    data = cursor.execute('SELECT password FROM users WHERE (%s) = userid;', (username,))
     user = data.fetchone()
 
     if not user:
@@ -103,7 +104,7 @@ def getUserProfileInfoDB(request):
     user_id = json_data['userid']
 
     cursor = connection.cursor()
-    cursor.execute('SELECT userid, first_name, last_name, email FROM users WHERE (%s) = userid;', (user_id,))
+    cursor.execute('SELECT userid, fname, lname, email FROM users WHERE (%s) = userid;', (user_id,))
     rows = cursor.fetchall()
 
     response = {}
