@@ -237,6 +237,9 @@ def autoscheduleDB(request, taskid):
     cursor = connection.cursor()
     cursor.execute("INSERT INTO events (title, eventstart, eventend, type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);", [task_title, final_timeslot.strftime("%Y-%m-%d %H:%M:%S"), (final_timeslot + timedelta(hours=task_duration)).strftime("%Y-%m-%d %H:%M:%S"), 'automatedTask', task_userids, taskid])
     
+    # TODO: call insertGCal on users 
+    for user in task_userids:
+        app.gcal.insertGCal(str(user), task_title, final_timeslot, final_timeslot + timedelta(hours=task_duration))
 
     response = {
         "message": "Events generation for task started",
