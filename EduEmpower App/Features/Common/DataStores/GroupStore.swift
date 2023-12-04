@@ -16,7 +16,7 @@ class GroupStore: ObservableObject {
     
     
     func fetchGroups() {
-        GroupGetAction().call() { response in
+        GroupGetAction(parameters: ProfileRequest(userid: AuthStore.shared.getUsername())).call() { response in
             for group in response {
                 let inviter = (User(
                     fname: AuthStore.shared.fname ?? "",
@@ -24,7 +24,7 @@ class GroupStore: ObservableObject {
                     email: AuthStore.shared.email ?? ""
                 ))
                 let invitees = group.invitees.map {
-                    User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
+                    User(username: $0.userid, fname: $0.fname, lname: $0.lname, email: "email@example.com")
                 }
                 var userids = [User]()
                 userids.append(User(fname: inviter.fname ,
@@ -33,7 +33,7 @@ class GroupStore: ObservableObject {
                 
                 self.save(varGroup(
                     id: UUID(),
-                    server_id: group.id,
+                    server_id: group.groupid,
                     groupName: group.title,
                     inviter: inviter,
                     invitees: invitees,
@@ -66,11 +66,11 @@ class GroupStore: ObservableObject {
             if let index = groups.firstIndex(where: { $0.id == group.id}) {
                 if let server_id = group.server_id {
                     GroupPutAction(parameters: GroupPutRequest(
-                        id: server_id,
+                        groupid: server_id,
                         title: group.groupName,
-                        inviter: "", //TODO
-                        invitees: [], //TODO
-                        userids: [] //TODO
+                        inviter: AuthStore.shared.getUsername(),
+                        invitees: [],
+                        userids: [AuthStore.shared.getUsername()]
                     )).call() { response in
                         if response.id == server_id {
                             self.groups[index] = group
@@ -82,9 +82,9 @@ class GroupStore: ObservableObject {
             } else {
                 GroupPostAction(parameters: GroupPostRequest(
                     title: group.groupName,
-                    inviter: "", //TODO
-                    invitees: [], //TODO
-                    userids: [] //TODO
+                    inviter: AuthStore.shared.getUsername(),
+                    invitees: [],
+                    userids: [AuthStore.shared.getUsername()]
                 )).call() { response in
                     var groupCopy = group
                     groupCopy.server_id = response.id

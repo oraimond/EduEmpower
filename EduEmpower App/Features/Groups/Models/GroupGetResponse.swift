@@ -8,7 +8,7 @@
 import Foundation
 
 struct GroupGetResponse: Decodable {
-    let id: Int
+    let groupid: Int
     let title: String
     let inviter: GroupUser
     let invitees: [GroupUser]
@@ -16,7 +16,7 @@ struct GroupGetResponse: Decodable {
 }
 
 struct GroupUser: Decodable {
-    let user_id: String
+    let userid: String
     let fname: String
     let lname: String
 }

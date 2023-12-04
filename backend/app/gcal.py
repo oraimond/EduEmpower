@@ -122,7 +122,7 @@ def updateCalendar(userid):
                 """
         cursor.execute(checkQuery)
         isEvent = cursor.fetchone()
-        if isEvent:
+        if isEvent[3]== start and iEvent[4] == end:
             continue
         
         query = f"""

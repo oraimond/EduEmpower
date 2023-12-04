@@ -13,7 +13,7 @@ struct GroupPutAction {
     func call(completion: @escaping (GroupResponse) -> Void) {
         let path = "/group/"
         
-        guard let url = URL(string: APIConstants.base_url + path + String(parameters.id)) else {
+        guard let url = URL(string: APIConstants.base_url + path + String(parameters.groupid)) else {
             print("URL Error")
             return
         }

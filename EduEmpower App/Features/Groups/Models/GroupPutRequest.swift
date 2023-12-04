@@ -8,7 +8,7 @@
 import Foundation
 
 struct GroupPutRequest: Encodable {
-    let id: Int
+    let groupid: Int
     let title: String
     let inviter: String
     let invitees: [String]
