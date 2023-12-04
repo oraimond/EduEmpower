@@ -14,12 +14,22 @@ def geteventsDB(request):
     # json_data = json.loads(request.body)
     # username = json_data['userid']
     username = request.GET.get('userid')
-    cursor.execute('SELECT type, "end", start, title, eventid FROM events WHERE (%s) = ANY(userids) ORDER BY start DESC;', (username,))  # not sure what fields we wanted
+    cursor.execute('SELECT title, start, "end", type, userids, taskid, eventid FROM events WHERE (%s) = ANY(userids) ORDER BY start DESC;', (username,))  # not sure what fields we wanted
     rows = cursor.fetchall()
 
-    response = {}
-    response['events'] = rows
-    return JsonResponse(response)
+    response = []
+    for row in rows:
+        tempdict = {}
+        tempdict['eventid'] = row[-1]
+        tempdict['title'] = row[0]
+        tempdict['start'] = row[1]
+        tempdict['end'] = row[2]
+        tempdict['type'] = row[3]
+        tempdict['users'] = row[4]
+        tempdict['related_task_id'] = row[5]
+        response.appepnd(tempdict)
+        
+    return JsonResponse(response, safe=False)
 
 def createeventDB(request):
     """
