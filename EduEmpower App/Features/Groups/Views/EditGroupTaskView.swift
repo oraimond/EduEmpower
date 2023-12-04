@@ -55,7 +55,7 @@ struct EditGroupTaskView: View {
                         .cornerRadius(10)
                 }
             }
-            .paadding()
+            .padding()
             .navigationBarTitle("Edit Group Task", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

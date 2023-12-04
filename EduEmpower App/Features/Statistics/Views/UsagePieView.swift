@@ -58,7 +58,6 @@ class PieChartUIView: UIView {
 
 
 struct PieChartView: View {
-    
     @ObservedObject var viewModel: StatisticsViewModel = StatisticsViewModel()
 
     @State var dataEntries: [varChartDataEntry]

@@ -11,7 +11,7 @@ import DeviceActivity
 import Foundation
 
 extension DeviceActivityReport.Context {
-    static let pieChart = Self("Pie Chart")
+    static let pieChart = Self("pieChart")
 }
 
 struct StatisticsView: View {
@@ -30,6 +30,8 @@ struct StatisticsView: View {
             
             Text("Focus Statistics")
                 .font(.largeTitle)
+            
+            DeviceActivityReport(context, filter: filter)
             
             // TODO: put graph diagram
             PieChartView(dataEntries: viewModel.dummyStats)
