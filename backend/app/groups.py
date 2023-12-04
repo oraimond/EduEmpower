@@ -45,7 +45,7 @@ def postgroupsDB(request):
         query = f"""
         SELECT userid FROM USERS WHERE email = \'{user}\';
         """
-        userid = cursor.execute(query).fetchone()
+        userid = cursor.execute(query) #.fetchone()
         invitees.append(userid['userid'])
 
         query = f"""
