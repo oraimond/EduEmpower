@@ -6,7 +6,7 @@ import json
 
 
 from datetime import datetime, timedelta
-import gcal
+import app.gcal
 
 class Task:
     def __init__(self, name, duration, due_date, priority):
