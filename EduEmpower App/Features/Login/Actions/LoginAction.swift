@@ -13,7 +13,7 @@ struct LoginAction {
     
     func call(completion: @escaping (LoginResponse) -> Void) {
         
-        let path = "/login"
+        let path = "//login"
         
         
         guard let url = URL(string: APIConstants.base_url + path) else {

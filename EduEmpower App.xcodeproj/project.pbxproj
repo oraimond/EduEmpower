@@ -16,6 +16,8 @@
 		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
 		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
 		AF2216482B0042F800CA4164 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2216472B0042F800CA4164 /* Group.swift */; };
+		AF3D97332B1D58FE000EE033 /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D97322B1D58FE000EE033 /* SignUpRequest.swift */; };
+		AF3D97352B1D762A000EE033 /* TaskAutoGenerateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D97342B1D762A000EE033 /* TaskAutoGenerateRequest.swift */; };
 		AF44CF752AFE7D560087A57B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF742AFE7D560087A57B /* HomeView.swift */; };
 		AF44CF792AFE7E7E0087A57B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF782AFE7E7E0087A57B /* ContentView.swift */; };
 		AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF822AFE7F090087A57B /* GroupsView.swift */; };
@@ -90,6 +92,8 @@
 		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		AF2216472B0042F800CA4164 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		AF3D97322B1D58FE000EE033 /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
+		AF3D97342B1D762A000EE033 /* TaskAutoGenerateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAutoGenerateRequest.swift; sourceTree = "<group>"; };
 		AF44CF742AFE7D560087A57B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AF44CF782AFE7E7E0087A57B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AF44CF822AFE7F090087A57B /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 				AF6F453F2B05B84500FA4B9A /* TaskPostRequest.swift */,
 				AF872EE22B06728A006154DD /* TaskResponse.swift */,
 				AF872EE42B067A98006154DD /* TaskPutRequest.swift */,
+				AF3D97342B1D762A000EE033 /* TaskAutoGenerateRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 				AFE05E712AF80CE3003D22A2 /* LoginRequest.swift */,
 				AFE05E732AF80D0E003D22A2 /* LoginResponse.swift */,
 				AFE05E7D2AF81273003D22A2 /* PasswordRequest.swift */,
+				AF3D97322B1D58FE000EE033 /* SignUpRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -603,6 +609,7 @@
 			files = (
 				AF55F14B2B0518B900D85E2A /* TaskStore.swift in Sources */,
 				AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */,
+				AF3D97352B1D762A000EE033 /* TaskAutoGenerateRequest.swift in Sources */,
 				AF6F453E2B05B7F400FA4B9A /* TaskDeleteAction.swift in Sources */,
 				AF97E0C72AFFD22E00759297 /* EditTaskView.swift in Sources */,
 				AF9641CB2B0445D0000608FD /* APIConstants.swift in Sources */,
@@ -626,6 +633,7 @@
 				AF44CF852AFE7F260087A57B /* TasksView.swift in Sources */,
 				AFE05E682AF80995003D22A2 /* LoginViewModel.swift in Sources */,
 				40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */,
+				AF3D97332B1D58FE000EE033 /* SignUpRequest.swift in Sources */,
 				AFD997AB2B0273C7004888DC /* GroupListRow.swift in Sources */,
 				AF97E0BE2AFFC7E500759297 /* TaskListRow.swift in Sources */,
 				AFD997B52B0273F3004888DC /* StatisticsViewModel.swift in Sources */,

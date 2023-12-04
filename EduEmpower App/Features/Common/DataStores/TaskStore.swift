@@ -43,11 +43,11 @@ class TaskStore: ObservableObject {
         }
     }
     
-    func generate_events(task_id: UUID, server_id: Int?) {
-        if let index = tasks.firstIndex(where: { $0.id == task_id }) { // If the task is in the list, update it
-            tasks[index].scheduled = true
-            if let server_id {
-                TaskAutoGenerateAction(server_id: server_id).call()
+    func generate_events(task_id: UUID, server_id: Int?, preferredTime: String) {
+        if let server_id {
+            if let index = tasks.firstIndex(where: { $0.server_id == server_id }) { // If the task is in the list, update it
+                tasks[index].scheduled = true
+                TaskAutoGenerateAction(server_id: server_id, parameters: TaskAutoGenerateRequest(time_preference: preferredTime)).call()
             }
         } else {
             print("Unable to generate events")
@@ -55,9 +55,9 @@ class TaskStore: ObservableObject {
     }
     
     func delete(task_id: UUID, server_id: Int?) {
-        if let index = tasks.firstIndex(where: { $0.id == task_id }) { // If the task is in the list, update it
-            tasks.remove(at: index)
-            if let server_id {
+        if let server_id {
+            if let index = tasks.firstIndex(where: { $0.server_id == server_id }) { // If the task is in the list, update it
+                tasks.remove(at: index)
                 TaskDeleteAction(server_id: server_id).call()
             }
         } else {

@@ -29,13 +29,13 @@ class SignUpViewModel: ObservableObject {
     }
 
     func submit() {
-        print("Submitted")
-//        PasswordAction(
-//            parameters: PasswordRequest(
-//                email: email
-//            )
-//        ).call { _ in
-//            // Login successful, navigate to the Home screen
-//        }
+        SignUpAction(
+            parameters: SignUpRequest(
+                fname: fname,
+                lname: lname,
+                userid: username,
+                email: email,
+                password: password)
+        ).call()
     }
 }

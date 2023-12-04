@@ -32,13 +32,19 @@ class EventStore: ObservableObject {
                         type = .automatedTask
                     }
                     
-                    self.events.append(Event(
+                    let event = Event(
                         id: String(event.eventid),
                         eventType: type,
                         start: ISO8601DateFormatter().date(from: event.start) ?? Date(),
                         end: ISO8601DateFormatter().date(from: event.end),
                         note: event.title
-                    ))
+                    )
+                    
+                    if let index = self.events.firstIndex(where: { $0.id == event.id }) {
+                        self.events[index] = event
+                    } else {
+                        self.events.append(event)
+                    }
                 }
             }
         }

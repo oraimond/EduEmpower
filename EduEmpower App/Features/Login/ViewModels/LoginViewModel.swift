@@ -23,7 +23,7 @@ class LoginViewModel: ObservableObject {
     func login() {
         LoginAction(
             parameters: LoginRequest(
-                username: username,
+                userid: username,
                 password: password
             )
         ).call { response in
@@ -42,7 +42,7 @@ class LoginViewModel: ObservableObject {
     func login_demo() {
         LoginAction(
             parameters: LoginRequest(
-                username: "test",
+                userid: "test",
                 password: "test"
             )
         ).call { response in
