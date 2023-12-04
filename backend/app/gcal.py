@@ -115,7 +115,8 @@ def updateCalendar(userid):
         checkQuery = f"""
                 SELECT * FROM EVENTS WHERE gcalid = \'{id}\';
                 """
-        isEvent = cursor.execute(checkQuery).fetchone()
+        cursor.execute(checkQuery)
+        isEvent = cursor.fetchone()
         if isEvent:
             continue
         
