@@ -113,7 +113,7 @@ def editgroupDB(request, groupid):
     response = {}
     response['id'] = groupid
     
-    return JsonResponse({response})
+    return JsonResponse(response)
 
 def deletegroupDB(request, groupid):
     """
