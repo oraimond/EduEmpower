@@ -40,12 +40,23 @@ struct StatisticsView: View {
             
             VStack {
                 // TODO if the ratio for social media greater than focus (show negatives) else (show positives)
-                List(viewModel.insightsList, id: \.id) {
-                    insight in InsightListRow(insight: insight)
-                }
-                
-                List(viewModel.suggestionsList, id: \.id) {
-                    suggestion in SuggestionListRow(suggestion: suggestion)
+                // Check if the "Focus" app value is less than 50
+                if let focusApp = viewModel.dummyStats.first(where: { $0.app == "Focus" }), focusApp.value < 50 {
+                    // Show negative insights
+                    List(viewModel.negativeInsights, id: \.id) { insight in
+                        InsightListRow(insight: insight)
+                    }
+                    List(viewModel.negativeSuggestions, id: \.id) { suggestion in
+                        SuggestionListRow(suggestion: suggestion)
+                    }
+                } else {
+                    // Show positive insights
+                    List(viewModel.positiveInsights, id: \.id) { insight in
+                        InsightListRow(insight: insight)
+                    }
+                    List(viewModel.positiveSuggestions, id: \.id) { suggestion in
+                        SuggestionListRow(suggestion: suggestion)
+                    }
                 }
             }
            
