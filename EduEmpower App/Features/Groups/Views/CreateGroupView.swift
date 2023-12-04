@@ -39,17 +39,10 @@ struct CreateGroupView: View {
                     List {
                         ForEach(invitees, id: \.id) { invitee in
                             TextField("Email", text: $invitees[getIndex(for: invitee)].email)
-                                .onChange(of: invitees[getIndex(for: invitee)].email) { newEmail in
-                                    if let user = findUser(with: newEmail) {
-                                        invitees[getIndex(for: invitee)] = user
-                                    }
-                                }
+
                         }
                         TextField("Add New Member", text: $newMemberEmail)
-                            .onChange(of: newMemberEmail) { newEmail in
-                                let newUser = User(fname: "", lname: "", email: newEmail)
-                                invitees.append(newUser)
-                            }
+
                     }
                 }
             }
@@ -100,10 +93,5 @@ struct CreateGroupView: View {
         return 0
     }
     
-    // TODO find a user based on email
-    private func findUser(with email: String) -> User? {
-        // Return the corresponding user or nil if not found
-        return nil
-    }
 
 }
