@@ -126,8 +126,8 @@ def autoscheduleDB(request, taskid):
         return HttpResponse("error3", status=500, headers={"error3": "The given TaskID has already been scheduled."})
 
     # TODO: call calendar update function
-    # for user in task_userids:
-    #     app.gcal.updateCalendar(user)
+    for user in task_userids:
+        app.gcal.updateCalendar(user)
 
     # get calendar events from database 
     cursor1 = connection.cursor()
@@ -238,8 +238,10 @@ def autoscheduleDB(request, taskid):
     cursor.execute("INSERT INTO events (title, eventstart, eventend, type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);", [task_title, final_timeslot.strftime("%Y-%m-%d %H:%M:%S"), (final_timeslot + timedelta(hours=task_duration)).strftime("%Y-%m-%d %H:%M:%S"), 'automatedTask', task_userids, taskid])
     
 
-    response = {}
-    response['task_to_timeslot'] = [taskid, viable_timeslots[0][0], viable_timeslots[0][1]]
+    response = {
+        "message": "Events generation for task started",
+        "taskid": str(taskid)
+    }
     return JsonResponse(response)
         
 
