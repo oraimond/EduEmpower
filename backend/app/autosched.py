@@ -147,7 +147,7 @@ def autoscheduleDB(request, taskid):
        
         response = {}
         response['message'] = "Events generation for task started"
-        response['taskid'] = "{" + str(taskid) + "}"
+        # response['taskid'] = "{" + str(taskid) + "}"
         return JsonResponse(response)
 >>>>>>> ef7d59f7bd33d71f90132f4f155e641a83bdf947
 
