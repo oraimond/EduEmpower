@@ -125,13 +125,13 @@ def autoscheduleDB(request, taskid):
         print('The given TaskID has already been scheduled.')
         return HttpResponse("error3", status=500, headers={"error3": "The given TaskID has already been scheduled."})
 
-    # TODO: call calendar update function
-    for user in task_userids:
-        app.gcal.updateCalendar(str(user))
+    # # TODO: call calendar update function
+    # for user in task_userids:
+    #     app.gcal.updateCalendar(str(user))
 
     # get calendar events from database 
     cursor1 = connection.cursor()
-    cursor1.execute('SELECT title, eventstart, eventend, type, userids, taskid, eventid FROM events WHERE eventstart < %s ORDER BY eventstart ASC;', [task_due_date_string])
+    cursor1.execute('SELECT title, start, "end", type, userids, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date_string])
     rows = cursor1.fetchall()
 
     if len(rows) == 0:
@@ -140,7 +140,7 @@ def autoscheduleDB(request, taskid):
         end_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day) + ' ' + str(task_duration) + ':00:00'
         cursor = connection.cursor()
 
-        cursor.execute("INSERT INTO events (title, eventstart, eventend, type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);", [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
+        cursor.execute('INSERT INTO events (title, start, "end", type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);', [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
        
         response = {
             "message": "Events generation for task started",
@@ -235,11 +235,11 @@ def autoscheduleDB(request, taskid):
 
     # add new event to the events database table 
     cursor = connection.cursor()
-    cursor.execute("INSERT INTO events (title, eventstart, eventend, type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);", [task_title, final_timeslot.strftime("%Y-%m-%d %H:%M:%S"), (final_timeslot + timedelta(hours=task_duration)).strftime("%Y-%m-%d %H:%M:%S"), 'automatedTask', task_userids, taskid])
+    cursor.execute('INSERT INTO events (title, start, "end", type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);', [task_title, final_timeslot.strftime("%Y-%m-%d %H:%M:%S"), (final_timeslot + timedelta(hours=task_duration)).strftime("%Y-%m-%d %H:%M:%S"), 'automatedTask', task_userids, taskid])
     
-    # TODO: call insertGCal on users 
-    for user in task_userids:
-        app.gcal.insertGCal(str(user), task_title, final_timeslot, final_timeslot + timedelta(hours=task_duration))
+    # # TODO: call insertGCal on users 
+    # for user in task_userids:
+    #     app.gcal.insertGCal(str(user), task_title, final_timeslot, final_timeslot + timedelta(hours=task_duration))
 
     response = {
         "message": "Events generation for task started",
