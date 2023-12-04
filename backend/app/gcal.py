@@ -23,13 +23,13 @@ def insertGCal(userid, name, start, end):
     cursor = connection.cursor()
 
     query = f'''
-        SELECT * FROM users WHERE userid = \'{userid}\';
+        SELECT refresh_token FROM users WHERE userid = \'{userid}\';
         '''
     user = cursor.execute(query)
     user = cursor.fetchone()
-    print(user[3])
+    print(user[0])
 
-    refresh_token = user[3]
+    refresh_token = user[0]
     if refresh_token == "":
         return
     params = {
