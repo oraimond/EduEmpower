@@ -108,9 +108,10 @@ def updateCalendar(userid):
     for event in events:
         if 'dateTime' not in event['start'] or 'dateTime' not in event['end']:
             continue
+        print(event)
         try:
-            start = event['start']['date'].replace("T", " ")
-            end = event['end']['date'].replace("T", " ")
+            start = event['start']['dateTime'].replace("T", " ")
+            end = event['end']['dateTime'].replace("T", " ")
             summary = event['summary']
             id = event['id']
         except TypeError as e:
