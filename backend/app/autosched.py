@@ -144,7 +144,7 @@ def autoscheduleDB(request, taskid):
        
         response = {}
         response['message'] = "Events generation for task started"
-        response['taskid'] = "{" + str(taskid) + "}"
+        # response['taskid'] = "{" + str(taskid) + "}"
         return JsonResponse(response)
 
     # only get events that contain users who are included in the given TaskID
