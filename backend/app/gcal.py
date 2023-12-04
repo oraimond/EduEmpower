@@ -118,11 +118,11 @@ def updateCalendar(userid):
             print(e)
             return
         checkQuery = f"""
-                SELECT * FROM EVENTS WHERE gcalid = \'{id}\';
+                SELECT * FROM EVENTS WHERE start = \'{start}\' AND "end" = \'{end}\';
                 """
         cursor.execute(checkQuery)
         isEvent = cursor.fetchone()
-        if isEvent[3] == start and isEvent[4] == end:
+        if isEvent:
             continue
         
         query = f"""
