@@ -45,8 +45,12 @@ def postgroupsDB(request):
         query = f"""
         SELECT userid FROM USERS WHERE email = \'{user}\';
         """
-        userid = cursor.execute(query) #.fetchone()
-        invitees.append(userid['userid'])
+        #userid = cursor.execute(query) .fetchone()
+        #invitees.append(userid['userid'])
+
+        cursor.execute(query)
+        userid = cursor.fetchone()
+        invitees.append(userid[0])
 
         query = f"""
             UPDATE users
