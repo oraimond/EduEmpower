@@ -142,8 +142,10 @@ def autoscheduleDB(request, taskid):
         cursor = connection.cursor()
         cursor.execute("INSERT INTO events (title, eventstart, eventend, type, users, taskid) VALUES (%s, %s, %s, %s, %s, %s);", [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
        
-        response = {}
-        response["message"] = "Events generation for task started"
+        response = {
+            "message": "Events generation for task started",
+            "taskid": str(taskid)
+        }
         # response['taskid'] = "{" + str(taskid) + "}"
         return JsonResponse(response)
 
