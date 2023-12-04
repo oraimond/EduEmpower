@@ -83,13 +83,17 @@ def editgroupDB(request, groupid):
         query = f"""
         SELECT userid FROM USERS WHERE email = \'{user}\';
         """
-        userid = cursor.execute(query).fetchone()
-        invitees.append(userid['userid'])
+        #userid = cursor.execute(query).fetchone()
+        #invitees.append(userid['userid'])
+
+        cursor.execute(query)
+        userid = cursor.fetchone()
+        invitees.append(userid[0])
 
         query = f"""
             UPDATE users
-            SET groups_invitations = ARRAY_APPEND(group_invitations, userid['userid'])
-            WHERE userid =\'{userid['userid']}\';
+            SET groups_invitations = ARRAY_APPEND(group_invitations, userid[0])
+            WHERE userid =\'{userid[0]}\';
             """
         cursor.execute(query)
 
