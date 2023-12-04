@@ -13,7 +13,7 @@ def geteventsDB(request):
     cursor = connection.cursor()
     # json_data = json.loads(request.body)
     # username = json_data['userid']
-    username = request.GET.get['userid']
+    username = request.GET.get('userid')
     cursor.execute('SELECT type, "end", start, title, eventid FROM events WHERE (%s) = ANY(userids) ORDER BY start DESC;', (username,))  # not sure what fields we wanted
     rows = cursor.fetchall()
 
