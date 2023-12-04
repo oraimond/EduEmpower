@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 from django.db import transaction
+import app.users
 
 def gettasksDB(request):
     """
@@ -29,9 +30,21 @@ def gettasksDB(request):
         tempdict['duration'] = row[1]
         tempdict['due_date'] = row[2]
         tempdict['description'] = row[3]
-        tempdict['users'] = row[4]
+        tempdict['users'] = []
         tempdict['scheduled'] = row[6]
         tempdict['groupd_id'] = row[5]
+
+        for user in row[4]:
+            cursor = connection.cursor()
+            cursor.execute('SELECT userid, fname, lname, email FROM users WHERE (%s) = userid;', (user,))
+            rows = cursor.fetchall()
+
+            curr_user = rows[0]
+            # response['userid'] = curr_user[0]
+            # response['first_name'] = curr_user[1]
+            # response['last_name'] = curr_user[2]
+            # response['email'] = curr_user[3]    
+            tempdict['users'].append({"userid": curr_user[0], "fname": curr_user[1], "lname": curr_user[2]})
 
         response.append(tempdict)
 
