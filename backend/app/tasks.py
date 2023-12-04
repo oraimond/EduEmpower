@@ -6,6 +6,16 @@ import json
 
 from django.db import transaction
 import app.users
+from routing.celery import app
+from app.gcal import updateCalendar
+
+@app.task
+def updating():
+    cursor = connection.cursor()
+    cursor.execute("Select * from users;")
+    rows = cursor.fetchall()
+    for row in rows:
+        updateCalendar(row[0])
 
 def gettasksDB(request):
     """
