@@ -32,6 +32,7 @@ struct EditGroupTaskView: View {
     var body: some View {
         NavigationView {
             Form {
+                // not allowing assigned user change for simplification
                 Section(header: Text("Task Details")) {
                     TextField("Title", text: $taskTitle)
                     TextField("Duration in Min", value: $taskDuration, formatter: NumberFormatter())
@@ -39,9 +40,23 @@ struct EditGroupTaskView: View {
                     TextField("Description", text: $taskDescription, axis: .vertical)
                         .lineLimit(5...10)
                 }
+                
+                Button(action: {
+                    // delete
+                    TaskStore.shared.delete(task_id: task.id, server_id: task.server_id)
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Text("Delete task")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(Color.red)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
-            
-            .navigationBarTitle("Add Group Task", displayMode: .inline)
+            .padding()
+            .navigationBarTitle("Edit Group Task", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
@@ -55,7 +70,18 @@ struct EditGroupTaskView: View {
                         
                         // send to database - specifically for the assigned group
                         // TODO
-                        
+                        let newTask = varTask(
+                            id: task.id,
+                            server_id: task.server_id,
+                            title: taskTitle,
+                            timeNeeded: taskDuration,
+                            dueDate: taskDueDate,
+                            taskDescription: taskDescription,
+                            members: members,
+                            scheduled: task.scheduled,
+                            group: group
+                        )
+                        TaskStore.shared.save(newTask)
                         // exit
                         presentationMode.wrappedValue.dismiss()
                     }) {

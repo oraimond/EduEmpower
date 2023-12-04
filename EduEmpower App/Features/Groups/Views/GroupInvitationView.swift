@@ -9,16 +9,35 @@ import SwiftUI
 
 struct GroupInvitationView: View {
     @ObservedObject var viewModel: GroupViewModel = GroupViewModel()
+    @ObservedObject var groupsStore: GroupStore = GroupStore.shared
+    @ObservedObject var authStore: AuthStore = AuthStore.shared
+
+    var loggedInUser: User {
+        User(
+            fname: authStore.fname ?? "",
+            lname: authStore.lname ?? "",
+            email: authStore.email ?? ""
+        )
+    }
 
     var body: some View {
         VStack(alignment: .leading) {
-            List(viewModel.dummyInvitations, id: \.id) { invitation in
+            List(groupsStore.groups.filter { group in
+                group.inviter != loggedInUser &&
+                group.invitees.contains(loggedInUser)
+            }, id: \.id) { group in
                 VStack(alignment: .leading) {
-                    Text(invitation.inviter.fname + " invites you to join " + invitation.group.groupName)
+                    Text(group.inviter.fname + " invites you to join " + group.groupName)
                         .font(.subheadline)
                     HStack {
                         Button(action: {
                             // TODO add to groups
+                            var mutableGroup = group
+                            mutableGroup.userids.append(loggedInUser)
+                            mutableGroup.invitees = mutableGroup.invitees.filter { invitee in
+                                invitee != loggedInUser
+                            }
+                            GroupStore.shared.save(mutableGroup)
                         }) {
                             Text("Accept")
                                 .font(.caption)
@@ -31,6 +50,11 @@ struct GroupInvitationView: View {
                         .padding(.top, 10)
                         Button(action: {
                             // Delete from Invitations
+                            var mutableGroup = group
+                            mutableGroup.invitees = mutableGroup.invitees.filter { invitee in
+                                invitee != loggedInUser
+                            }
+                            GroupStore.shared.save(mutableGroup)
                         }) {
                             Text("Decline")
                                 .font(.caption)

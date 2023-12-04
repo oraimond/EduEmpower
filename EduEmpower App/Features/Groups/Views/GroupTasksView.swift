@@ -11,6 +11,8 @@ struct GroupTasksView: View {
     @State var  group: varGroup
     @Binding var task: [varTask]
     @ObservedObject var viewModel: GroupViewModel = GroupViewModel()
+    @ObservedObject var tasksStore: TaskStore = TaskStore.shared
+
     
     @State var newTask: varTask = varTask( title: "", timeNeeded: 0, dueDate: Date(), taskDescription: "", members: [])
     @State var showingEditTaskView = false
@@ -19,7 +21,7 @@ struct GroupTasksView: View {
     var body: some View {
 
             NavigationStack{
-                List(viewModel.dummyTasks.filter { $0.group == group }, id: \.id) { task in
+                List(tasksStore.tasks.filter { $0.group == group }, id: \.id) { task in
                     GroupTaskListRow (group: group, task: task)
                 }
                 .navigationTitle("Group Tasks")

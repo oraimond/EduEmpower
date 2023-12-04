@@ -7,8 +7,17 @@
 
 import SwiftUI
 import UIKit
+import DeviceActivity
+import Foundation
+
+extension DeviceActivityReport.Context {
+    static let pieChart = Self("pieChart")
+}
 
 struct StatisticsView: View {
+    @State private var context: DeviceActivityReport.Context = .pieChart
+    @State private var filter = DeviceActivityFilter(segment: .daily(during: DateInterval(start: Date(), end: Date())))
+    
     @ObservedObject var viewModel: StatisticsViewModel = StatisticsViewModel()
     
     @State var newInsight: varInsight = varInsight(title: "", insightDescription: "")
@@ -22,17 +31,32 @@ struct StatisticsView: View {
             Text("Focus Statistics")
                 .font(.largeTitle)
             
+            DeviceActivityReport(context, filter: filter)
+            
             // TODO: put graph diagram
             PieChartView(dataEntries: viewModel.dummyStats)
                 .frame(width: 150, height: 150)
             
+            
             VStack {
-                List(viewModel.dummyInsights, id: \.id) {
-                    insight in InsightListRow(insight: insight)
-                }
-                
-                List(viewModel.dummySuggestions, id: \.id) {
-                    suggestion in SuggestionListRow(suggestion: suggestion)
+                // TODO if the ratio for social media greater than focus (show negatives) else (show positives)
+                // Check if the "Focus" app value is less than 50
+                if let focusApp = viewModel.dummyStats.first(where: { $0.app == "Focus" }), focusApp.value < 50 {
+                    // Show negative insights
+                    List(viewModel.negativeInsights, id: \.id) { insight in
+                        InsightListRow(insight: insight)
+                    }
+                    List(viewModel.negativeSuggestions, id: \.id) { suggestion in
+                        SuggestionListRow(suggestion: suggestion)
+                    }
+                } else {
+                    // Show positive insights
+                    List(viewModel.positiveInsights, id: \.id) { insight in
+                        InsightListRow(insight: insight)
+                    }
+                    List(viewModel.positiveSuggestions, id: \.id) { suggestion in
+                        SuggestionListRow(suggestion: suggestion)
+                    }
                 }
             }
            

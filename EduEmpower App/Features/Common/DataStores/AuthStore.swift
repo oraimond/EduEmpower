@@ -18,8 +18,10 @@ class AuthStore: ObservableObject {
     @Published var fname: String?
     @Published var lname: String?
     @Published var email: String?
-
+    
     private init() {} // ensure that only one instance of AuthStore can be created
+    
+
     
     func getProfile() {
         ProfileAction(parameters: ProfileRequest(userid: getUsername())).call() { response in
@@ -62,4 +64,5 @@ class AuthStore: ObservableObject {
     func logout() {
         // TODO clear all data stores
     }
+
 }

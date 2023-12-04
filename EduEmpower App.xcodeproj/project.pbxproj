@@ -7,12 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4066843F2B17DD3800394CC7 /* GroupPostRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066843E2B17DD3800394CC7 /* GroupPostRequest.swift */; };
+		406684412B17DE7500394CC7 /* GroupGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684402B17DE7500394CC7 /* GroupGetResponse.swift */; };
+		406684432B17DF8300394CC7 /* GroupPutRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684422B17DF8300394CC7 /* GroupPutRequest.swift */; };
+		406684452B17DFD400394CC7 /* GroupResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684442B17DFD400394CC7 /* GroupResponse.swift */; };
+		406684472B17E00200394CC7 /* GroupGetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684462B17E00200394CC7 /* GroupGetAction.swift */; };
+		406684492B17E15F00394CC7 /* GroupPostAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684482B17E15F00394CC7 /* GroupPostAction.swift */; };
+		4066844B2B17E26800394CC7 /* GroupPutAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844A2B17E26800394CC7 /* GroupPutAction.swift */; };
+		4066844D2B17E31200394CC7 /* GroupDeleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */; };
+		406684662B1BDE9400394CC7 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684652B1BDE9400394CC7 /* ScheduleModel.swift */; };
 		409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */; };
 		40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612292B0590CA0011650B /* GroupTasksView.swift */; };
 		40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */; };
 		40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122D2B05C4540011650B /* EditGroupView.swift */; };
 		40C612302B05CFC90011650B /* GroupInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122F2B05CFC80011650B /* GroupInvitationView.swift */; };
-		40C612322B05D70A0011650B /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612312B05D70A0011650B /* Invitation.swift */; };
+		40EEBB332B1CFE8100D57C8D /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EEBB322B1CFE8100D57C8D /* DataModel.swift */; };
 		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
 		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
 		AF2216482B0042F800CA4164 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2216472B0042F800CA4164 /* Group.swift */; };
@@ -84,12 +93,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4066843E2B17DD3800394CC7 /* GroupPostRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostRequest.swift; sourceTree = "<group>"; };
+		406684402B17DE7500394CC7 /* GroupGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupGetResponse.swift; sourceTree = "<group>"; };
+		406684422B17DF8300394CC7 /* GroupPutRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPutRequest.swift; sourceTree = "<group>"; };
+		406684442B17DFD400394CC7 /* GroupResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupResponse.swift; sourceTree = "<group>"; };
+		406684462B17E00200394CC7 /* GroupGetAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupGetAction.swift; sourceTree = "<group>"; };
+		406684482B17E15F00394CC7 /* GroupPostAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPostAction.swift; sourceTree = "<group>"; };
+		4066844A2B17E26800394CC7 /* GroupPutAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupPutAction.swift; sourceTree = "<group>"; };
+		4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDeleteAction.swift; sourceTree = "<group>"; };
+		406684652B1BDE9400394CC7 /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		40C612292B0590CA0011650B /* GroupTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTasksView.swift; sourceTree = "<group>"; };
 		40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupTaskView.swift; sourceTree = "<group>"; };
 		40C6122D2B05C4540011650B /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
 		40C6122F2B05CFC80011650B /* GroupInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupInvitationView.swift; sourceTree = "<group>"; };
-		40C612312B05D70A0011650B /* Invitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
+		40EEBB322B1CFE8100D57C8D /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		AF2216472B0042F800CA4164 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
@@ -173,6 +191,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4066843C2B17DC6500394CC7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4066843E2B17DD3800394CC7 /* GroupPostRequest.swift */,
+				406684402B17DE7500394CC7 /* GroupGetResponse.swift */,
+				406684422B17DF8300394CC7 /* GroupPutRequest.swift */,
+				406684442B17DFD400394CC7 /* GroupResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4066843D2B17DC6C00394CC7 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				406684462B17E00200394CC7 /* GroupGetAction.swift */,
+				406684482B17E15F00394CC7 /* GroupPostAction.swift */,
+				4066844A2B17E26800394CC7 /* GroupPutAction.swift */,
+				4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */,
+			);
+			path = Actions;
+			sourceTree = "<group>";
+		};
+		406684642B1BDE7100394CC7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				406684652B1BDE9400394CC7 /* ScheduleModel.swift */,
+				40EEBB322B1CFE8100D57C8D /* DataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		409381F92B0286D500C3DF39 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +288,8 @@
 		AF44CF7A2AFE7EBF0087A57B /* Groups */ = {
 			isa = PBXGroup;
 			children = (
+				4066843C2B17DC6500394CC7 /* Models */,
+				4066843D2B17DC6C00394CC7 /* Actions */,
 				AFD997A42B0273B6004888DC /* ViewModels */,
 				AF44CF812AFE7EFC0087A57B /* Views */,
 			);
@@ -259,6 +310,7 @@
 		AF44CF7C2AFE7ED40087A57B /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				406684642B1BDE7100394CC7 /* Model */,
 				AFD997B32B0273F3004888DC /* ViewModels */,
 				AF44CF7F2AFE7EEB0087A57B /* Views */,
 			);
@@ -363,7 +415,6 @@
 				AF97E0BB2AFFC4C600759297 /* Event.swift */,
 				AF97E0C22AFFCCE000759297 /* User.swift */,
 				AF2216472B0042F800CA4164 /* Group.swift */,
-				40C612312B05D70A0011650B /* Invitation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -622,12 +673,14 @@
 				AFE05E7C2AF81211003D22A2 /* PasswordViewModel.swift in Sources */,
 				AF6F453A2B05B7DD00FA4B9A /* TaskPostAction.swift in Sources */,
 				AFD997BB2B0274E9004888DC /* ChartDataEntry.swift in Sources */,
+				4066844D2B17E31200394CC7 /* GroupDeleteAction.swift in Sources */,
 				AF97E0C52AFFD12C00759297 /* SingleTaskView.swift in Sources */,
 				AFE05E7A2AF810E3003D22A2 /* ForgotPasswordView.swift in Sources */,
 				AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */,
 				AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */,
 				AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */,
 				40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */,
+				406684452B17DFD400394CC7 /* GroupResponse.swift in Sources */,
 				40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */,
 				AF97E0C12AFFC94200759297 /* TasksViewModel.swift in Sources */,
 				AF6F45402B05B84500FA4B9A /* TaskPostRequest.swift in Sources */,
@@ -644,23 +697,27 @@
 				AF499CB02B00319900255F3A /* DaysEventsListView.swift in Sources */,
 				AFDC73B42B16681100DBD53C /* EventGetResponse.swift in Sources */,
 				AFD997B72B027431004888DC /* GroupViewModel.swift in Sources */,
+				40EEBB332B1CFE8100D57C8D /* DataModel.swift in Sources */,
 				AFD997B12B0273EA004888DC /* SuggestionListRow.swift in Sources */,
 				AFDC73B82B16699D00DBD53C /* EventGetAction.swift in Sources */,
 				AFD997AC2B0273C7004888DC /* GroupTaskListRow.swift in Sources */,
+				4066843F2B17DD3800394CC7 /* GroupPostRequest.swift in Sources */,
 				AF499CAC2B001E6D00255F3A /* CalendarView.swift in Sources */,
 				AF872EE52B067A98006154DD /* TaskPutRequest.swift in Sources */,
 				AF44CF872AFE7F420087A57B /* ProfileView.swift in Sources */,
 				AF97E0BC2AFFC4C600759297 /* Event.swift in Sources */,
 				AF6F453C2B05B7E900FA4B9A /* TaskPutAction.swift in Sources */,
+				406684662B1BDE9400394CC7 /* ScheduleModel.swift in Sources */,
 				AF872EE92B0703C8006154DD /* TaskAutoGenerateAction.swift in Sources */,
 				AFE05E722AF80CE3003D22A2 /* LoginRequest.swift in Sources */,
+				406684412B17DE7500394CC7 /* GroupGetResponse.swift in Sources */,
 				AF55F1512B051E8D00D85E2A /* TaskGetResponse.swift in Sources */,
 				AFE05E822AF812DA003D22A2 /* SignUpAction.swift in Sources */,
 				AFD997BC2B0274E9004888DC /* Suggestion.swift in Sources */,
+				406684492B17E15F00394CC7 /* GroupPostAction.swift in Sources */,
 				AFD997BD2B0274E9004888DC /* Insight.swift in Sources */,
 				AFC1FC732B0456B50086F846 /* ProfileResponse.swift in Sources */,
 				AFE05E802AF812CC003D22A2 /* PasswordAction.swift in Sources */,
-				40C612322B05D70A0011650B /* Invitation.swift in Sources */,
 				AF44CF792AFE7E7E0087A57B /* ContentView.swift in Sources */,
 				AFC1FC782B04570F0086F846 /* ProfileAction.swift in Sources */,
 				AFE05E7E2AF81273003D22A2 /* PasswordRequest.swift in Sources */,
@@ -671,10 +728,13 @@
 				AFE05E742AF80D0E003D22A2 /* LoginResponse.swift in Sources */,
 				AF55F14E2B051E4E00D85E2A /* TaskGetAction.swift in Sources */,
 				AF2216482B0042F800CA4164 /* Group.swift in Sources */,
+				406684432B17DF8300394CC7 /* GroupPutRequest.swift in Sources */,
 				AFC1FC702B044DCC0086F846 /* AuthStore.swift in Sources */,
 				AF872EEB2B070B17006154DD /* GroupStore.swift in Sources */,
 				AF3D97372B1E2A10000EE033 /* ProfileRequest.swift in Sources */,
 				409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */,
+				4066844B2B17E26800394CC7 /* GroupPutAction.swift in Sources */,
+				406684472B17E00200394CC7 /* GroupGetAction.swift in Sources */,
 				AFD997B02B0273EA004888DC /* InsightListRow.swift in Sources */,
 				AF97E0BA2AFFC33300759297 /* Task.swift in Sources */,
 				AFD997AA2B0273C7004888DC /* CreateGroupView.swift in Sources */,
