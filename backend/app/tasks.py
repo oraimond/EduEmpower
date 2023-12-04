@@ -36,7 +36,7 @@ def gettasksDB(request):
 
         response.append(tempdict)
 
-    return JsonResponse(response)
+    return JsonResponse(response, safe=False)
 
 def posttasksDB(request):
     """
