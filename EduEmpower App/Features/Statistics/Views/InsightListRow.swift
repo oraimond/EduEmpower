@@ -10,7 +10,6 @@ import SwiftUI
 struct InsightListRow: View {
     let insight: varInsight
     
-//    @ObservableObject var viewModel: StatisticsViewModel = StatisticsViewModel()
     
     var body: some View {
         VStack(alignment: .leading) {

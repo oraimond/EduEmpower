@@ -17,14 +17,14 @@ struct varGroup: Equatable, Identifiable {
     var groupName: String
     var inviter: User
     var invitees: [User]
-    var members: [User] // inviter + invitees who accepted
+    var userids: [User] // inviter + invitees who accepted
     
-    init(id: UUID? = nil, server_id: Int? = nil, groupName: String = "", inviter: User? = nil, invitees: [User] = [], members: [User] = []) {
+    init(id: UUID? = nil, server_id: Int? = nil, groupName: String = "", inviter: User? = nil, invitees: [User] = [], userids: [User] = []) {
         self.id = id ?? UUID()
         self.server_id = server_id
         self.groupName = groupName
         self.inviter = inviter!
         self.invitees = invitees
-        self.members = members
+        self.userids = userids
     }
 }

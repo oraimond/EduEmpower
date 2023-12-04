@@ -26,8 +26,8 @@ class GroupStore: ObservableObject {
                 let invitees = group.invitees.map {
                     User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
                 }
-                var members = [User]()
-                members.append(User(fname: inviter.fname ,
+                var userids = [User]()
+                userids.append(User(fname: inviter.fname ,
                                     lname: inviter.lname ,
                                     email: inviter.email ))
                 
@@ -37,7 +37,7 @@ class GroupStore: ObservableObject {
                     groupName: group.title,
                     inviter: inviter,
                     invitees: invitees,
-                    members: members
+                    userids: userids
                 ), fetching: true)
                 
             }

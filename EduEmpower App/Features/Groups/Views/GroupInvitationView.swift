@@ -33,7 +33,7 @@ struct GroupInvitationView: View {
                         Button(action: {
                             // TODO add to groups
                             var mutableGroup = group
-                            mutableGroup.members.append(loggedInUser)
+                            mutableGroup.userids.append(loggedInUser)
                             mutableGroup.invitees = mutableGroup.invitees.filter { invitee in
                                 invitee != loggedInUser
                             }

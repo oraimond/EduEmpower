@@ -31,7 +31,7 @@ struct GroupsView: View {
             // TODO: filter groups and only show if the authStore user is in group's inviter or userids of groupStore.groups
             List(groupsStore.groups.filter { group in
                 group.inviter == loggedInUser ||
-                group.members.contains(loggedInUser) },
+                group.userids.contains(loggedInUser) },
                  id: \.id) { group in
                 GroupListRow(group: group, task: $tasksStore.tasks)
             }

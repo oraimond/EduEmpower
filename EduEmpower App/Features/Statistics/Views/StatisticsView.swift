@@ -39,11 +39,12 @@ struct StatisticsView: View {
             
             
             VStack {
-                List(viewModel.dummyInsights, id: \.id) {
+                // TODO if the ratio for social media greater than focus (show negatives) else (show positives)
+                List(viewModel.insightsList, id: \.id) {
                     insight in InsightListRow(insight: insight)
                 }
                 
-                List(viewModel.dummySuggestions, id: \.id) {
+                List(viewModel.suggestionsList, id: \.id) {
                     suggestion in SuggestionListRow(suggestion: suggestion)
                 }
             }

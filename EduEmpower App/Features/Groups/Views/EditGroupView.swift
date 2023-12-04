@@ -14,7 +14,7 @@ struct EditGroupView: View {
     @State var groupName: String
     @State var inviter: User
     @State var invitees: [User]
-    @State var members: [User]
+    @State var userids: [User]
     @State var newMemberEmail: String
     
     var loggedInUser: User {
@@ -32,7 +32,7 @@ struct EditGroupView: View {
         self._groupName = State(initialValue: group.wrappedValue.groupName)
         self._inviter = State(initialValue: group.wrappedValue.inviter)
         self._invitees = State(initialValue: group.wrappedValue.invitees)
-        self._members = State(initialValue: group.wrappedValue.members)
+        self._userids = State(initialValue: group.wrappedValue.userids)
         self._newMemberEmail = State(initialValue: "")
     }
 
@@ -46,8 +46,8 @@ struct EditGroupView: View {
                 
                 Section(header: Text("Group Members Emails")) {
                     List {
-                        ForEach(group.members, id: \.id) { member in
-                            TextField("Email", text: $members[getIndex(for: member)].email)
+                        ForEach(group.userids, id: \.id) { member in
+                            TextField("Email", text: $userids[getIndex(for: member)].email)
                                 .disabled(true)
                         }
                     }
@@ -55,7 +55,7 @@ struct EditGroupView: View {
                 Button(action: {
                     // delete
                     var mutableGroup = group
-                    mutableGroup.members = mutableGroup.members.filter { userid in userid != loggedInUser }
+                    mutableGroup.userids = mutableGroup.userids.filter { userid in userid != loggedInUser }
                     GroupStore.shared.save(mutableGroup)
                 }) {
                     Text("Delete Group")
@@ -84,7 +84,7 @@ struct EditGroupView: View {
                             groupName: groupName,
                             inviter: inviter,
                             invitees: invitees,
-                            members: group.members
+                            userids: group.userids
                         )
                         GroupStore.shared.save(newGroup)
                         
@@ -99,7 +99,7 @@ struct EditGroupView: View {
     }
     
     private func getIndex(for user: User) -> Int {
-        if let index = members.firstIndex(where: { $0.id == user.id }) {
+        if let index = userids.firstIndex(where: { $0.id == user.id }) {
             return index
         }
         return 0

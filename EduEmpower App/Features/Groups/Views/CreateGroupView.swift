@@ -14,7 +14,7 @@ struct CreateGroupView: View {
     @State var groupName: String
     @State var inviter: User
     @State var invitees: [User]
-    @State var members: [User]
+    @State var userids: [User]
     @State var newMemberEmail: String
     
     @Environment(\.presentationMode) var presentationMode
@@ -24,7 +24,7 @@ struct CreateGroupView: View {
         self._groupName = State(initialValue: group.wrappedValue.groupName)
         self._inviter = State(initialValue: group.wrappedValue.inviter)
         self._invitees = State(initialValue: group.wrappedValue.invitees)
-        self._members = State(initialValue: group.wrappedValue.members)
+        self._userids = State(initialValue: group.wrappedValue.userids)
         self._newMemberEmail = State(initialValue: "")
     }
 
@@ -65,7 +65,7 @@ struct CreateGroupView: View {
                             email: authStore.email ?? ""
                         ))
                         group.invitees = invitees
-                        group.members.append(User(
+                        group.userids.append(User(
                             fname: inviter.fname,
                             lname: inviter.lname,
                             email: inviter.email
@@ -78,7 +78,7 @@ struct CreateGroupView: View {
                             groupName: groupName,
                             inviter: inviter,
                             invitees: invitees,
-                            members: group.members
+                            userids: group.userids
                         )
                         GroupStore.shared.save(newGroup)
 

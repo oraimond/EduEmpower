@@ -17,8 +17,6 @@
 		4066844D2B17E31200394CC7 /* GroupDeleteAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */; };
 		406684662B1BDE9400394CC7 /* ScheduleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406684652B1BDE9400394CC7 /* ScheduleModel.swift */; };
 		409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */; };
-		40C34F102B17CEFB00E9110F /* PieChartReport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */; };
-		40C34F122B17CF2600E9110F /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C34F112B17CF2500E9110F /* PieChartView.swift */; };
 		40C6122A2B0590CA0011650B /* GroupTasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C612292B0590CA0011650B /* GroupTasksView.swift */; };
 		40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */; };
 		40C6122E2B05C4540011650B /* EditGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C6122D2B05C4540011650B /* EditGroupView.swift */; };
@@ -100,8 +98,6 @@
 		4066844C2B17E31200394CC7 /* GroupDeleteAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupDeleteAction.swift; sourceTree = "<group>"; };
 		406684652B1BDE9400394CC7 /* ScheduleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleModel.swift; sourceTree = "<group>"; };
 		409381FA2B0286EF00C3DF39 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
-		40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartReport.swift; sourceTree = "<group>"; };
-		40C34F112B17CF2500E9110F /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		40C612292B0590CA0011650B /* GroupTasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTasksView.swift; sourceTree = "<group>"; };
 		40C6122B2B05AF7A0011650B /* EditGroupTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupTaskView.swift; sourceTree = "<group>"; };
 		40C6122D2B05C4540011650B /* EditGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditGroupView.swift; sourceTree = "<group>"; };
@@ -335,8 +331,6 @@
 				AFD997AE2B0273EA004888DC /* SuggestionListRow.swift */,
 				AFD997AF2B0273EA004888DC /* UsagePieView.swift */,
 				AF44CF882AFE7F5C0087A57B /* StatisticsView.swift */,
-				40C34F0F2B17CEFB00E9110F /* PieChartReport.swift */,
-				40C34F112B17CF2500E9110F /* PieChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -690,7 +684,6 @@
 				AFD997AC2B0273C7004888DC /* GroupTaskListRow.swift in Sources */,
 				4066843F2B17DD3800394CC7 /* GroupPostRequest.swift in Sources */,
 				AF499CAC2B001E6D00255F3A /* CalendarView.swift in Sources */,
-				40C34F122B17CF2600E9110F /* PieChartView.swift in Sources */,
 				AF872EE52B067A98006154DD /* TaskPutRequest.swift in Sources */,
 				AF44CF872AFE7F420087A57B /* ProfileView.swift in Sources */,
 				AF97E0BC2AFFC4C600759297 /* Event.swift in Sources */,
@@ -700,7 +693,6 @@
 				AFE05E722AF80CE3003D22A2 /* LoginRequest.swift in Sources */,
 				406684412B17DE7500394CC7 /* GroupGetResponse.swift in Sources */,
 				AF55F1512B051E8D00D85E2A /* TaskGetResponse.swift in Sources */,
-				40C34F102B17CEFB00E9110F /* PieChartReport.swift in Sources */,
 				AFE05E822AF812DA003D22A2 /* SignUpAction.swift in Sources */,
 				AFD997BC2B0274E9004888DC /* Suggestion.swift in Sources */,
 				406684492B17E15F00394CC7 /* GroupPostAction.swift in Sources */,
