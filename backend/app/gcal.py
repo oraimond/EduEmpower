@@ -98,7 +98,7 @@ def updateCalendar(userid):
     timeMax = (datetime.now() + timedelta(365)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     creds = r.json()
-    if not "access_token" in creds:
+    if "access_token" not in creds:
         return
     calendarRequest = f"https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMin={timeMin}&timeMax={timeMax}&singleEvents=true&orderBy=startTime"
     auth_header = {'Authorization': f'Bearer {creds["access_token"]}'}
@@ -106,6 +106,8 @@ def updateCalendar(userid):
     events = response.json()['items']
 
     for event in events:
+        if 'dateTime' not in event['start'] or 'dateTime' not in event['end']:
+            continue
         try:
             start = event['start']['dateTime'].replace("T", " ")
             end = event['end']['dateTime'].replace("T", " ")
