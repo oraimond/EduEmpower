@@ -13,8 +13,8 @@ def gettasksDB(request):
     if request.method != 'GET':
         return HttpResponse(status=404)
 
-    username, token = request.headers["authorization"]
-
+    token = request.headers["authorization"]
+    username = json.loads(request.body)['userid']
     # do authorization ?????
     
     cursor = connection.cursor()
