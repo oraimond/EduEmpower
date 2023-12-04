@@ -3,7 +3,7 @@ from django.http import JsonResponse, HttpResponse
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from app.gcal import updateCalendar
 def geteventsDB(request):
     """
     TODO: Edit so that request gets all events for a user
@@ -11,6 +11,7 @@ def geteventsDB(request):
 
     cursor = connection.cursor()
     username = json.loads(request.body)['userid']
+    updateCalendar(username)
     cursor.execute('SELECT title, start, "end", type, userids, taskid, eventid FROM events WHERE (%s) = ANY(userids) ORDER BY start DESC;', (username,))  # not sure what fields we wanted
     rows = cursor.fetchall()
     response = []
