@@ -16,13 +16,8 @@ from celery.schedules import crontab
 from datetime import datetime
 CELERY_BEAT_SCHEDULE = { # scheduler configuration
     'Task_one_schedule' : {  # whatever the name you want
-        'task': 'test_app.tasks.task_one', # name of task with path
+        'task': 'app.tasks.updating', # name of task with path
         'schedule': crontab(), # crontab() runs the tasks every minute
-    },
-    'Task_two_schedule' : {  # whatever the name you want
-        'task': 'test_app.tasks.task_two', # name of task with path
-        'schedule': 30, # 30 runs this task every 30 seconds
-        'args' : {datetime.now()} # arguments for the task
     },
 }
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
