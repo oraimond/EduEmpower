@@ -45,8 +45,9 @@ def posttasksDB(request):
     cursor = connection.cursor()
     #cursor.execute('INSERT INTO tasks (tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
            #        '(%s, %s, %s, %s, %s, %s );', (tasktitle, groupid, timeneeded, duedate, description, userid))
-    cursor.execute('INSERT INTO tasks (title, duration, due_date, description, userids, scheduled) VALUES '
-                   '(%s, %s, %s, %s, %s, %s);', (title, duration, due_date, description, userids, scheduled))
+    taskid = cursor.execute('INSERT INTO tasks (title, duration, due_date, description, userids, scheduled) VALUES '
+                   '(%s, %s, %s, %s, %s, %s); SELECT currval(\'tasks_id_seq\');', (title, duration, due_date, description, userids, scheduled)).fetchone()
+
     
     return JsonResponse({'id': taskid})
 
