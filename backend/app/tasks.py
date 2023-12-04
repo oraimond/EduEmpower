@@ -5,7 +5,6 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 from django.db import transaction
-from sequences import get_next_value
 
 def gettasksDB(request):
     """
@@ -33,7 +32,6 @@ def posttasksDB(request):
     Postgres table needs to be updated with assigned_users and group.
     taskid isn't passed in the request, it is generated here or in postgres. 
     """  # generate the taskid !!!!!!!!
-    taskid = get_next_value("tasks")
     
     if request.method != 'POST':
         return HttpResponse(status=404)
@@ -45,10 +43,10 @@ def posttasksDB(request):
     userids = json_data['userids']
     scheduled = json_data['scheduled']
     cursor = connection.cursor()
-    #cursor.execute('INSERT INTO tasks (taskid, tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
-           #        '(%s, %s, %s, %s, %s, %s, %s );', (taskid, tasktitle, groupid, timeneeded, duedate, description, userid))
-    cursor.execute('INSERT INTO tasks (title, duration, due_date, description, userids, scheduled, taskid) VALUES '
-                   '(%s, %s, %s, %s, %s, %s );', (title, duration, due_date, description, userids, scheduled, taskid))
+    #cursor.execute('INSERT INTO tasks (tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
+           #        '(%s, %s, %s, %s, %s, %s );', (tasktitle, groupid, timeneeded, duedate, description, userid))
+    cursor.execute('INSERT INTO tasks (title, duration, due_date, description, userids, scheduled) VALUES '
+                   '(%s, %s, %s, %s, %s, %s);', (title, duration, due_date, description, userids, scheduled))
     
     return JsonResponse({'id': taskid})
 
