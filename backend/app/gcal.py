@@ -120,7 +120,7 @@ def updateCalendar(userid):
             continue
         
         query = f"""
-        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{userid}])
+        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[\'{userid}\'])
         """
         cursor.execute(query)
 
@@ -178,7 +178,7 @@ def postgoogleDB(request):
 
 
         query = f"""
-        INSERT INTO events (gcalid, title, start, "end", type, userids) VALUES (\'{id}\', \'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{username}]);
+        INSERT INTO events (gcalid, title, start, "end", type, userids) VALUES (\'{id}\', \'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[\'{username}\']);
         """
         cursor.execute(query)
 
