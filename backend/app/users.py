@@ -32,12 +32,13 @@ def loginDB(request):
 
     if not user:
         raise ValidationError
-
-    index1 = user['password'].find('$')
-    index2 = user['password'].rfind('$')
-    salt = user['password'][index1 + 1:index2]
+    
+    print(user[0])
+    index1 = user[0].find('$')
+    index2 = user[0].rfind('$')
+    salt = user[0][index1 + 1:index2]
     # print(user)
-    if not user or user['password'] != hash_password(password, salt):
+    if not user or user[0] != hash_password(password, salt):
         raise ValidationError
 
     request.session['userid'] = username
