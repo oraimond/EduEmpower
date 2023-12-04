@@ -113,7 +113,7 @@ def autoscheduleDB(request, taskid):
 
     # TODO: call calendar update function
     for user in task_userids:
-        gcal.updateCalendar(user)
+        app.gcal.updateCalendar(user)
 
     # get calendar events from database 
     cursor1 = connection.cursor()
