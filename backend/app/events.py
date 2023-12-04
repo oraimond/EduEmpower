@@ -11,9 +11,7 @@ def geteventsDB(request):
     if request.method != 'GET':
         return HttpResponse(status=404)
     cursor = connection.cursor()
-    # json_data = json.loads(request.body)
-    # username = json_data['userid']
-    username = request.GET.get('userid')
+    username = json.loads(request.body)['userid']
     cursor.execute('SELECT title, start, "end", type, userids, taskid, eventid FROM events WHERE (%s) = ANY(userids) ORDER BY start DESC;', (username,))  # not sure what fields we wanted
     rows = cursor.fetchall()
     response = []
