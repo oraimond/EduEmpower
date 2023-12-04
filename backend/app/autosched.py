@@ -100,7 +100,21 @@ def autoscheduleDB(request, taskid):
     task_group_id = query_result[5]
     task_scheduled = query_result[6]
 
-    task_due_date_string = str(task_due_date.year) + '-' + str(task_due_date.month) + '-' + str(task_due_date.day)
+    task_due_year = str(task_due_date.year)
+    task_due_month = task_due_date.month
+    task_due_day = task_due_date.day
+
+    if task_due_month < 10:
+        task_due_month = '0' + str(task_due_month)
+    else:
+        task_due_month = str(task_due_month)
+
+    if task_due_day < 10:
+        task_due_day = '0' + str(task_due_day)
+    else: 
+        task_due_day = str(task_due_day)
+
+    task_due_date_string = task_due_year + '-' + task_due_month + '-' + task_due_day
     today_date = datetime.today()
 
     # if query_result[-1] != str(taskid):
