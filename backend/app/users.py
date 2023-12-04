@@ -110,7 +110,7 @@ def getUserProfileInfoDB(request):
     response = {}
     response['user'] = rows
     
-    return JsonResponse({response})
+    return JsonResponse(response)
 
 
 def hash_password(password, saltvar):
