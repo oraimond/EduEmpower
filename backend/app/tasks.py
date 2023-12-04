@@ -67,8 +67,8 @@ def edittasksDB(request, taskid):
     scheduled = json_data['scheduled']
     cursor = connection.cursor()
 
-    cursor.execute('UPDATE tasks SET (title, duration, due_date, description, userids, scheduled) VALUES '
-                   '(%s, %s, %s, %s, %s, %s ) WHERE taskid = %s;', (title, duration, due_date, description, userids, scheduled, taskid) 
+    cursor.execute('UPDATE tasks SET title = %s, duration=%s, due_date=%s, description=%s, userids=%s, scheduled=%s '
+                   'WHERE taskid = %s;', (title, duration, due_date, description, userids, scheduled, taskid)
                    ) # this might need to be edited !!!!!!!!
                    
     
