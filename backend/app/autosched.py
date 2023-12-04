@@ -212,12 +212,6 @@ def autoscheduleDB(request, taskid):
                 final_timeslot = timeslot
                 break
 
-    else:
-        print('Invalid value for time preference.')
-        return HttpResponse("error4", status=500, headers={"error4": "Invalid value for time preference."})
-
-
-
     # add new event to the events database table 
     cursor = connection.cursor()
     cursor.execute("INSERT INTO events (title, start, end, type, users, taskid) VALUES (%s, %s, %s, %s, %s, %s, %s);", [task_title, final_timeslot, final_timeslot + task_duration, 'automatedTask', task_userids, taskid])
