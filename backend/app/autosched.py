@@ -195,7 +195,7 @@ def autoscheduleDB(request, taskid):
     viable_timeslots = []
     for timeslot in open_timeslots:
         # print((timeslot[1] - timeslot[0]))
-        if task_duration > timeslot[1] - timeslot[0]:
+        if timedelta(hours=task_duration) > timeslot[1] - timeslot[0]:
             continue
 
         if task_due_date < timeslot[0]:
