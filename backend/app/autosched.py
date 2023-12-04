@@ -140,10 +140,8 @@ def autoscheduleDB(request, taskid):
         today_date += timedelta(hours=task_duration)
         end_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day)
         cursor = connection.cursor()
-<<<<<<< HEAD
+
         cursor.execute("INSERT INTO events (title, eventstart, eventend, type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);", [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
-=======
-        cursor.execute("INSERT INTO events (title, eventstart, eventend, type, users, taskid) VALUES (%s, %s, %s, %s, %s, %s);", [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
        
         response = {
             "message": "Events generation for task started",
@@ -151,7 +149,6 @@ def autoscheduleDB(request, taskid):
         }
         # response['taskid'] = "{" + str(taskid) + "}"
         return JsonResponse(response)
->>>>>>> ef7d59f7bd33d71f90132f4f155e641a83bdf947
 
     # only get events that contain users who are included in the given TaskID
     relevant_events = []
