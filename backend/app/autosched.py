@@ -6,6 +6,7 @@ import json
 
 
 from datetime import datetime, timedelta
+import app.gcal
 
 class Task:
     def __init__(self, name, duration, due_date, priority):
@@ -78,35 +79,75 @@ def autoscheduleDB(request, taskid):
     if request.method != 'POST':
         return HttpResponse(status=404)
     
+
+    
     # get tasks from database 
     cursor = connection.cursor()
-    cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE taskid = %s;', (taskid))
+    cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE taskid = %s;', [taskid])
     rows = cursor.fetchall()
 
-    if len(rows) != 8:
-        print('The resulting query from the Tasks table has one or more missing attributes.')
-        return HttpResponse("CUSTOM MESSAGE", status=500, headers={"CUSTOM MESSAGE": "Result of query from Tasks table has missing attributes."})
+    # if len(rows) < 5:
+    #     print('The resulting query from the Tasks table has one or more missing attributes.')
+    #     return HttpResponse("error1", status=500, headers={"error1": "Result of query from Tasks table has missing attributes (less than 5 attributes)."})
 
-    task_title = rows[0]
-    task_duration = rows[1]
-    task_due_date = rows[2]
-    task_description = rows[3]
-    task_userids = rows[4]
-    task_group_id = rows[5]
-    task_scheduled = rows[6]
+    query_result = rows[0]
 
-    if rows[7] != taskid:
-        print('TaskID from front end does not match TaskID retreived from database.')
-        return HttpResponse("CUSTOM MESSAGE", status=500, headers={"CUSTOM MESSAGE": "TaskID from front end does not match TaskID retreived from database."})
+    task_title = query_result[0]
+    task_duration = query_result[1]
+    task_due_date = query_result[2]
+    task_description = query_result[3]
+    task_userids = query_result[4]
+    task_group_id = query_result[5]
+    task_scheduled = query_result[6]
+
+    task_due_year = str(task_due_date.year)
+    task_due_month = task_due_date.month
+    task_due_day = task_due_date.day
+
+    if task_due_month < 10:
+        task_due_month = '0' + str(task_due_month)
+    else:
+        task_due_month = str(task_due_month)
+
+    if task_due_day < 10:
+        task_due_day = '0' + str(task_due_day)
+    else: 
+        task_due_day = str(task_due_day)
+
+    task_due_date_string = task_due_year + '-' + task_due_month + '-' + task_due_day
+    today_date = datetime.today()
+
+    # if query_result[-1] != str(taskid):
+    #     print('TaskID from front end does not match TaskID retreived from database.')
+    #     return HttpResponse("error2", status=500, headers={"error2": "TaskID from front end does not match TaskID retreived from database."})
     
     if task_scheduled == True:
         print('The given TaskID has already been scheduled.')
-        return HttpResponse("CUSTOM MESSAGE", status=500, headers={"CUSTOM MESSAGE": "The given TaskID has already been scheduled."})
+        return HttpResponse("error3", status=500, headers={"error3": "The given TaskID has already been scheduled."})
+
+    # TODO: call calendar update function
+    for user in task_userids:
+        app.gcal.updateCalendar(str(user))
 
     # get calendar events from database 
     cursor1 = connection.cursor()
-    cursor1.execute('SELECT title, start, end, type, users, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', (task_due_date))
+    cursor1.execute('SELECT title, start, "end", type, userids, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date_string])
     rows = cursor1.fetchall()
+
+    if len(rows) == 0:
+         # add new event to the events database table 
+        start_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day)
+        end_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day) + ' ' + str(task_duration) + ':00:00'
+        cursor = connection.cursor()
+
+        cursor.execute('INSERT INTO events (title, start, "end", type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);', [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
+       
+        response = {
+            "message": "Events generation for task started",
+            "taskid": str(taskid)
+        }
+        # response['taskid'] = "{" + str(taskid) + "}"
+        return JsonResponse(response)
 
     # only get events that contain users who are included in the given TaskID
     relevant_events = []
@@ -116,6 +157,7 @@ def autoscheduleDB(request, taskid):
         for userid in task_userids:
             if userid in event_users:
                 relevant_events.append(row)
+                break
 
     relevant_events = sorted(relevant_events, key=lambda x: x[1])
 
@@ -136,7 +178,6 @@ def autoscheduleDB(request, taskid):
             merged_event_intervals.append(current_interval)
 
     del event_intervals
-    del merged_event_intervals
     del relevant_events
     del rows
 
@@ -153,10 +194,11 @@ def autoscheduleDB(request, taskid):
 
     viable_timeslots = []
     for timeslot in open_timeslots:
-        if task_duration > timeslot[1] - timeslot[0]:
+        # print((timeslot[1] - timeslot[0]))
+        if timedelta(hours=task_duration) > timeslot[1] - timeslot[0]:
             continue
 
-        if task_due_date > timeslot[1]:
+        if task_due_date < timeslot[0]:
             continue
 
         viable_timeslots.append(timeslot)
@@ -166,14 +208,43 @@ def autoscheduleDB(request, taskid):
     
     viable_timeslots = sorted(viable_timeslots, key=timeslot_duration, reverse=True)
 
+    # # TODO: stuff for the user preferences of work time for auto schedule task 
+    time_preference = request.POST.get("time_preference")
+
+    final_timeslot = viable_timeslots[0][0]
+    if time_preference == "morning":
+        for timeslot in viable_timeslots:
+            # TODO: find preferred time slot 
+            if (timeslot[0] + task_duration).hour < 12 and (timeslot[0]).hour > 7:
+                final_timeslot = timeslot
+                break
+
+    elif time_preference == "afternoon":
+        for timeslot in viable_timeslots:
+            # TODO: find preferred time slot 
+            if (timeslot[0]).hour >= 12 and (timeslot[0] + task_duration).hour < 18:
+                final_timeslot = timeslot
+                break
+
+    elif time_preference == "evening":
+        for timeslot in viable_timeslots:
+            # TODO: find preferred time slot 
+            if (timeslot[0]).hour >= 18 and (timeslot[0] + task_duration).hour < 22:
+                final_timeslot = timeslot
+                break
+
     # add new event to the events database table 
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO events (title, start, end, type, users, taskid) VALUES '
-                   '(%s, %s, %s, %s, %s, %s, %s);', (task_title, viable_timeslots[0][0], viable_timeslots[0][0] + task_duration, 'automatedTask', task_userids, taskid))
+    cursor.execute('INSERT INTO events (title, start, "end", type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);', [task_title, final_timeslot.strftime("%Y-%m-%d %H:%M:%S"), (final_timeslot + timedelta(hours=task_duration)).strftime("%Y-%m-%d %H:%M:%S"), 'automatedTask', task_userids, taskid])
     
+    # TODO: call insertGCal on users 
+    for user in task_userids:
+        app.gcal.insertGCal(str(user), task_title, final_timeslot, final_timeslot + timedelta(hours=task_duration))
 
-    response = {}
-    response['task_to_timeslot'] = [taskid, viable_timeslots[0][0], viable_timeslots[0][1]]
+    response = {
+        "message": "Events generation for task started",
+        "taskid": str(taskid)
+    }
     return JsonResponse(response)
         
 

@@ -25,8 +25,11 @@ def insertGCal(userid, name, start, end):
     query = f'''
         SELECT * FROM users WHERE userid = \'{userid}\';
         '''
-    user = cursor.execute(query).fetchone()
-    refresh_token = user['refresh_token']
+    user = cursor.execute(query)
+    user = cursor.fetchone()
+    for i in user:
+        print(i)
+    refresh_token = user[5]
     if refresh_token == "":
         return
     params = {
@@ -46,18 +49,19 @@ def insertGCal(userid, name, start, end):
     event = {
         "summary": name,
         "start": {
-            'dateTime': start,
-            'timeZone': 'America/Los_Angeles',
+            'dateTime': start
         },
         'end': {
             'dateTime': end,
-            'timeZone': 'America/Los_Angeles',
         },
     }
 
     creds = r.json()
     auth_header = {'Authorization': f'Bearer {creds["access_token"]}'}
-    response = requests.get(url=requestURL, params=event, headers=auth_header)
+    try:
+        response = requests.post(url=requestURL, json=event, headers=auth_header)
+    except Exception as e:
+        print(e)
 
 def updateCalendar(userid):
     scopes = ['https://www.googleapis.com/auth/calendar', 'https://www.googleapis.com/auth/userinfo.email',
@@ -74,8 +78,9 @@ def updateCalendar(userid):
     query = f'''
     SELECT * FROM users WHERE userid = \'{userid}\';
     '''
-    user = cursor.execute(query).fetchone()
-    refresh_token = user['refresh_token']
+    user = cursor.execute(query)
+    user = cursor.fetchone()
+    refresh_token = user[5]
     if refresh_token == "":
         return
     params = {
@@ -103,11 +108,19 @@ def updateCalendar(userid):
             start = event['start']['dateTime'].replace("T", " ")
             end = event['end']['dateTime'].replace("T", " ")
             summary = event['summary']
+            id = event['id']
         except TypeError as e:
             print(e)
             return
+        checkQuery = f"""
+                SELECT * FROM EVENTS WHERE gcalid = \'{id}\';
+                """
+        isEvent = cursor.execute(checkQuery).fetchone()
+        if isEvent:
+            continue
+        
         query = f"""
-        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{username}])
+        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{userid}])
         """
         cursor.execute(query)
 
@@ -153,17 +166,19 @@ def postgoogleDB(request):
 
 
     calendar = response.json()["items"]
-
     for event in calendar:
         try:
             start = event['start']['dateTime'].replace("T", " ")
             end = event['end']['dateTime'].replace("T", " ")
             summary = event['summary']
+            id = event['id']
         except TypeError as e:
             print(e)
             return
+
+
         query = f"""
-        INSERT INTO events (title, start, "end", type, userids) VALUES (\'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{username}])
+        INSERT INTO events (gcalid, title, start, "end", type, userids) VALUES (\'{id}\', \'{summary}\', \'{start}\', \'{end}\', \'gcal\', ARRAY[{username}]);
         """
         cursor.execute(query)
 

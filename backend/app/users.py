@@ -7,6 +7,7 @@ import json
 import uuid
 from google.oauth2 import id_token
 from google.auth.transport import requests
+from django.utils.crypto import get_random_string
 
 import hashlib, time
 
@@ -15,29 +16,43 @@ def loginDB(request):
     """
     TODO: Implement this
     """
-    username = request['userid']
-    password = request['password']
+    json_data = json.loads(request.body)
+    
+    username = json_data['userid']
+    password = json_data['password']
 
     cursor = connection.cursor()
 
-    data = connection.execute(
-        f'''SELECT password FROM users WHERE userid = \'{username}\''''
-    )
-    user = data.fetchone()
+    #data = cursor.execute(
+        #f'''SELECT password FROM users WHERE userid = \'{username}\''''
+    #)
+    data = cursor.execute('SELECT password FROM users WHERE (%s) = userid;', (username,))
+    #user = data.fetchone()
+    user = cursor.fetchone()
 
     if not user:
         raise ValidationError
-
-    index1 = user['password'].find('$')
-    index2 = user['password'].rfind('$')
-    salt = user['password'][index1 + 1:index2]
+    
+    print(user[0])
+    index1 = user[0].find('$')
+    index2 = user[0].rfind('$')
+    salt = user[0][index1 + 1:index2]
     # print(user)
-    if not user or user['password'] != hash_password(password, salt):
+    if not user or user[0] != hash_password(password, salt):
         raise ValidationError
 
     request.session['userid'] = username
 
-    return JsonResponse({"userid": username})
+    unique_token = get_random_string(length=10)
+
+    now = time.time()
+
+    expires_at = now + 60
+
+    #cursor.execute('INSERT INTO users (refresh_token, expiresat) VALUES '
+                   #'(%s, %s) WHERE userid = (%s);', (unique_token, expires_at, username))
+
+    return JsonResponse({'Token': unique_token, 'userid': username, 'expiresat': expires_at})
 
 def signupDB(request):
     """
@@ -75,7 +90,7 @@ def signupDB(request):
     # insert new userid
     # Ok for userid to expire about 1 sec beyond idToken expiration
     cursor.execute('INSERT INTO users (password, fname, lname, email, userid) VALUES '
-                   '(%s, %s, %s);', (password, fname, lname, email, userid))
+                   '(%s, %s, %s, %s, %s);', (password, fname, lname, email, userid))
     request.session['userid'] = userid
     # Return userid etc
     return JsonResponse({'userid': userid, 'first_name': fname, 'last_name': lname, 'email': email})
@@ -86,7 +101,18 @@ def getUserProfileInfoDB(request):
     """
     TODO: Implement this
     """
-    return JsonResponse({})
+    json_data = json.loads(request.body)
+
+    user_id = json_data['userid']
+
+    cursor = connection.cursor()
+    cursor.execute('SELECT userid, fname, lname, email FROM users WHERE (%s) = userid;', (user_id,))
+    rows = cursor.fetchall()
+
+    response = {}
+    response['user'] = rows
+    
+    return JsonResponse(response)
 
 
 def hash_password(password, saltvar):
