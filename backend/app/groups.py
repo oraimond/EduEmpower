@@ -51,11 +51,11 @@ def postgroupsDB(request):
         cursor.execute(query)
         userid = cursor.fetchone()
         invitees.append(userid[0])
-
+        userid = userid[0]
         query = f"""
             UPDATE users
-            SET groups_invitations = ARRAY_APPEND(group_invitations, userid[0])
-            WHERE userid =\'{userid[0]}\';
+            SET group_invitations = ARRAY_APPEND(group_invitations, userid)
+            WHERE userid =\'{userid}\';
             """
         cursor.execute(query)
 
