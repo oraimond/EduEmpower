@@ -19,11 +19,23 @@ def gettasksDB(request):
     
     cursor = connection.cursor()
     #cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
-    cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks WHERE (%s) = ANY(userids);', (username,))
+    cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE (%s) = ANY(userids);', (username,))
     rows = cursor.fetchall()
 
-    response = {}
-    response['tasks'] = rows
+    response = []
+    for row in rows:
+        tempdict = {}
+        tempdict['taskid'] = row[-1]
+        tempdict['title'] = row[0]
+        tempdict['duration'] = row[1]
+        tempdict['due_date'] = row[2]
+        tempdict['description'] = row[3]
+        tempdict['users'] = row[4]
+        tempdict['scheduled'] = row[6]
+        tempdict['groupd_id'] = row[5]
+
+        response.append(tempdict)
+
     return JsonResponse(response)
 
 def posttasksDB(request):
