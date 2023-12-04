@@ -112,8 +112,8 @@ def autoscheduleDB(request, taskid):
         return HttpResponse("error3", status=500, headers={"error3": "The given TaskID has already been scheduled."})
 
     # TODO: call calendar update function
-    for user in task_userids:
-        app.gcal.updateCalendar(user)
+    # for user in task_userids:
+    #     app.gcal.updateCalendar(user)
 
     # get calendar events from database 
     cursor1 = connection.cursor()
