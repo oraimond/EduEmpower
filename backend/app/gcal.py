@@ -25,8 +25,11 @@ def insertGCal(userid, name, start, end):
     query = f'''
         SELECT * FROM users WHERE userid = \'{userid}\';
         '''
-    user = cursor.execute(query).fetchone()
-    refresh_token = user['refresh_token']
+    user = cursor.execute(query)
+    user = cursor.fetchone()
+    for i in user:
+        print(i)
+    refresh_token = user[5]
     if refresh_token == "":
         return
     params = {
@@ -75,8 +78,9 @@ def updateCalendar(userid):
     query = f'''
     SELECT * FROM users WHERE userid = \'{userid}\';
     '''
-    user = cursor.execute(query).fetchone()
-    refresh_token = user['refresh_token']
+    user = cursor.execute(query)
+    user = cursor.fetchone()
+    refresh_token = user[5]
     if refresh_token == "":
         return
     params = {
@@ -162,7 +166,6 @@ def postgoogleDB(request):
 
 
     calendar = response.json()["items"]
-
     for event in calendar:
         try:
             start = event['start']['dateTime'].replace("T", " ")
