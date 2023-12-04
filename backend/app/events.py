@@ -14,7 +14,6 @@ def geteventsDB(request):
     username = json.loads(request.body)['userid']
     cursor.execute('SELECT title, start, "end", type, userids, taskid, eventid FROM events WHERE (%s) = ANY(userids) ORDER BY start DESC;', (username,))  # not sure what fields we wanted
     rows = cursor.fetchall()
-
     response = []
     for row in rows:
         tempdict = {}
@@ -26,8 +25,8 @@ def geteventsDB(request):
         tempdict['users'] = row[4]
         tempdict['related_task_id'] = row[5]
         response.append(tempdict)
-        
-    return JsonResponse(response, safe=False)
+
+    return JsonResponse({"content":response, "rows": rows})
 
 def createeventDB(request):
     """
