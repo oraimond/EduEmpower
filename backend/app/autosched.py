@@ -131,7 +131,7 @@ def autoscheduleDB(request, taskid):
 
     # get calendar events from database 
     cursor1 = connection.cursor()
-    cursor1.execute('SELECT title, start, end, type, userids, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date_string])
+    cursor1.execute('SELECT title, eventstart, eventend, type, userids, taskid, eventid FROM events WHERE start < %s ORDER BY start ASC;', [task_due_date_string])
     rows = cursor1.fetchall()
 
     if len(rows) == 0:
