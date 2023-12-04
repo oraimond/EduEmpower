@@ -8,7 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 
 # TASK API CALLS
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def gettasks(request):
     return gettasksDB(request)
 
@@ -27,7 +27,7 @@ def editorDeleteTask(request, taskid):
 
 
 # GROUP API CALLS
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def getgroups(request):
     return getgroupsDB(request)
 
@@ -57,7 +57,7 @@ def postgoogle(request):
     return postgoogleDB(request)
 
 #EVENT/CALENDAR API CALLS
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def getevents(request):
     return geteventsDB(request)
 
@@ -72,7 +72,7 @@ def editorDeleteEvent(request, eventid):
     return editorDeleteEventDB(request, eventid)
 
 @csrf_exempt
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def getEventsForTask(request, taskid):
     return getEventsForTaskDB(request, taskid)
 
@@ -88,6 +88,6 @@ def signup(request):
     return signupDB(request)
 
 @csrf_exempt
-@require_http_methods(["GET"])
+@require_http_methods(["POST"])
 def getProfileInfo(request):
     return getUserProfileInfoDB(request)

@@ -8,8 +8,7 @@ def geteventsDB(request):
     """
     TODO: Edit so that request gets all events for a user
     """
-    if request.method != 'GET':
-        return HttpResponse(status=404)
+
     cursor = connection.cursor()
     username = json.loads(request.body)['userid']
     cursor.execute('SELECT title, start, "end", type, userids, taskid, eventid FROM events WHERE (%s) = ANY(userids) ORDER BY start DESC;', (username,))  # not sure what fields we wanted

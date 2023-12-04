@@ -8,8 +8,7 @@ def getgroupsDB(request):
     """
     TODO: Ensure that groups returned are for specific user
     """ # similar to tasks, ensure that we search in the table for userid and not all groups !!!!!!
-    if request.method != 'GET':
-        return HttpResponse(status=404)
+
 
     request_body = json.loads(request.body)
     userid = request_body['userid']

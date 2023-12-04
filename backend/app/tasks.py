@@ -10,8 +10,7 @@ def gettasksDB(request):
     """
     TODO: Edit function so that it returns tasks for authenticated user.
     User authentication must be completed first""" # need to search the table for tasks that match the userid ?????
-    if request.method != 'GET':
-        return HttpResponse(status=404)
+
 
     # token = request.headers["authorization"]
     username = json.loads(request.body)['userid']
