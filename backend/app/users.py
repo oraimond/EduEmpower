@@ -27,7 +27,8 @@ def loginDB(request):
         #f'''SELECT password FROM users WHERE userid = \'{username}\''''
     #)
     data = cursor.execute('SELECT password FROM users WHERE (%s) = userid;', (username,))
-    user = data.fetchone()
+    #user = data.fetchone()
+    user = cursor.fetchone()
 
     if not user:
         raise ValidationError
