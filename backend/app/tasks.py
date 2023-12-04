@@ -95,7 +95,7 @@ def deletetaskDB(request, taskid):
         return HttpResponse(status=404)
 
     cursor = connection.cursor()
-    cursor.execute('DELETE FROM tasks WHERE taskid = \'{taskid}\';')
+    cursor.execute(f'DELETE FROM tasks WHERE taskid = {taskid};')
     
     
     
