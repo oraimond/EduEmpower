@@ -13,6 +13,7 @@ struct varGroup: Equatable {
     }
     
     let id = UUID()
+    var server_id: Int?
     var groupName: String
     var members: [User]
 }

@@ -23,11 +23,38 @@ class LoginViewModel: ObservableObject {
     func login() {
         LoginAction(
             parameters: LoginRequest(
-                username: username,
+                userid: username,
                 password: password
             )
-        ).call { _ in
-            // Login successful, navigate to the Home screen
+        ).call { response in
+            print("Login successful, navigate to the Home screen")
+            AuthStore.shared.loggedIn.toggle()
+            AuthStore.shared.token = response.Token
+            AuthStore.shared.user_id = response.userid
+            AuthStore.shared.expires_at = response.expiresat
+            
+            // Get info from database
+            AuthStore.shared.getProfile()
+            TaskStore.shared.fetchTasks()
+        }
+    }
+    
+    func login_demo() {
+        LoginAction(
+            parameters: LoginRequest(
+                userid: "jsmith",
+                password: "password"
+            )
+        ).call { response in
+            print("Login successful, navigate to the Home screen")
+            AuthStore.shared.loggedIn.toggle()
+            AuthStore.shared.token = response.Token
+            AuthStore.shared.user_id = response.userid
+            AuthStore.shared.expires_at = response.expiresat
+            
+            // Get info from database
+            AuthStore.shared.getProfile()
+            TaskStore.shared.fetchTasks()
         }
     }
 }

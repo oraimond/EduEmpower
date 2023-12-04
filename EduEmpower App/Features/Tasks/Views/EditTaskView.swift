@@ -37,15 +37,17 @@ struct EditTaskView: View {
                     TextField("Description", text: $taskDescription, axis: .vertical)
                         .lineLimit(5...10)
                 }
-                
+
                 Section(header: Text("Assigned Users")) {
                     ForEach(members, id: \.id) { user in
                         Text(user.fname)
                     }
                 }
-                
+
                 Button(action: {
                     // delete
+                    TaskStore.shared.delete(task_id: task.id, server_id: task.server_id)
+                    presentationMode.wrappedValue.dismiss()
                 }) {
                     Text("Delete task")
                         .font(.headline)
@@ -56,7 +58,7 @@ struct EditTaskView: View {
                         .cornerRadius(10)
                 }
             }
-            
+            .padding()
             .navigationBarTitle("Edit Task", displayMode: .inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -68,12 +70,20 @@ struct EditTaskView: View {
                         task.taskDescription = taskDescription
                         task.members = members
                         
-                        // send to database
-                        // TODO
-                        
-                        // exit
+                        // Store in TaskStore
+                        let newTask = varTask(
+                            id: task.id,
+                            server_id: task.server_id,
+                            title: taskTitle,
+                            timeNeeded: taskDuration,
+                            dueDate: taskDueDate,
+                            taskDescription: taskDescription,
+                            members: members,
+                            scheduled: task.scheduled
+                        )
+                        TaskStore.shared.save(newTask)
                         presentationMode.wrappedValue.dismiss()
-                    }) {
+                      }) {
                         Image(systemName: "checkmark.circle.fill")
                     }
                 }

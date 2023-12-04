@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @ObservedObject var viewModel: ProfileViewModel = ProfileViewModel()
+    @ObservedObject var authStore: AuthStore = AuthStore.shared
     
     @State private var logOutActive = false
     
@@ -22,11 +23,11 @@ struct ProfileView: View {
                                     .frame(width: 100, height: 100)
                                     .clipShape(Circle())
                                     .foregroundColor(.blue)
-                Text(viewModel.dummyUser.fname).font(.largeTitle)
-                Text(viewModel.dummyUser.lname).font(.largeTitle)
+                Text(authStore.getFname()).font(.largeTitle)
+                Text(authStore.getLname()).font(.largeTitle)
                 Spacer()
                 Button(
-                    action: {logOutActive = true},
+                    action: {authStore.loggedIn = false},
                     label: {
                         Text("Logout")
                             .font(.system(size: 24, weight: .bold, design: .default))
@@ -36,15 +37,12 @@ struct ProfileView: View {
                             .cornerRadius(10)
                     }
                 )
-                .navigationDestination(isPresented: $logOutActive) {
-                    LoginView()
-                }
                 Spacer()
             }
         }
     }
 }
 
-#Preview {
-    ProfileView()
-}
+//#Preview {
+//    ProfileView()
+//}
