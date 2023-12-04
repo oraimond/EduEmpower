@@ -51,10 +51,10 @@ def insertGCal(userid, name, start, end):
     event = {
         "summary": name,
         "start": {
-            'dateTime': start
+            'dateTime': start.strftime("%Y-%m-%d %H:%M:%SZ")
         },
         'end': {
-            'dateTime': end,
+            'dateTime': end.strftime("%Y-%m-%dT%H:%M:%SZ"),
         },
     }
 
