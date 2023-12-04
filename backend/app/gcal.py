@@ -105,8 +105,8 @@ def updateCalendar(userid):
 
     for event in events:
         try:
-            start = event['start']['dateTime'].replace("T", " ")
-            end = event['end']['dateTime'].replace("T", " ")
+            start = event['start']['date'].replace("T", " ")
+            end = event['end']['date'].replace("T", " ")
             summary = event['summary']
             id = event['id']
         except TypeError as e:
