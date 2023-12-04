@@ -9,14 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selectedTab = 0
-    @State private var loggedIn: Bool = true
+    
+    @ObservedObject var authStore: AuthStore = AuthStore.shared
     
     var body: some View {
         
-        if loggedIn {
+        if authStore.loggedIn {
             TabView(selection: $selectedTab) {
                 HomeView()
-                    .environmentObject(EventStore(preview: true))
+                    .environmentObject(EventStore(preview: false))
                     .tabItem {
                         Image(systemName: "calendar")
                         Text("Home")
@@ -50,8 +51,4 @@ struct ContentView: View {
             LoginView()
         }
     }
-}
-
-#Preview {
-    ContentView()
 }

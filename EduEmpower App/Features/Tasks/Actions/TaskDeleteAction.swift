@@ -1,36 +1,30 @@
 //
-//  SignUpAction.swift
+//  TaskDeleteAction.swift
 //  EduEmpower App
 //
-//  Created by Oli Raimond on 11/5/23.
+//  Created by Oli Raimond on 11/15/23.
 //
 
 import Foundation
 
-struct SignUpAction {
-    
-    var parameters: SignUpRequest
+struct TaskDeleteAction {
+    let server_id: Int
     
     func call() {
         
-        let path = "//signup"
+        let path = "/task/"
         
         
-        guard let url = URL(string: APIConstants.base_url + path) else {
+        guard let url = URL(string: APIConstants.base_url + path + String(server_id)) else {
             print("URL Error")
             return
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "post"
+        request.httpMethod = "delete"
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        do {
-            request.httpBody = try JSONEncoder().encode(parameters)
-        } catch {
-            print("Error: Unable to encode request parameters")
-        }
+        request.addValue("Bearer \(AuthStore.shared.getToken())", forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { _, _, error in
             // Error: API request failed
@@ -41,4 +35,3 @@ struct SignUpAction {
         task.resume()
     }
 }
-

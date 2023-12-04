@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
+    
     
     @State private var forgotPasswordPresenting = false
     @State private var signUpPresenting = false
@@ -22,6 +22,19 @@ struct LoginView: View {
                 
                 Text("Welcome to EduEmpower")
                     .font(.largeTitle)
+                
+                Button(
+                    action: viewModel.login_demo,
+                    label: {
+                        Text("Demo")
+                            .font(.system(size: 20, weight: .bold, design: .default))
+                            .frame(maxWidth: 100, maxHeight: 60)
+                            .foregroundColor(Color.white)
+                            .background(Color.green)
+                            .cornerRadius(5)
+                    }
+                )
+
                 
                 Spacer()
                 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskListRow: View {
-    let task: varTask
+    var task: varTask
     @ObservedObject var viewModel: TasksViewModel = TasksViewModel()
     @State private var presentingSingleTask = false
     

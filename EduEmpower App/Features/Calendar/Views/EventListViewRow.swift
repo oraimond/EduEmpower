@@ -35,11 +35,11 @@ struct EventListViewRow: View {
 
             }
             Spacer()
-            Button {
-//                formType = .update(event)
-            } label: {
-                Text("Edit")
-            }
+//            Button {
+////                formType = .update(event)
+//            } label: {
+//                Text("Edit")
+//            }
             .buttonStyle(.bordered)
         }
     }

@@ -11,6 +11,9 @@ struct SingleTaskView: View {
     @ObservedObject var viewModel: TasksViewModel = TasksViewModel()
     @State var task: varTask
     @State var showEditView: Bool = false
+    @State var preferredTime: String? = nil
+    @State var showingActionSheet = false
+    
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -43,18 +46,36 @@ struct SingleTaskView: View {
             
             Spacer()
             
-            Button(action: {
-                // auto schedule
-            }) {
-                Text("Auto Schedule")
-                    .font(.headline)
-                    .padding()
-                    .frame(maxWidth: .infinity, alignment: .center)
-                    .background(Color.green)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
+            if task.scheduled {
+                Button(action: {}) {
+                    Text("Scheduled")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(Color.gray)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }.disabled(true)
+            } else {
+                Button(action: {
+                    self.showingActionSheet = true
+                }) {
+                    Text("Auto Schedule")
+                        .font(.headline)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .background(Color.green)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .actionSheet(isPresented: $showingActionSheet) {
+                    ActionSheet(title: Text("Preferred time to complete this task"), message: Text("Select a time"), buttons: [
+                        .default(Text("Morning")) { preferredTime = "morning"; TaskStore.shared.generate_events(task_id: task.id, server_id: task.server_id, preferredTime: self.preferredTime ?? "morning"); task.scheduled = true },
+                        .default(Text("Afternoon")) { preferredTime = "afternoon"; TaskStore.shared.generate_events(task_id: task.id, server_id: task.server_id, preferredTime: self.preferredTime ?? "morning"); task.scheduled = true },
+                        .default(Text("Evening")) { preferredTime = "evening"; TaskStore.shared.generate_events(task_id: task.id, server_id: task.server_id, preferredTime: self.preferredTime ?? "morning"); task.scheduled = true }
+                    ])
+                }
             }
-            .padding(.top, 10)
         }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

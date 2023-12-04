@@ -1,22 +1,24 @@
 //
-//  SignUpAction.swift
+//  TaskAutoGenerateAction.swift
 //  EduEmpower App
 //
-//  Created by Oli Raimond on 11/5/23.
+//  Created by Oli Raimond on 11/16/23.
 //
 
 import Foundation
 
-struct SignUpAction {
+struct TaskAutoGenerateAction {
+    let server_id: Int
     
-    var parameters: SignUpRequest
+    var parameters: TaskAutoGenerateRequest
     
     func call() {
         
-        let path = "//signup"
+        let initial_path = "/task/"
+        let final_path = "/generate_events/"
         
         
-        guard let url = URL(string: APIConstants.base_url + path) else {
+        guard let url = URL(string: APIConstants.base_url + initial_path + String(server_id) + final_path) else {
             print("URL Error")
             return
         }
@@ -25,6 +27,7 @@ struct SignUpAction {
         request.httpMethod = "post"
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(AuthStore.shared.getToken())", forHTTPHeaderField: "Authorization")
         
         do {
             request.httpBody = try JSONEncoder().encode(parameters)
@@ -41,4 +44,3 @@ struct SignUpAction {
         task.resume()
     }
 }
-
