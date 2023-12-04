@@ -109,10 +109,9 @@ def editgroupDB(request, groupid):
     cursor.execute(f'UPDATE groups SET title = %s, inviter = %s, invitees= %s '
                    'WHERE groupid = %s;', (title, inviter, invitees, groupid))
 
-    rows = cursor.fetchall()
 
     response = {}
-    response['groups'] = rows
+    response['id'] = groupid
     
     return JsonResponse({response})
 
