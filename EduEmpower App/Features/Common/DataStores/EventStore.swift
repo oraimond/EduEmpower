@@ -23,7 +23,31 @@ class EventStore: ObservableObject {
         if preview {
             events = Event.sampleEvents
         } else {
-            // load from persistence store
+            EventGetAction(parameters: ProfileRequest(userid: AuthStore.shared.getUsername())).call() { response in
+                for event in response {
+                    print(event)
+                    var type = Event.EventType.unspecified
+                    if event.type == "gcal" {
+                        type = .gcal
+                    } else if event.type == "automatedTask" {
+                        type = .automatedTask
+                    }
+                    
+                    let event = Event(
+                        id: String(event.eventid),
+                        eventType: type,
+                        start: APIConstants.convertStringToDate(event.start) ?? Date(),
+                        end: APIConstants.convertStringToDate(event.end),
+                        note: event.title
+                    )
+                    
+                    if let index = self.events.firstIndex(where: { $0.id == event.id }) {
+                        self.events[index] = event
+                    } else {
+                        self.events.append(event)
+                    }
+                }
+            }
         }
     }
 

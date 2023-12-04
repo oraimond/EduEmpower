@@ -8,7 +8,7 @@
 import Foundation
 
 struct LoginResponse: Decodable {
-    let token: String
-    let user_id: String
-    let expires_at: String
+    let Token: String
+    let userid: String
+    let expiresat: Double
 }

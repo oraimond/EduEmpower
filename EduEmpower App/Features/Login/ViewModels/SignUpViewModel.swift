@@ -11,6 +11,7 @@ class SignUpViewModel: ObservableObject {
     
     @Published var fname: String = ""
     @Published var lname: String = ""
+    @Published var username: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var confirmPassword: String = ""
@@ -28,13 +29,13 @@ class SignUpViewModel: ObservableObject {
     }
 
     func submit() {
-        print("Submitted")
-//        PasswordAction(
-//            parameters: PasswordRequest(
-//                email: email
-//            )
-//        ).call { _ in
-//            // Login successful, navigate to the Home screen
-//        }
+        SignUpAction(
+            parameters: SignUpRequest(
+                fname: fname,
+                lname: lname,
+                userid: username,
+                email: email,
+                password: password)
+        ).call()
     }
 }

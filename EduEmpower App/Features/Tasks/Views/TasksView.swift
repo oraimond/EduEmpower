@@ -34,6 +34,12 @@ struct TasksView: View {
                 EditTaskView(task: Binding.constant(task))
             }
         }
+        .task {
+            TaskStore.shared.fetchTasks()
+        }
+        .refreshable {
+            TaskStore.shared.fetchTasks()
+        }
     }
 }
 

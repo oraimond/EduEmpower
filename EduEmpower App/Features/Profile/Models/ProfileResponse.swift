@@ -8,7 +8,7 @@
 import Foundation
 
 struct ProfileResponse: Decodable {
-    let user_id: String
+    let userid: String
     let first_name: String
     let last_name: String
     let email: String

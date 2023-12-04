@@ -13,88 +13,99 @@ struct SignUpView: View {
     @ObservedObject var viewModel: SignUpViewModel = SignUpViewModel()
     
     var body: some View {
-        VStack {
-            
-            Spacer()
-            
-            Text("Enter your details below to sign up")
-                .font(.title2)
-            
-            Spacer()
-            
+        ScrollView {
             VStack {
-                TextField(
-                    "First Name",
-                    text: $viewModel.fname
-                )
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .padding(.top, 20)
+                Spacer()
                 
-                Divider()
+                Text("Enter your details below to sign up")
+                    .font(.title2)
                 
-                TextField(
-                    "Last Name",
-                    text: $viewModel.lname
-                )
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .padding(.top, 20)
+                Spacer()
                 
-                Divider()
-                
-                TextField(
-                    "Email",
-                    text: $viewModel.email
-                )
-                .autocapitalization(.none)
-                .disableAutocorrection(true)
-                .padding(.top, 20)
-                
-                Divider()
-                
-                SecureField(
-                    "Password",
-                    text: $viewModel.password
-                )
-                .padding(.top, 20)
-                
-                Divider()
-                
-                SecureField(
-                    "Re-enter Password",
-                    text: $viewModel.confirmPassword
-                )
-                .padding(.top, 20)
-                
-                Divider()
-                
-                if !viewModel.passwordMatch() && !viewModel.confirmPassword.isEmpty {
-                    Text("Passwords do not match")
-                        .foregroundColor(.red)
-                        .font(.footnote)
+                VStack {
+                    TextField(
+                        "First Name",
+                        text: $viewModel.fname
+                    )
+                    .autocapitalization(.words)
+                    .disableAutocorrection(true)
+                    .padding(.top, 20)
+                    
+                    Divider()
+                    
+                    TextField(
+                        "Last Name",
+                        text: $viewModel.lname
+                    )
+                    .autocapitalization(.words)
+                    .disableAutocorrection(true)
+                    .padding(.top, 20)
+                    
+                    Divider()
+                    
+                    TextField(
+                        "Username",
+                        text: $viewModel.username
+                    )
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .padding(.top, 20)
+                    
+                    Divider()
+                    
+                    TextField(
+                        "Email",
+                        text: $viewModel.email
+                    )
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .padding(.top, 20)
+                    
+                    Divider()
+                    
+                    SecureField(
+                        "Password",
+                        text: $viewModel.password
+                    )
+                    .padding(.top, 20)
+                    
+                    Divider()
+                    
+                    SecureField(
+                        "Re-enter Password",
+                        text: $viewModel.confirmPassword
+                    )
+                    .padding(.top, 20)
+                    
+                    Divider()
+                    
+                    if !viewModel.passwordMatch() && !viewModel.confirmPassword.isEmpty {
+                        Text("Passwords do not match")
+                            .foregroundColor(.red)
+                            .font(.footnote)
+                    }
                 }
+                
+                Spacer()
+                
+                Button(
+                    action: {
+                        viewModel.submit()
+                        isPresented = false
+                    },
+                    label: {
+                        Text("Sign Up")
+                            .font(.system(size: 24, weight: .bold, design: .default))
+                            .frame(maxWidth: .infinity, minHeight: 60, maxHeight: 60)
+                            .foregroundColor(Color.white)
+                            .background(viewModel.buttonColor)
+                            .cornerRadius(10)
+                    }
+                )
+                .disabled(!viewModel.ready())
             }
-            
-            Spacer()
-            
-            Button(
-                action: {
-                    viewModel.submit()
-                    isPresented = false
-                },
-                label: {
-                    Text("Sign Up")
-                        .font(.system(size: 24, weight: .bold, design: .default))
-                        .frame(maxWidth: .infinity, maxHeight: 60)
-                        .foregroundColor(Color.white)
-                        .background(viewModel.buttonColor)
-                        .cornerRadius(10)
-                }
-            )
-            .disabled(!viewModel.ready())
+            .padding(30)
         }
-        .padding(30)
     }
 }
 

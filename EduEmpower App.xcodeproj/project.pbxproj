@@ -25,6 +25,9 @@
 		AF0C57342AFD614A005C9E25 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57332AFD614A005C9E25 /* SignUpView.swift */; };
 		AF0C57362AFD62F3005C9E25 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */; };
 		AF2216482B0042F800CA4164 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF2216472B0042F800CA4164 /* Group.swift */; };
+		AF3D97332B1D58FE000EE033 /* SignUpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D97322B1D58FE000EE033 /* SignUpRequest.swift */; };
+		AF3D97352B1D762A000EE033 /* TaskAutoGenerateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D97342B1D762A000EE033 /* TaskAutoGenerateRequest.swift */; };
+		AF3D97372B1E2A10000EE033 /* ProfileRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3D97362B1E2A10000EE033 /* ProfileRequest.swift */; };
 		AF44CF752AFE7D560087A57B /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF742AFE7D560087A57B /* HomeView.swift */; };
 		AF44CF792AFE7E7E0087A57B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF782AFE7E7E0087A57B /* ContentView.swift */; };
 		AF44CF832AFE7F090087A57B /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF44CF822AFE7F090087A57B /* GroupsView.swift */; };
@@ -68,6 +71,8 @@
 		AFD997BB2B0274E9004888DC /* ChartDataEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997B82B0274E9004888DC /* ChartDataEntry.swift */; };
 		AFD997BC2B0274E9004888DC /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997B92B0274E9004888DC /* Suggestion.swift */; };
 		AFD997BD2B0274E9004888DC /* Insight.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFD997BA2B0274E9004888DC /* Insight.swift */; };
+		AFDC73B42B16681100DBD53C /* EventGetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDC73B32B16681100DBD53C /* EventGetResponse.swift */; };
+		AFDC73B82B16699D00DBD53C /* EventGetAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDC73B72B16699D00DBD53C /* EventGetAction.swift */; };
 		AFE05E582AF8060E003D22A2 /* EduEmpowerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */; };
 		AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE05E592AF8060E003D22A2 /* LoginView.swift */; };
 		AFE05E5C2AF8060F003D22A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFE05E5B2AF8060F003D22A2 /* Assets.xcassets */; };
@@ -106,6 +111,9 @@
 		AF0C57332AFD614A005C9E25 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		AF0C57352AFD62F3005C9E25 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		AF2216472B0042F800CA4164 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		AF3D97322B1D58FE000EE033 /* SignUpRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpRequest.swift; sourceTree = "<group>"; };
+		AF3D97342B1D762A000EE033 /* TaskAutoGenerateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAutoGenerateRequest.swift; sourceTree = "<group>"; };
+		AF3D97362B1E2A10000EE033 /* ProfileRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRequest.swift; sourceTree = "<group>"; };
 		AF44CF742AFE7D560087A57B /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		AF44CF782AFE7E7E0087A57B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AF44CF822AFE7F090087A57B /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
@@ -149,6 +157,8 @@
 		AFD997B82B0274E9004888DC /* ChartDataEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartDataEntry.swift; sourceTree = "<group>"; };
 		AFD997B92B0274E9004888DC /* Suggestion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
 		AFD997BA2B0274E9004888DC /* Insight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Insight.swift; sourceTree = "<group>"; };
+		AFDC73B32B16681100DBD53C /* EventGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventGetResponse.swift; sourceTree = "<group>"; };
+		AFDC73B72B16699D00DBD53C /* EventGetAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventGetAction.swift; sourceTree = "<group>"; };
 		AFE05E542AF8060E003D22A2 /* EduEmpower App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "EduEmpower App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFE05E572AF8060E003D22A2 /* EduEmpowerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EduEmpowerApp.swift; sourceTree = "<group>"; };
 		AFE05E592AF8060E003D22A2 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -254,6 +264,7 @@
 		AF44CF722AFE7CF60087A57B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AFDC73B32B16681100DBD53C /* EventGetResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,6 +272,7 @@
 		AF44CF732AFE7D030087A57B /* Actions */ = {
 			isa = PBXGroup;
 			children = (
+				AFDC73B72B16699D00DBD53C /* EventGetAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -380,6 +392,7 @@
 				AF6F453F2B05B84500FA4B9A /* TaskPostRequest.swift */,
 				AF872EE22B06728A006154DD /* TaskResponse.swift */,
 				AF872EE42B067A98006154DD /* TaskPutRequest.swift */,
+				AF3D97342B1D762A000EE033 /* TaskAutoGenerateRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -429,6 +442,7 @@
 			isa = PBXGroup;
 			children = (
 				AFC1FC722B0456B50086F846 /* ProfileResponse.swift */,
+				AF3D97362B1E2A10000EE033 /* ProfileRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -565,6 +579,7 @@
 				AFE05E712AF80CE3003D22A2 /* LoginRequest.swift */,
 				AFE05E732AF80D0E003D22A2 /* LoginResponse.swift */,
 				AFE05E7D2AF81273003D22A2 /* PasswordRequest.swift */,
+				AF3D97322B1D58FE000EE033 /* SignUpRequest.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -648,6 +663,7 @@
 			files = (
 				AF55F14B2B0518B900D85E2A /* TaskStore.swift in Sources */,
 				AFE05E5A2AF8060E003D22A2 /* LoginView.swift in Sources */,
+				AF3D97352B1D762A000EE033 /* TaskAutoGenerateRequest.swift in Sources */,
 				AF6F453E2B05B7F400FA4B9A /* TaskDeleteAction.swift in Sources */,
 				AF97E0C72AFFD22E00759297 /* EditTaskView.swift in Sources */,
 				AF9641CB2B0445D0000608FD /* APIConstants.swift in Sources */,
@@ -673,14 +689,17 @@
 				AF44CF852AFE7F260087A57B /* TasksView.swift in Sources */,
 				AFE05E682AF80995003D22A2 /* LoginViewModel.swift in Sources */,
 				40C6122C2B05AF7A0011650B /* EditGroupTaskView.swift in Sources */,
+				AF3D97332B1D58FE000EE033 /* SignUpRequest.swift in Sources */,
 				AFD997AB2B0273C7004888DC /* GroupListRow.swift in Sources */,
 				AF97E0BE2AFFC7E500759297 /* TaskListRow.swift in Sources */,
 				AFD997B52B0273F3004888DC /* StatisticsViewModel.swift in Sources */,
 				AF44CF752AFE7D560087A57B /* HomeView.swift in Sources */,
 				AF499CB02B00319900255F3A /* DaysEventsListView.swift in Sources */,
+				AFDC73B42B16681100DBD53C /* EventGetResponse.swift in Sources */,
 				AFD997B72B027431004888DC /* GroupViewModel.swift in Sources */,
 				40EEBB332B1CFE8100D57C8D /* DataModel.swift in Sources */,
 				AFD997B12B0273EA004888DC /* SuggestionListRow.swift in Sources */,
+				AFDC73B82B16699D00DBD53C /* EventGetAction.swift in Sources */,
 				AFD997AC2B0273C7004888DC /* GroupTaskListRow.swift in Sources */,
 				4066843F2B17DD3800394CC7 /* GroupPostRequest.swift in Sources */,
 				AF499CAC2B001E6D00255F3A /* CalendarView.swift in Sources */,
@@ -712,6 +731,7 @@
 				406684432B17DF8300394CC7 /* GroupPutRequest.swift in Sources */,
 				AFC1FC702B044DCC0086F846 /* AuthStore.swift in Sources */,
 				AF872EEB2B070B17006154DD /* GroupStore.swift in Sources */,
+				AF3D97372B1E2A10000EE033 /* ProfileRequest.swift in Sources */,
 				409381FB2B0286EF00C3DF39 /* ProfileViewModel.swift in Sources */,
 				4066844B2B17E26800394CC7 /* GroupPutAction.swift in Sources */,
 				406684472B17E00200394CC7 /* GroupGetAction.swift in Sources */,

@@ -11,6 +11,8 @@ struct SingleTaskView: View {
     @ObservedObject var viewModel: TasksViewModel = TasksViewModel()
     @State var task: varTask
     @State var showEditView: Bool = false
+    @State var preferredTime: String? = nil
+    @State var showingActionSheet = false
     
 
     var body: some View {
@@ -56,8 +58,7 @@ struct SingleTaskView: View {
                 }.disabled(true)
             } else {
                 Button(action: {
-                    TaskStore.shared.generate_events(task_id: task.id, server_id: task.server_id)
-                    task.scheduled = true
+                    self.showingActionSheet = true
                 }) {
                     Text("Auto Schedule")
                         .font(.headline)
@@ -66,6 +67,13 @@ struct SingleTaskView: View {
                         .background(Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
+                }
+                .actionSheet(isPresented: $showingActionSheet) {
+                    ActionSheet(title: Text("Preferred time to complete this task"), message: Text("Select a time"), buttons: [
+                        .default(Text("Morning")) { preferredTime = "morning"; TaskStore.shared.generate_events(task_id: task.id, server_id: task.server_id, preferredTime: self.preferredTime ?? "morning"); task.scheduled = true },
+                        .default(Text("Afternoon")) { preferredTime = "afternoon"; TaskStore.shared.generate_events(task_id: task.id, server_id: task.server_id, preferredTime: self.preferredTime ?? "morning"); task.scheduled = true },
+                        .default(Text("Evening")) { preferredTime = "evening"; TaskStore.shared.generate_events(task_id: task.id, server_id: task.server_id, preferredTime: self.preferredTime ?? "morning"); task.scheduled = true }
+                    ])
                 }
             }
         }

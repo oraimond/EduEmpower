@@ -10,6 +10,8 @@ import Foundation
 struct TaskAutoGenerateAction {
     let server_id: Int
     
+    var parameters: TaskAutoGenerateRequest
+    
     func call() {
         
         let initial_path = "/task/"
@@ -26,6 +28,12 @@ struct TaskAutoGenerateAction {
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(AuthStore.shared.getToken())", forHTTPHeaderField: "Authorization")
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(parameters)
+        } catch {
+            print("Error: Unable to encode request parameters")
+        }
         
         let task = URLSession.shared.dataTask(with: request) { _, _, error in
             // Error: API request failed

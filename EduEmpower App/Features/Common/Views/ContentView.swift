@@ -17,7 +17,7 @@ struct ContentView: View {
         if authStore.loggedIn {
             TabView(selection: $selectedTab) {
                 HomeView()
-                    .environmentObject(EventStore(preview: true))
+                    .environmentObject(EventStore(preview: false))
                     .tabItem {
                         Image(systemName: "calendar")
                         Text("Home")
