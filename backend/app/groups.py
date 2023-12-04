@@ -62,9 +62,10 @@ def postgroupsDB(request):
 
 
     cursor.execute(f'INSERT INTO groups (title, inviter, invitees) VALUES '
-                   '(%s, %s, ARRAY[%s]);', (title, inviter, invitees))
+                   '(%s, %s, ARRAY[%s]) RETURNING groupid;', (title, inviter, invitees))
 
-    return JsonResponse({})
+    groupid = cursor.fetchone()[0]
+    return JsonResponse({'groupid': groupid, 'title': title, 'userids': invitees})
 
 def editgroupDB(request, groupid):
     """
