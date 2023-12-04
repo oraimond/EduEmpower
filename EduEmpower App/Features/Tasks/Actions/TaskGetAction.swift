@@ -21,7 +21,7 @@ struct TaskGetAction {
         }
         
         var request = URLRequest(url: url)
-        request.httpMethod = "get"
+        request.httpMethod = "post"
     
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(AuthStore.shared.getToken())", forHTTPHeaderField: "Authorization")

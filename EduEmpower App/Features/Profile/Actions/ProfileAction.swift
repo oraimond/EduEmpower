@@ -12,7 +12,7 @@ struct ProfileAction {
     var parameters: ProfileRequest
     
     func call(completion: @escaping (ProfileResponse) -> Void) {
-        let path = "/user/profile"
+        let path = "//user/profile"
         
         
         guard let url = URL(string: APIConstants.base_url + path) else {
@@ -20,8 +20,10 @@ struct ProfileAction {
             return
         }
         
+        print(parameters.userid)
+        
         var request = URLRequest(url: url)
-        request.httpMethod = "get"
+        request.httpMethod = "post"
     
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(AuthStore.shared.getToken())", forHTTPHeaderField: "Authorization")
@@ -39,6 +41,7 @@ struct ProfileAction {
                 if let response = response {
                     completion(response)
                 } else {
+//                    print(String(data: data, encoding: .utf8)!)
                     print("Failed to decode login")
                 }
             } else {

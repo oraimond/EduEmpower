@@ -7,7 +7,6 @@ struct GoogleSignInView: View {
     private let signinClient = GIDSignIn.sharedInstance
     private let additionalScopes = ["https://www.googleapis.com/auth/calendar", "https://www.googleapis.com/auth/userinfo.email", "https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/calendar.events"]
     @ObservedObject var eventStore: EventStore
-    private let serverUrl = "https://34.16.135.240/"
     
     var body: some View {
         if let rootVC = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.keyWindow?.rootViewController {
@@ -18,7 +17,7 @@ struct GoogleSignInView: View {
                     if error != nil {
                         print("signIn: \(error!.localizedDescription)")
                     } else {
-                        getEvents(result?.user.accessToken.tokenString)
+//                        getEvents(result?.user.accessToken.tokenString)
                         backendSignin(authCode)
 
                         
@@ -28,13 +27,13 @@ struct GoogleSignInView: View {
             .frame(width:100, height:50, alignment: Alignment.center)
             .onAppear {
                 if let user = signinClient.currentUser {
-                    getEvents(user.accessToken.tokenString)
+//                    getEvents(user.accessToken.tokenString)
                 } else {
                     signinClient.restorePreviousSignIn { user, error in
                         if error != nil {
                             print("restorePreviousSignIn: \(error!.localizedDescription)")
                         } else {
-                            getEvents(user?.accessToken.tokenString)
+//                            getEvents(user?.accessToken.tokenString)
                         }
                     }
                 }
@@ -151,10 +150,12 @@ struct GoogleSignInView: View {
                     return
                 }
                         
-                guard let apiUrl = URL(string: serverUrl+"postgoogle/") else {
+                guard let apiUrl = URL(string: APIConstants.base_url+"/postgoogle/") else {
                     print("backendSignIn: Bad URL")
                     return
                 }
+                
+                print(authCode)
                 
                 var request = URLRequest(url: apiUrl)
                 request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
@@ -170,7 +171,7 @@ struct GoogleSignInView: View {
                     print("backEndSignIn: NETWORKING ERROR")
                 }
             }
-            
+            print("backend signin done")
             isPresented.toggle()
         }
     }

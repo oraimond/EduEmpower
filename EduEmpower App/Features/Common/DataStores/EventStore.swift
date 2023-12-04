@@ -23,8 +23,9 @@ class EventStore: ObservableObject {
         if preview {
             events = Event.sampleEvents
         } else {
-            EventGetAction().call() { response in
+            EventGetAction(parameters: ProfileRequest(userid: AuthStore.shared.getUsername())).call() { response in
                 for event in response {
+                    print(event)
                     var type = Event.EventType.unspecified
                     if event.type == "gcal" {
                         type = .gcal
@@ -35,8 +36,8 @@ class EventStore: ObservableObject {
                     let event = Event(
                         id: String(event.eventid),
                         eventType: type,
-                        start: ISO8601DateFormatter().date(from: event.start) ?? Date(),
-                        end: ISO8601DateFormatter().date(from: event.end),
+                        start: APIConstants.convertStringToDate(event.start) ?? Date(),
+                        end: APIConstants.convertStringToDate(event.end),
                         note: event.title
                     )
                     

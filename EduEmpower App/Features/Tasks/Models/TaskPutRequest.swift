@@ -7,10 +7,8 @@
 
 import Foundation
 
-import Foundation
-
 struct TaskPutRequest: Encodable {
-    let id: Int
+    let taskid: Int
     let title: String
     let duration: Int
     let due_date: String

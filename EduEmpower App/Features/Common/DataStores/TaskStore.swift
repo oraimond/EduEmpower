@@ -18,22 +18,22 @@ class TaskStore: ObservableObject {
         TaskGetAction(parameters: ProfileRequest(userid: AuthStore.shared.getUsername())).call() { response in
             
             for task in response {
-                let members = task.assigned_users.map {
-                    User(username: $0.user_id, fname: $0.fname, lname: $0.lname, email: "TODO")
+                let members = task.users.map {
+                    User(username: $0.userid, fname: $0.fname, lname: $0.lname, email: "email@example.com")
                 }
                 
                 var group: varGroup?
                 if let group_id = task.group_id {
-                    group = varGroup(server_id: group_id, groupName: "TODO", members: [])
+                    group = varGroup(server_id: group_id, groupName: "Group", members: [])
                 }
 
                 
                 self.save(varTask(
                     id: UUID(),
-                    server_id: task.id,
+                    server_id: task.taskid,
                     title: task.title,
                     timeNeeded: task.duration,
-                    dueDate: ISO8601DateFormatter().date(from: task.due_date) ?? Date(),
+                    dueDate: APIConstants.convertStringToDate(task.due_date) ?? Date(),
                     taskDescription: task.description,
                     members: members,
                     scheduled: task.scheduled,
@@ -78,12 +78,12 @@ class TaskStore: ObservableObject {
             if let index = tasks.firstIndex(where: { $0.id == task.id }) { // If the task is in the list, update it
                 if let server_id = task.server_id {
                     TaskPutAction(parameters: TaskPutRequest(
-                        id: server_id,
+                        taskid: server_id,
                         title: task.title,
                         duration: task.timeNeeded,
                         due_date: ISO8601DateFormatter().string(from: task.dueDate),
                         description: task.taskDescription,
-                        userids: [], // todo
+                        userids: [AuthStore.shared.getUsername()],
                         scheduled: task.scheduled,
                         group_id: nil
                     )).call() { response in
