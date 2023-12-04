@@ -30,7 +30,7 @@ def getgroupsDB(request):
         group["inviter"] = row[3]
         group['invitees'] = row[4]
         response.append(group)
-    
+
     return JsonResponse({"Content": response})
 
 def postgroupsDB(request):
@@ -101,7 +101,7 @@ def editgroupDB(request, groupid):
         userid = userid[0]
         query = f"""
             UPDATE users
-            SET groups_invitations = ARRAY_APPEND(group_invitations, userid)
+            SET group_invitations = ARRAY_APPEND(group_invitations, userid)
             WHERE userid =\'{userid}\';
             """
         cursor.execute(query)
