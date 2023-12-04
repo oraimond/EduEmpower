@@ -9,6 +9,7 @@ from django.views.decorators.http import require_http_methods
 
 # TASK API CALLS
 @require_http_methods(["POST"])
+@csrf_exempt
 def gettasks(request):
     return gettasksDB(request)
 
@@ -28,6 +29,7 @@ def editorDeleteTask(request, taskid):
 
 # GROUP API CALLS
 @require_http_methods(["POST"])
+@csrf_exempt
 def getgroups(request):
     return getgroupsDB(request)
 
@@ -58,6 +60,7 @@ def postgoogle(request):
 
 #EVENT/CALENDAR API CALLS
 @require_http_methods(["POST"])
+@csrf_exempt
 def getevents(request):
     return geteventsDB(request)
 
