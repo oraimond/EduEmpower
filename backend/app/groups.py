@@ -51,20 +51,21 @@ def postgroupsDB(request):
         cursor.execute(query)
         userid = cursor.fetchone()
         invitees.append(userid[0])
-
+        userid = userid[0]
         query = f"""
             UPDATE users
-            SET groups_invitations = ARRAY_APPEND(group_invitations, userid[0])
-            WHERE userid =\'{userid[0]}\';
+            SET group_invitations = ARRAY_APPEND(group_invitations, userid)
+            WHERE userid =\'{userid}\';
             """
         cursor.execute(query)
 
 
 
     cursor.execute(f'INSERT INTO groups (title, inviter, invitees) VALUES '
-                   '(%s, %s, ARRAY[%s]);', (title, inviter, invitees))
+                   '(%s, %s, ARRAY[%s]) RETURNING groupid;', (title, inviter, invitees))
 
-    return JsonResponse({})
+    groupid = cursor.fetchone()[0]
+    return JsonResponse({'groupid': groupid, 'title': title, 'userids': invitees})
 
 def editgroupDB(request, groupid):
     """
@@ -89,11 +90,11 @@ def editgroupDB(request, groupid):
         cursor.execute(query)
         userid = cursor.fetchone()
         invitees.append(userid[0])
-
+        userid = userid[0]
         query = f"""
             UPDATE users
-            SET groups_invitations = ARRAY_APPEND(group_invitations, userid[0])
-            WHERE userid =\'{userid[0]}\';
+            SET groups_invitations = ARRAY_APPEND(group_invitations, userid)
+            WHERE userid =\'{userid}\';
             """
         cursor.execute(query)
 
