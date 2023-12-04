@@ -110,10 +110,11 @@ def getUserProfileInfoDB(request):
     rows = cursor.fetchall()
 
     response = {}
-    response['userid'] = rows[0]
-    response['first_name'] = rows[1]
-    response['last_name'] = rows[2]
-    response['email'] = rows[3]
+    curr_user = rows[0]
+    response['userid'] = curr_user[0]
+    response['first_name'] = curr_user[1]
+    response['last_name'] = curr_user[2]
+    response['email'] = curr_user[3]
      
     return JsonResponse(response)
 
