@@ -27,8 +27,7 @@ def insertGCal(userid, name, start, end):
         '''
     user = cursor.execute(query)
     user = cursor.fetchone()
-    for i in user:
-        print(i)
+
     print(user[5])
     print(user[3])
 
