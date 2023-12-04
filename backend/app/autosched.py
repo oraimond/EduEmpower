@@ -74,6 +74,12 @@ def is_consistent(task, slot, assignment, constraints):
 
 
 
+def minutes_to_hours(minutes: int):
+    if minutes >= 60:
+        return (minutes/60, minutes%60)
+
+    else:
+        return (0, minutes)
 
 def autoscheduleDB(request, taskid):
     if request.method != 'POST':
@@ -93,7 +99,7 @@ def autoscheduleDB(request, taskid):
     query_result = rows[0]
 
     task_title = query_result[0]
-    task_duration = query_result[1]
+    task_duration = query_result[1] # minutes
     task_due_date = query_result[2]
     task_description = query_result[3]
     task_userids = query_result[4]
@@ -137,7 +143,7 @@ def autoscheduleDB(request, taskid):
     if len(rows) == 0:
          # add new event to the events database table 
         start_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day)
-        end_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day) + ' ' + str(task_duration) + ':00:00'
+        end_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day) + ' ' + str(minutes_to_hours(task_duration)[0]) + ':' + str(minutes_to_hours(task_duration)[1]) + ':00'
         cursor = connection.cursor()
 
         cursor.execute('INSERT INTO events (title, start, "end", type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);', [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
@@ -197,7 +203,7 @@ def autoscheduleDB(request, taskid):
     viable_timeslots = []
     for timeslot in open_timeslots:
         # print((timeslot[1] - timeslot[0]))
-        if timedelta(hours=task_duration) > timeslot[1] - timeslot[0]:
+        if timedelta(minutes=task_duration) > timeslot[1] - timeslot[0]:
             continue
 
         if task_due_date < timeslot[0]:
@@ -217,31 +223,31 @@ def autoscheduleDB(request, taskid):
     if time_preference == "morning":
         for timeslot in viable_timeslots:
             # TODO: find preferred time slot 
-            if (timeslot[0] + task_duration).hour < 12 and (timeslot[0]).hour > 7:
+            if (timeslot[0] + timedelta(minutes=task_duration)).hour < 12 and (timeslot[0]).hour > 7:
                 final_timeslot = timeslot
                 break
 
     elif time_preference == "afternoon":
         for timeslot in viable_timeslots:
             # TODO: find preferred time slot 
-            if (timeslot[0]).hour >= 12 and (timeslot[0] + task_duration).hour < 18:
+            if (timeslot[0]).hour >= 12 and (timeslot[0] + timedelta(minutes=task_duration)).hour < 18:
                 final_timeslot = timeslot
                 break
 
     elif time_preference == "evening":
         for timeslot in viable_timeslots:
             # TODO: find preferred time slot 
-            if (timeslot[0]).hour >= 18 and (timeslot[0] + task_duration).hour < 22:
+            if (timeslot[0]).hour >= 18 and (timeslot[0] + timedelta(minutes=task_duration)).hour < 22:
                 final_timeslot = timeslot
                 break
 
     # add new event to the events database table 
     cursor = connection.cursor()
-    cursor.execute('INSERT INTO events (title, start, "end", type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);', [task_title, final_timeslot.strftime("%Y-%m-%d %H:%M:%S"), (final_timeslot + timedelta(hours=task_duration)).strftime("%Y-%m-%d %H:%M:%S"), 'automatedTask', task_userids, taskid])
+    cursor.execute('INSERT INTO events (title, start, "end", type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);', [task_title, final_timeslot.strftime("%Y-%m-%d %H:%M:%S"), (final_timeslot + timedelta(minutes=task_duration)).strftime("%Y-%m-%d %H:%M:%S"), 'automatedTask', task_userids, taskid])
     
     # TODO: call insertGCal on users 
     for user in task_userids:
-        app.gcal.insertGCal(str(user), task_title, final_timeslot, final_timeslot + timedelta(hours=task_duration))
+        app.gcal.insertGCal(str(user), task_title, final_timeslot, final_timeslot + timedelta(minutes=task_duration))
 
     response = {
         "message": "Events generation for task started",
