@@ -45,10 +45,10 @@ def posttasksDB(request):
     cursor = connection.cursor()
     #cursor.execute('INSERT INTO tasks (tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
            #        '(%s, %s, %s, %s, %s, %s );', (tasktitle, groupid, timeneeded, duedate, description, userid))
-    taskid = cursor.execute('INSERT INTO tasks (title, duration, due_date, description, userids, scheduled) VALUES '
-                   '(%s, %s, %s, %s, %s, %s) RETURNING taskid;', (title, duration, due_date, description, userids, scheduled)).fetchone()
+    cursor.execute('INSERT INTO tasks (title, duration, due_date, description, userids, scheduled) VALUES '
+                   '(%s, %s, %s, %s, %s, %s);', (title, duration, due_date, description, userids, scheduled))
 
-    
+    taskid = cursor.lastrowid
     return JsonResponse({'id': taskid})
 
 def edittasksDB(request, taskid):
