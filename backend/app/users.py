@@ -23,9 +23,10 @@ def loginDB(request):
 
     cursor = connection.cursor()
 
-    data = cursor.execute(
-        f'''SELECT password FROM users WHERE userid = \'{username}\''''
-    )
+    #data = cursor.execute(
+        #f'''SELECT password FROM users WHERE userid = \'{username}\''''
+    #)
+    data = cursor.execute('SELECT password FROM users WHERE (%s) = userid;', (username,))
     user = data.fetchone()
 
     if not user:
