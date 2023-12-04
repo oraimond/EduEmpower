@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 import os
-
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'sample_app.settings')
+from celery import Celery
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'routing.settings')
 
 app = Celery( 'celery_app',
 broker='redis://localhost:6379/0',
