@@ -12,7 +12,7 @@ struct TaskPostRequest: Encodable {
     let duration: Int
     let due_date: String
     let description: String
-    let assigned_users: [String]
+    let userids: [String]
     let scheduled: Bool
     let group_id: Int?
 }

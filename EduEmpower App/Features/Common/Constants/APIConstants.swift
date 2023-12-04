@@ -8,6 +8,6 @@
 import Foundation
 
 struct APIConstants {
-    static let base_url: String = "http://localhost:3001"
-//    static let base_url: String = "https://34.16.135.240"
+//    static let base_url: String = "http://localhost:3001"
+    static let base_url: String = "https://34.16.135.240"
 }

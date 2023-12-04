@@ -13,7 +13,7 @@ class AuthStore: ObservableObject {
     @Published var loggedIn: Bool = false
     var token: String?
     var user_id: String?
-    var expires_at: String?
+    var expires_at: Double?
     
     @Published var fname: String?
     @Published var lname: String?
@@ -22,7 +22,7 @@ class AuthStore: ObservableObject {
     private init() {} // ensure that only one instance of AuthStore can be created
     
     func getProfile() {
-        ProfileAction().call() { response in
+        ProfileAction(parameters: ProfileRequest(userid: getUsername())).call() { response in
             self.fname = response.first_name
             self.lname = response.last_name
             self.email = response.email
@@ -32,6 +32,14 @@ class AuthStore: ObservableObject {
     func getToken() -> String {
         if let token {
             return token
+        }
+        print("No Auth Token")
+        return "NoToken"
+    }
+    
+    func getUsername() -> String {
+        if let user_id {
+            return user_id
         }
         print("No Auth Token")
         return "NoToken"

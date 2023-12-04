@@ -15,7 +15,7 @@ class TaskStore: ObservableObject {
     private init() {}
     
     func fetchTasks() {
-        TaskGetAction().call() { response in
+        TaskGetAction(parameters: ProfileRequest(userid: AuthStore.shared.getUsername())).call() { response in
             
             for task in response {
                 let members = task.assigned_users.map {
@@ -83,9 +83,9 @@ class TaskStore: ObservableObject {
                         duration: task.timeNeeded,
                         due_date: ISO8601DateFormatter().string(from: task.dueDate),
                         description: task.taskDescription,
-                        assigned_users: [], //TODO
+                        userids: [], // todo
                         scheduled: task.scheduled,
-                        group_id: nil //TODO
+                        group_id: nil
                     )).call() { response in
                         if response.id == server_id {
                             self.tasks[index] = task
@@ -104,9 +104,9 @@ class TaskStore: ObservableObject {
                     duration: task.timeNeeded,
                     due_date: ISO8601DateFormatter().string(from: task.dueDate),
                     description: task.taskDescription,
-                    assigned_users: [], //TODO
+                    userids: [AuthStore.shared.getUsername()],
                     scheduled: task.scheduled,
-                    group_id: nil //TODO
+                    group_id: nil
                 )).call() { response in
                     var taskCopy = task
                     taskCopy.server_id = response.id

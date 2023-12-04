@@ -8,6 +8,9 @@
 import Foundation
 
 struct TaskGetAction {
+    
+    var parameters: ProfileRequest
+    
     func call(completion: @escaping ([TaskGetResponse]) -> Void) {
         let path = "/tasks/"
         
@@ -22,6 +25,12 @@ struct TaskGetAction {
     
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(AuthStore.shared.getToken())", forHTTPHeaderField: "Authorization")
+        
+        do {
+            request.httpBody = try JSONEncoder().encode(parameters)
+        } catch {
+            print("Error: Unable to encode request parameters")
+        }
         
         let task = URLSession.shared.dataTask(with: request) { data, _, error in
             if let data = data {

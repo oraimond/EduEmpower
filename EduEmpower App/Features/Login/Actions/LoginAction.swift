@@ -40,7 +40,12 @@ struct LoginAction {
                     completion(response)
                 } else {
                     // TODO failed login
+                    let string = String(data: data, encoding: .utf8)!
+                    print(string)
                     print("Incorrect details")
+                    if let error = error {
+                        print("Error: \(error.localizedDescription)")
+                    }
                 }
             } else {
                 // Error: API request failed
