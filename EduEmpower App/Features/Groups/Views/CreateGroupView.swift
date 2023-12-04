@@ -22,7 +22,7 @@ struct CreateGroupView: View {
     init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
         self._groupName = State(initialValue: group.wrappedValue.groupName)
-        self._inviter = State(initialValue: group.wrappedValue.inviter)
+        self._inviter = State(initialValue: group.wrappedValue.inviter ?? User(fname: "", lname: "", email: ""))
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         self._userids = State(initialValue: group.wrappedValue.userids)
         self._newMemberEmail = State(initialValue: "")

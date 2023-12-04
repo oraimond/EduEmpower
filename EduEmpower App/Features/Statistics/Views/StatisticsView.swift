@@ -26,16 +26,14 @@ struct StatisticsView: View {
     var body: some View {
         VStack {
             
-            Spacer()
             
             Text("Focus Statistics")
                 .font(.largeTitle)
             
-            DeviceActivityReport(context, filter: filter)
             
             // TODO: put graph diagram
             PieChartView(dataEntries: viewModel.dummyStats)
-                .frame(width: 150, height: 150)
+                .frame(width: 200, height: 200)
             
             
             VStack {

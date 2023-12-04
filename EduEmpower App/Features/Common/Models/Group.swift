@@ -15,7 +15,7 @@ struct varGroup: Equatable, Identifiable {
     let id: UUID
     var server_id: Int?
     var groupName: String
-    var inviter: User
+    var inviter: User?
     var invitees: [User]
     var userids: [User] // inviter + invitees who accepted
     
@@ -23,7 +23,7 @@ struct varGroup: Equatable, Identifiable {
         self.id = id ?? UUID()
         self.server_id = server_id
         self.groupName = groupName
-        self.inviter = inviter!
+        self.inviter = inviter
         self.invitees = invitees
         self.userids = userids
     }
