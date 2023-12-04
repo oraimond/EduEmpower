@@ -30,7 +30,8 @@ def getgroupsDB(request):
         group["inviter"] = row[3]
         group['invitees'] = row[4]
         response.append(group)
-    return JsonResponse(response)
+    
+    return JsonResponse({"Content": response})
 
 def postgroupsDB(request):
     """
