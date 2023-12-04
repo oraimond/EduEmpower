@@ -21,8 +21,15 @@ def getgroupsDB(request):
                        OR '{userid}' = ANY(invitees);''')  # not sure what fields we wanted
     rows = cursor.fetchall()
 
-    response = {}
-    response['usergroups'] = rows
+    response = []
+    for row in rows:
+        group = {}
+        group['groupid'] = row[0]
+        group['title'] = row[1]
+        group["userids"] = row[2]
+        group["inviter"] = row[3]
+        group['invitees'] = row[4]
+        response.append(group)
     return JsonResponse(response)
 
 def postgroupsDB(request):
@@ -62,7 +69,7 @@ def postgroupsDB(request):
 
 
     cursor.execute(f'INSERT INTO groups (title, inviter, invitees) VALUES '
-                   '(%s, %s, ARRAY[%s]) RETURNING groupid;', (title, inviter, invitees))
+                   '(%s, %s, %s) RETURNING groupid;', (title, inviter, invitees))
 
     groupid = cursor.fetchone()[0]
     return JsonResponse({'groupid': groupid, 'title': title, 'userids': invitees})
@@ -99,7 +106,7 @@ def editgroupDB(request, groupid):
         cursor.execute(query)
 
     cursor.execute(f'UPDATE groups SET (title, inviter, invitees) VALUES '
-                   '(%s, %s, ARRAY[%s]) WHERE groupid = %s;', (title, inviter, invitees, groupid))
+                   '(%s, %s, %s) WHERE groupid = %s;', (title, inviter, invitees, groupid))
 
     rows = cursor.fetchall()
 
