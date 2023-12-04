@@ -138,7 +138,7 @@ def autoscheduleDB(request, taskid):
          # add new event to the events database table 
         start_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day)
         today_date += timedelta(hours=task_duration)
-        end_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day) + ' ' + str(today_date.hours) + ':00:00'
+        end_string = str(today_date.year) + '-' + str(today_date.month) + '-' + str(today_date.day) + ' ' + str(today_date.hour) + ':00:00'
         cursor = connection.cursor()
 
         cursor.execute("INSERT INTO events (title, eventstart, eventend, type, userids, taskid) VALUES (%s, %s, %s, %s, %s, %s);", [task_title, start_string, end_string, 'automatedTask', task_userids, taskid])
