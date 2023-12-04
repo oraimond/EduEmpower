@@ -106,8 +106,8 @@ def editgroupDB(request, groupid):
             """
         cursor.execute(query)
 
-    cursor.execute(f'UPDATE groups SET (title, inviter, invitees) VALUES '
-                   '(%s, %s, %s) WHERE groupid = %s;', (title, inviter, invitees, groupid))
+    cursor.execute(f'UPDATE groups SET title = %s, inviter = %s, invitees= %s '
+                   'WHERE groupid = %s;', (title, inviter, invitees, groupid))
 
     rows = cursor.fetchall()
 
