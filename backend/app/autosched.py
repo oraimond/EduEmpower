@@ -190,6 +190,8 @@ def autoscheduleDB(request, taskid):
         interval_between = (current_interval_end, next_interval_start)
         open_timeslots.append(interval_between)
 
+    open_timeslots.inesrt(0, (datetime.now(), merged_event_intervals[0][0]))
+    open_timeslots.append((merged_event_intervals[-1][1], task_due_date))
     # add something to prevent time slots from going into 11pm to 8am
 
     viable_timeslots = []
