@@ -28,7 +28,7 @@ def geteventsDB(request):
         tempdict['related_task_id'] = row[5]
         response.append(tempdict)
 
-    return JsonResponse({"content":response, "rows": rows})
+    return JsonResponse(response, safe=False)
 
 def createeventDB(request):
     """
