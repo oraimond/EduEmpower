@@ -15,11 +15,11 @@ struct varGroup: Equatable, Identifiable {
     let id: UUID
     var server_id: Int?
     var title: String
-    var inviter: User?
+    var inviter: User
     var invitees: [User]
     var userids: [User] // inviter + invitees who accepted
     
-    init(id: UUID? = nil, server_id: Int? = nil, title: String = "", inviter: User? = nil, invitees: [User] = [], userids: [User] = []) {
+    init(id: UUID? = nil, server_id: Int? = nil, title: String = "", inviter: User, invitees: [User] = [], userids: [User] = []) {
         self.id = id ?? UUID()
         self.server_id = server_id
         self.title = title

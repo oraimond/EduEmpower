@@ -39,7 +39,7 @@ struct GroupsView: View {
             .toolbar {
                 ToolbarItem(placement:.navigationBarTrailing) {
                     Button {
-                        newGroup = varGroup()
+                        newGroup = varGroup(inviter: loggedInUser)
                         showingEditGroupView = true
                     } label: {
                         Image(systemName: "plus")

@@ -13,6 +13,13 @@ class TaskStore: ObservableObject {
     @Published var tasks = [varTask]()
     
     private init() {}
+    var loggedInUser: User {
+            User(
+                fname: AuthStore.shared.fname ?? "",
+                lname: AuthStore.shared.lname ?? "",
+                email: AuthStore.shared.email ?? ""
+            )
+        }
     
     func fetchTasks() {
         TaskGetAction(parameters: ProfileRequest(userid: AuthStore.shared.getUsername())).call() { response in
@@ -21,10 +28,15 @@ class TaskStore: ObservableObject {
                 let members = task.users.map {
                     User(username: $0.userid, fname: $0.fname, lname: $0.lname, email: "email@example.com")
                 }
+                let inviter =  User(
+                    fname: AuthStore.shared.fname ?? "",
+                    lname: AuthStore.shared.lname ?? "",
+                    email: AuthStore.shared.email ?? ""
+                )
                 
                 var group: varGroup?
                 if let group_id = task.group_id {
-                    group = varGroup(server_id: group_id, title: "Group", userids: [])
+                    group = varGroup(server_id: group_id, title: "Group", inviter: inviter, userids: [])
                 }
 
                 

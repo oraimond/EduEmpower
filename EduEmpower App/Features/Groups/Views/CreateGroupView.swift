@@ -84,7 +84,7 @@ struct CreateGroupView: View {
                                 email: inviter.email
                             ))
                             
-                            print("group inviter:", group.inviter?.email)
+                            print("group inviter:", group.inviter.email)
                             
                             let newGroup = varGroup(
                                 id: group.id,
