@@ -29,7 +29,7 @@ def insertGCal(userid, name, start, end):
     user = cursor.fetchone()
     print(user)
     print(user[0])
-    
+
     refresh_token = user[0]
     if refresh_token == "":
         return
@@ -50,7 +50,7 @@ def insertGCal(userid, name, start, end):
     event = {
         "summary": name,
         "start": {
-            'dateTime': start.strftime("%Y-%m-%d %H:%M:%SZ")
+            'dateTime': start.strftime("%Y-%m-%dT%H:%M:%SZ")
         },
         'end': {
             'dateTime': end.strftime("%Y-%m-%dT%H:%M:%SZ"),
