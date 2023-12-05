@@ -43,12 +43,24 @@ struct CreateGroupView: View {
                 }
                 Section(header: Text("Group Members Emails")) {
                         List {
-                            ForEach(invitees, id: \.id) { invitee in
-                                TextField("Email", text: $invitees[getIndex(for: invitee)].email)
-                            }
                             TextField("Add New Member", text: $newMemberEmail, onCommit: {
                                 if !newMemberEmail.isEmpty {
                                     invitees.append(User(fname: "", lname: "", email: newMemberEmail))
+                                }
+                            })
+                            TextField("Add New Member", text: $newMemberEmail1, onCommit: {
+                                if !newMemberEmail1.isEmpty {
+                                    invitees.append(User(fname: "", lname: "", email: newMemberEmail1))
+                                }
+                            })
+                            TextField("Add New Member", text: $newMemberEmail2, onCommit: {
+                                if !newMemberEmail2.isEmpty {
+                                    invitees.append(User(fname: "", lname: "", email: newMemberEmail2))
+                                }
+                            })
+                            TextField("Add New Member", text: $newMemberEmail3, onCommit: {
+                                if !newMemberEmail3.isEmpty {
+                                    invitees.append(User(fname: "", lname: "", email: newMemberEmail3))
                                 }
                             })
                         }
@@ -71,6 +83,8 @@ struct CreateGroupView: View {
                                 lname: inviter.lname,
                                 email: inviter.email
                             ))
+                            
+                            print("group inviter:", group.inviter?.email)
                             
                             let newGroup = varGroup(
                                 id: group.id,
