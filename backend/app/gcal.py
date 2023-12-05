@@ -29,8 +29,7 @@ def insertGCal(userid, name, start, end):
     user = cursor.fetchone()
     print(user)
     print(user[0])
-    if len(user) == 0:
-        return
+    
     refresh_token = user[0]
     if refresh_token == "":
         return
