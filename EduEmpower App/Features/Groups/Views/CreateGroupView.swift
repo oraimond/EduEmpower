@@ -15,7 +15,6 @@ struct CreateGroupView: View {
     @State var inviter: User
     @State var invitees: [User]
     @State var userids: [User]
-    @State var newMemberEmails: [String]
     @State var newMemberEmail: String
     
     @Environment(\.presentationMode) var presentationMode
@@ -27,7 +26,6 @@ struct CreateGroupView: View {
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         self._userids = State(initialValue: group.wrappedValue.userids)
         self._newMemberEmail = State(initialValue: "")
-        self._newMemberEmails = State(initialValue: [])
     }
 
     var body: some View {
@@ -37,64 +35,134 @@ struct CreateGroupView: View {
                     TextField("Group Name", text: $title)
                 }
                 Section(header: Text("Group Members Emails")) {
-                    TextField("Add New Email", text: $newMemberEmail)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                    Button(action: {
-                        if !newMemberEmail.isEmpty {
-                            // Add the new email to the array
-                            invitees.append(User(fname: "", lname: "", email: newMemberEmail))
-                            // Clear the newEmail field for the next input
-                            newMemberEmail = ""
+                        List {
+                            ForEach(invitees, id: \.id) { invitee in
+                                TextField("Email", text: $invitees[getIndex(for: invitee)].email)
+                                    .onChange(of: invitees[getIndex(for: invitee)].email) { newEmail in
+                                        if let user = findUser(with: newEmail) {
+                                            invitees[getIndex(for: invitee)] = user
+                                        }
+                                    }
+                            }
+                            TextField("Add New Member", text: $newMemberEmail)
+                                .onChange(of: newMemberEmail) { newEmail in
+                                    let newUser = User(fname: "", lname: "", email: newEmail)
+                                    invitees.append(newUser)
+                                }
                         }
-                    }) {
-                        Text("Add Email")
                     }
-
+                }
+                .navigationBarTitle("Create group", displayMode: .inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            // Store locally
+                            group.title = title
+                            group.inviter = (User(
+                                fname: authStore.fname ?? "",
+                                lname: authStore.lname ?? "",
+                                email: authStore.email ?? ""
+                            ))
+                            group.invitees = invitees
+                            group.userids.append(User(
+                                fname: inviter.fname,
+                                lname: inviter.lname,
+                                email: inviter.email
+                            ))
+                            
+                            let newGroup = varGroup(
+                                id: group.id,
+                                server_id: group.server_id,
+                                title: title,
+                                inviter: inviter,
+                                invitees: invitees,
+                                userids: group.userids
+                            )
+                            GroupStore.shared.save(newGroup)
+                            
+                            // exit
+                            presentationMode.wrappedValue.dismiss()
+                        }) {
+                            Image(systemName: "checkmark.circle.fill")
+                        }
+                    }
                 }
             }
         }
-        .navigationBarTitle("Create group", displayMode: .inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    // Store locally
-                    group.title = title
-                    group.inviter = (User(
-                        fname: authStore.fname ?? "",
-                        lname: authStore.lname ?? "",
-                        email: authStore.email ?? ""
-                    ))
-                    group.invitees = invitees
-                    group.userids.append(User(
-                        fname: inviter.fname,
-                        lname: inviter.lname,
-                        email: inviter.email
-                    ))
-                    
-
-                    let newGroup = varGroup(
-                        id: group.id,
-                        server_id: group.server_id,
-                        title: title,
-                        inviter: inviter,
-                        invitees: invitees,
-                        userids: group.userids
-                    )
-                    GroupStore.shared.save(newGroup)
-
-                    
-                    // exit
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image(systemName: "checkmark.circle.fill")
-                }
+        
+        private func getIndex(for user: User) -> Int {
+            if let index = invitees.firstIndex(where: { $0.id == user.id }) {
+                return index
             }
+            return 0
+        }
+        
+        // TODO find a user based on email
+        private func findUser(with email: String) -> User? {
+            // Return the corresponding user or nil if not found
+            return nil
         }
     }
-}
-    
-
-    
 
 
+//                    List {
+//                        TextField("Add New Email", text: $newMemberEmail, onCommit: {
+//                            if !newMemberEmail.isEmpty {
+//                                // Add the new email to the array
+//                                invitees.append(User(fname: "", lname: "", email: newMemberEmail))
+//                                // Clear the newEmail field for the next input
+//                                newMemberEmail = ""
+//                            }
+//
+//                        })
+//                            .textFieldStyle(RoundedBorderTextFieldStyle())
+//                    }
+//                    
+//
+//                }
+//            }
+//        }
+//        .navigationBarTitle("Create group", displayMode: .inline)
+//        .toolbar {
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                Button(action: {
+//                    // Store locally
+//                    group.title = title
+//                    group.inviter = (User(
+//                        fname: authStore.fname ?? "",
+//                        lname: authStore.lname ?? "",
+//                        email: authStore.email ?? ""
+//                    ))
+//                    group.invitees = invitees
+//                    group.userids.append(User(
+//                        fname: inviter.fname,
+//                        lname: inviter.lname,
+//                        email: inviter.email
+//                    ))
+//                    
+//
+//                    let newGroup = varGroup(
+//                        id: group.id,
+//                        server_id: group.server_id,
+//                        title: title,
+//                        inviter: inviter,
+//                        invitees: invitees,
+//                        userids: group.userids
+//                    )
+//                    GroupStore.shared.save(newGroup)
+//
+//                    
+//                    // exit
+//                    presentationMode.wrappedValue.dismiss()
+//                }) {
+//                    Image(systemName: "checkmark.circle.fill")
+//                }
+//            }
+//        }
+//    }
+//}
+//    
+//
+//    
+//
+//
