@@ -37,8 +37,6 @@ struct CreateGroupView: View {
                     TextField("Group Name", text: $title)
                 }
                 Section(header: Text("Group Members Emails")) {
-//                    List {
-//       }
                     TextField("Add New Email", text: $newMemberEmail)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
 
@@ -54,47 +52,47 @@ struct CreateGroupView: View {
                     }
 
                 }
-                }
             }
-            .navigationBarTitle("Create group", displayMode: .inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        // Store locally
-                        group.title = title
-                        group.inviter = (User(
-                            fname: authStore.fname ?? "",
-                            lname: authStore.lname ?? "",
-                            email: authStore.email ?? ""
-                        ))
-                        group.invitees = invitees
-                        group.userids.append(User(
-                            fname: inviter.fname,
-                            lname: inviter.lname,
-                            email: inviter.email
-                        ))
-                        
+        }
+        .navigationBarTitle("Create group", displayMode: .inline)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    // Store locally
+                    group.title = title
+                    group.inviter = (User(
+                        fname: authStore.fname ?? "",
+                        lname: authStore.lname ?? "",
+                        email: authStore.email ?? ""
+                    ))
+                    group.invitees = invitees
+                    group.userids.append(User(
+                        fname: inviter.fname,
+                        lname: inviter.lname,
+                        email: inviter.email
+                    ))
+                    
 
-                        let newGroup = varGroup(
-                            id: group.id,
-                            server_id: group.server_id,
-                            title: title,
-                            inviter: inviter,
-                            invitees: invitees,
-                            userids: group.userids
-                        )
-                        GroupStore.shared.save(newGroup)
+                    let newGroup = varGroup(
+                        id: group.id,
+                        server_id: group.server_id,
+                        title: title,
+                        inviter: inviter,
+                        invitees: invitees,
+                        userids: group.userids
+                    )
+                    GroupStore.shared.save(newGroup)
 
-                        
-                        // exit
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Image(systemName: "checkmark.circle.fill")
-                    }
+                    
+                    // exit
+                    presentationMode.wrappedValue.dismiss()
+                }) {
+                    Image(systemName: "checkmark.circle.fill")
                 }
             }
         }
     }
+}
     
 
     
