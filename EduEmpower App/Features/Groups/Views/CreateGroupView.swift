@@ -16,6 +16,9 @@ struct CreateGroupView: View {
     @State var invitees: [User]
     @State var userids: [User]
     @State var newMemberEmail: String
+    @State var newMemberEmail1: String
+    @State var newMemberEmail2: String
+    @State var newMemberEmail3: String
     
     @Environment(\.presentationMode) var presentationMode
 
@@ -26,6 +29,10 @@ struct CreateGroupView: View {
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         self._userids = State(initialValue: group.wrappedValue.userids)
         self._newMemberEmail = State(initialValue: "")
+        self._newMemberEmail1 = State(initialValue: "")
+        self._newMemberEmail2 = State(initialValue: "")
+        self._newMemberEmail3 = State(initialValue: "")
+
     }
 
     var body: some View {
@@ -38,17 +45,12 @@ struct CreateGroupView: View {
                         List {
                             ForEach(invitees, id: \.id) { invitee in
                                 TextField("Email", text: $invitees[getIndex(for: invitee)].email)
-                                    .onChange(of: invitees[getIndex(for: invitee)].email) { newEmail in
-                                        if let user = findUser(with: newEmail) {
-                                            invitees[getIndex(for: invitee)] = user
-                                        }
-                                    }
                             }
-                            TextField("Add New Member", text: $newMemberEmail)
-                                .onChange(of: newMemberEmail) { newEmail in
-                                    let newUser = User(fname: "", lname: "", email: newEmail)
-                                    invitees.append(newUser)
+                            TextField("Add New Member", text: $newMemberEmail, onCommit: {
+                                if !newMemberEmail.isEmpty {
+                                    invitees.append(User(fname: "", lname: "", email: newMemberEmail))
                                 }
+                            })
                         }
                     }
                 }
