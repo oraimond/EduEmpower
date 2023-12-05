@@ -61,6 +61,7 @@ def insertGCal(userid, name, start, end):
     auth_header = {'Authorization': f'Bearer {creds["access_token"]}'}
     try:
         response = requests.post(url=requestURL, json=event, headers=auth_header)
+        print(response.body)
     except Exception as e:
         print(e)
 
