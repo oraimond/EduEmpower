@@ -36,27 +36,24 @@ struct CreateGroupView: View {
                 Section(header: Text("Group Name")) {
                     TextField("Group Name", text: $title)
                 }
-                
                 Section(header: Text("Group Members Emails")) {
 //                    List {
 //       }
+                    TextField("Add New Email", text: $newMemberEmail)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
 
-                    
-                        TextField("Add New Email", text: $newMemberEmail)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-
-                        Button(action: {
-                            if !newMemberEmail.isEmpty {
-                                // Add the new email to the array
-                                invitees.append(User(fname: "", lname: "", email: newMemberEmail))
-                                // Clear the newEmail field for the next input
-                                newMemberEmail = ""
-                            }
-                        }) {
-                            Text("Add Email")
+                    Button(action: {
+                        if !newMemberEmail.isEmpty {
+                            // Add the new email to the array
+                            invitees.append(User(fname: "", lname: "", email: newMemberEmail))
+                            // Clear the newEmail field for the next input
+                            newMemberEmail = ""
                         }
-
+                    }) {
+                        Text("Add Email")
                     }
+
+                }
                 }
             }
             .navigationBarTitle("Create group", displayMode: .inline)
