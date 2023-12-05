@@ -11,37 +11,50 @@ struct CreateGroupView: View {
     @ObservedObject var authStore: AuthStore = AuthStore.shared
     @Binding var group: varGroup // Pass in the selected group
     
-    @State var groupName: String
+    @State var title: String
     @State var inviter: User
     @State var invitees: [User]
     @State var userids: [User]
+    @State var newMemberEmails: [String]
     @State var newMemberEmail: String
     
     @Environment(\.presentationMode) var presentationMode
 
     init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
-        self._groupName = State(initialValue: group.wrappedValue.groupName)
+        self._title = State(initialValue: group.wrappedValue.title)
         self._inviter = State(initialValue: group.wrappedValue.inviter ?? User(fname: "", lname: "", email: ""))
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         self._userids = State(initialValue: group.wrappedValue.userids)
         self._newMemberEmail = State(initialValue: "")
+        self._newMemberEmails = State(initialValue: [])
     }
 
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Group Name")) {
-                    TextField("Group Name", text: $groupName)
+                    TextField("Group Name", text: $title)
                 }
                 
                 Section(header: Text("Group Members Emails")) {
-                    List {
-                        ForEach(invitees, id: \.id) { invitee in
-                            TextField("Email", text: $invitees[getIndex(for: invitee)].email)
+//                    List {
+//       }
 
+                    
+                        TextField("Add New Email", text: $newMemberEmail)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+
+                        Button(action: {
+                            if !newMemberEmail.isEmpty {
+                                // Add the new email to the array
+                                invitees.append(User(fname: "", lname: "", email: newMemberEmail))
+                                // Clear the newEmail field for the next input
+                                newMemberEmail = ""
+                            }
+                        }) {
+                            Text("Add Email")
                         }
-                        TextField("Add New Member", text: $newMemberEmail)
 
                     }
                 }
@@ -51,7 +64,7 @@ struct CreateGroupView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         // Store locally
-                        group.groupName = groupName
+                        group.title = title
                         group.inviter = (User(
                             fname: authStore.fname ?? "",
                             lname: authStore.lname ?? "",
@@ -68,7 +81,7 @@ struct CreateGroupView: View {
                         let newGroup = varGroup(
                             id: group.id,
                             server_id: group.server_id,
-                            groupName: groupName,
+                            title: title,
                             inviter: inviter,
                             invitees: invitees,
                             userids: group.userids
@@ -86,12 +99,7 @@ struct CreateGroupView: View {
         }
     }
     
-    private func getIndex(for user: User) -> Int {
-        if let index = invitees.firstIndex(where: { $0.id == user.id }) {
-            return index
-        }
-        return 0
-    }
+
     
 
-}
+

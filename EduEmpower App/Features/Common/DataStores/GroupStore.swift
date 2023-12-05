@@ -34,7 +34,7 @@ class GroupStore: ObservableObject {
                 self.save(varGroup(
                     id: UUID(),
                     server_id: group.groupid,
-                    groupName: group.title,
+                    title: group.title,
                     inviter: inviter,
                     invitees: invitees,
                     userids: userids
@@ -67,7 +67,7 @@ class GroupStore: ObservableObject {
                 if let server_id = group.server_id {
                     GroupPutAction(parameters: GroupPutRequest(
                         groupid: server_id,
-                        title: group.groupName,
+                        title: group.title,
                         inviter: AuthStore.shared.getUsername(),
                         invitees: [],
                         userids: [AuthStore.shared.getUsername()]
@@ -81,7 +81,7 @@ class GroupStore: ObservableObject {
                 }
             } else {
                 GroupPostAction(parameters: GroupPostRequest(
-                    title: group.groupName,
+                    title: group.title,
                     inviter: AuthStore.shared.getUsername(),
                     invitees: [],
                     userids: [AuthStore.shared.getUsername()]

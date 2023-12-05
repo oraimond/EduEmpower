@@ -17,9 +17,9 @@ class GroupViewModel: ObservableObject {
 //    ]
 //
 //    lazy var dummyGroups: [varGroup] = [
-//        varGroup(groupName: "Chemistry Group", userids: [dummyUsers[0], dummyUsers[1]]),
-//        varGroup(groupName: "Physics Group", userids: [dummyUsers[2], dummyUsers[3]]),
-//        varGroup(groupName: "History Group", userids: [dummyUsers[3], dummyUsers[4]])
+//        varGroup(title: "Chemistry Group", userids: [dummyUsers[0], dummyUsers[1]]),
+//        varGroup(title: "Physics Group", userids: [dummyUsers[2], dummyUsers[3]]),
+//        varGroup(title: "History Group", userids: [dummyUsers[3], dummyUsers[4]])
 //    ]
 //    
 //    lazy var dummyTasks: [varTask] = [

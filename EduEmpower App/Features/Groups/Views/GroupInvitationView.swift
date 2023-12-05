@@ -25,11 +25,13 @@ struct GroupInvitationView: View {
             List {
                 Section(header: Text("Invitations")) {
                     ForEach(groupsStore.groups.filter { group in
-                        group.inviter != loggedInUser &&
-                        group.invitees.contains(loggedInUser)
+                        group.inviter?.email != loggedInUser.email ||
+                        group.invitees.contains{ invitee in
+                            invitee.email == loggedInUser.email
+                        }
                     }, id: \.id) { group in
                         VStack(alignment: .leading) {
-                            Text(group.inviter!.fname + " invites you to join " + group.groupName)
+                            Text(group.inviter!.fname + " invites you to join " + group.title)
                                 .font(.subheadline)
                             HStack {
                                 Button(action: {

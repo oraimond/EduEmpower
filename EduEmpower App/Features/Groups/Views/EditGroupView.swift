@@ -11,7 +11,7 @@ struct EditGroupView: View {
     @ObservedObject var authStore: AuthStore = AuthStore.shared
     @Binding var group: varGroup // Pass in the selected group
 
-    @State var groupName: String
+    @State var title: String
     @State var inviter: User
     @State var invitees: [User]
     @State var userids: [User]
@@ -29,7 +29,7 @@ struct EditGroupView: View {
 
     init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
-        self._groupName = State(initialValue: group.wrappedValue.groupName)
+        self._title = State(initialValue: group.wrappedValue.title)
         self._inviter = State(initialValue: group.wrappedValue.inviter ?? User(username: "", fname: "", lname: "", email: ""))
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         self._userids = State(initialValue: group.wrappedValue.userids)
@@ -41,7 +41,7 @@ struct EditGroupView: View {
             Form {
                 //only allow editing group name for simplification
                 Section(header: Text("Group Name")) {
-                    TextField("Group Name", text: $groupName)
+                    TextField("Group Name", text: $title)
                 }
                 
                 Section(header: Text("Group Members Emails")) {
@@ -74,14 +74,14 @@ struct EditGroupView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         // Store locally
-                        group.groupName = groupName
+                        group.title = title
                         
                         // send to database
                         // TODO
                         let newGroup = varGroup(
                             id: group.id,
                             server_id: group.server_id,
-                            groupName: groupName,
+                            title: title,
                             inviter: inviter,
                             invitees: invitees,
                             userids: group.userids

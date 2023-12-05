@@ -24,7 +24,7 @@ class TaskStore: ObservableObject {
                 
                 var group: varGroup?
                 if let group_id = task.group_id {
-                    group = varGroup(server_id: group_id, groupName: "Group", userids: [])
+                    group = varGroup(server_id: group_id, title: "Group", userids: [])
                 }
 
                 

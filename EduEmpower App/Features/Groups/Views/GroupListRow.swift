@@ -15,7 +15,7 @@ struct GroupListRow: View {
     var body: some View {
         NavigationLink(destination: GroupTasksView (group: group, task: $task)) {
             VStack(alignment: .leading) {
-                Text(group.groupName)
+                Text(group.title)
                     .font(.headline)
             }
         }
