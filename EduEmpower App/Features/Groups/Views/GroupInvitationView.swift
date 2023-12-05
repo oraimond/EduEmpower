@@ -25,7 +25,6 @@ struct GroupInvitationView: View {
             List {
                 Section(header: Text("Invitations")) {
                     ForEach(groupsStore.groups.filter { group in
-                        group.inviter.email != loggedInUser.email ||
                         group.invitees.contains{ invitee in
                             invitee.email == loggedInUser.email
                         }
