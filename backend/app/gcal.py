@@ -29,8 +29,7 @@ def insertGCal(userid, name, start, end):
     user = cursor.fetchone()
     print(user)
     print(user[0])
-    if len(user) == 0:
-        return
+
     refresh_token = user[0]
     if refresh_token == "":
         return
@@ -51,7 +50,7 @@ def insertGCal(userid, name, start, end):
     event = {
         "summary": name,
         "start": {
-            'dateTime': start.strftime("%Y-%m-%d %H:%M:%SZ")
+            'dateTime': start.strftime("%Y-%m-%dT%H:%M:%SZ")
         },
         'end': {
             'dateTime': end.strftime("%Y-%m-%dT%H:%M:%SZ"),
@@ -62,6 +61,7 @@ def insertGCal(userid, name, start, end):
     auth_header = {'Authorization': f'Bearer {creds["access_token"]}'}
     try:
         response = requests.post(url=requestURL, json=event, headers=auth_header)
+        print(response.body)
     except Exception as e:
         print(e)
 
