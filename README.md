@@ -7,6 +7,6 @@
 ![Elevator Pitch](https://github.com/oraimond/EduEmpower/blob/main/images/68747470733a2f2f692e696d6775722e636f6d2f50466e69785a462e706e67.png?raw=true) <!-- MUST be placed in user-images.githubusercontent.com -->
 ![Team](https://github.com/oraimond/EduEmpower/blob/main/images/68747470733a2f2f692e696d6775722e636f6d2f654b6c633674752e706e67.png?raw=true)
 
-[video_page]: ____
+[video_page]: https://youtu.be/nl_bfxst3Eo
 [wiki_page]: https://github.com/oraimond/EduEmpower/wiki
 [agile_page]: https://trello.com/b/OJnS6Zy2/eduempower
