@@ -4,7 +4,7 @@
 |:-----:|:-----:|:--------:|
 |[<img src="https://eecs441.eecs.umich.edu/img/admin/video.png">][video_page]|[<img src="https://eecs441.eecs.umich.edu/img/admin/wiki.png">][wiki_page]|[<img src="https://eecs441.eecs.umich.edu/img/admin/trello.png">][agile_page]|
 
-![Elevator Pitch](https://i.imgur.com/PFnixZF.png) <!-- MUST be placed in user-images.githubusercontent.com -->
+![Elevator Pitch]([https://i.imgur.com/PFnixZF.png](https://github.com/oraimond/EduEmpower/blob/main/images/68747470733a2f2f692e696d6775722e636f6d2f50466e69785a462e706e67.png?raw=true)) <!-- MUST be placed in user-images.githubusercontent.com -->
 ![Team](https://i.imgur.com/eKlc6tu.png)
 
 [video_page]: ____
