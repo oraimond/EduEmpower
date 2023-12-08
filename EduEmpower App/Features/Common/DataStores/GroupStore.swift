@@ -64,13 +64,17 @@ class GroupStore: ObservableObject {
             }
         } else {
             if let index = groups.firstIndex(where: { $0.id == group.id}) {
+                print("Editing group")
                 if let server_id = group.server_id {
+                    // Extract emails from the invitees array
+                    let inviteeEmails = group.invitees.map { $0.email }
+                    let memberEmails = group.userids.map {$0.email }
                     GroupPutAction(parameters: GroupPutRequest(
                         groupid: server_id,
                         title: group.title,
                         inviter: AuthStore.shared.getUsername(),
-                        invitees: [],
-                        userids: [AuthStore.shared.getUsername()]
+                        invitees: inviteeEmails,
+                        userids: memberEmails
                     )).call() { response in
                         if response.id == server_id {
                             self.groups[index] = group
@@ -80,11 +84,17 @@ class GroupStore: ObservableObject {
                     print("Error updating group")
                 }
             } else {
+                print("creating group")
+                // Extract emails from the invitees array
+                let inviteeEmails = group.invitees.map { $0.email }
+                let memberEmails = group.userids.map {$0.email }
+                print("invitees emails: ", inviteeEmails)
+                print("member emails: ", memberEmails)
                 GroupPostAction(parameters: GroupPostRequest(
                     title: group.title,
                     inviter: AuthStore.shared.getUsername(),
-                    invitees: [],
-                    userids: [AuthStore.shared.getUsername()]
+                    invitees: inviteeEmails,
+                    userids: memberEmails
                 )).call() { response in
                     var groupCopy = group
                     groupCopy.server_id = response.id

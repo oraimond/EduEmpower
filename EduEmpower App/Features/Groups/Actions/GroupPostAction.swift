@@ -11,6 +11,7 @@ struct GroupPostAction {
     var parameters: GroupPostRequest
     
     func call(completion: @escaping (GroupResponse) -> Void) {
+        print("group post action running")
         let path = "/group/"
         
         guard let url = URL(string: APIConstants.base_url + path) else {

@@ -25,7 +25,7 @@ struct CreateGroupView: View {
     init(group: Binding<varGroup>) {    // Initialize state variables with existing group properties
         self._group = group
         self._title = State(initialValue: group.wrappedValue.title)
-        self._inviter = State(initialValue: group.wrappedValue.inviter ?? User(fname: "", lname: "", email: ""))
+        self._inviter = State(initialValue: group.wrappedValue.inviter)
         self._invitees = State(initialValue: group.wrappedValue.invitees)
         self._userids = State(initialValue: group.wrappedValue.userids)
         self._newMemberEmail = State(initialValue: "")
@@ -43,26 +43,10 @@ struct CreateGroupView: View {
                 }
                 Section(header: Text("Group Members Emails")) {
                         List {
-                            TextField("Add New Member", text: $newMemberEmail, onCommit: {
-                                if !newMemberEmail.isEmpty {
-                                    invitees.append(User(fname: "", lname: "", email: newMemberEmail))
-                                }
-                            })
-                            TextField("Add New Member", text: $newMemberEmail1, onCommit: {
-                                if !newMemberEmail1.isEmpty {
-                                    invitees.append(User(fname: "", lname: "", email: newMemberEmail1))
-                                }
-                            })
-                            TextField("Add New Member", text: $newMemberEmail2, onCommit: {
-                                if !newMemberEmail2.isEmpty {
-                                    invitees.append(User(fname: "", lname: "", email: newMemberEmail2))
-                                }
-                            })
-                            TextField("Add New Member", text: $newMemberEmail3, onCommit: {
-                                if !newMemberEmail3.isEmpty {
-                                    invitees.append(User(fname: "", lname: "", email: newMemberEmail3))
-                                }
-                            })
+                            TextField("Add New Member", text: $newMemberEmail)
+                            TextField("Add New Member", text: $newMemberEmail1)
+                            TextField("Add New Member", text: $newMemberEmail2)
+                            TextField("Add New Member", text: $newMemberEmail3)
                         }
                     }
                 }
@@ -71,6 +55,22 @@ struct CreateGroupView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button(action: {
                             // Store locally
+                            
+                            if !newMemberEmail.isEmpty {
+                                invitees.append(User(fname: "", lname: "", email: newMemberEmail))
+                            }
+                            if !newMemberEmail1.isEmpty {
+                                invitees.append(User(fname: "", lname: "", email: newMemberEmail1))
+                            }
+                            if !newMemberEmail2.isEmpty {
+                                invitees.append(User(fname: "", lname: "", email: newMemberEmail2))
+                            }
+                            if !newMemberEmail3.isEmpty {
+                                invitees.append(User(fname: "", lname: "", email: newMemberEmail3))
+                            }
+                            
+                            
+                            
                             group.title = title
                             group.inviter = (User(
                                 fname: authStore.fname ?? "",
@@ -78,13 +78,10 @@ struct CreateGroupView: View {
                                 email: authStore.email ?? ""
                             ))
                             group.invitees = invitees
-                            group.userids.append(User(
-                                fname: inviter.fname,
-                                lname: inviter.lname,
-                                email: inviter.email
-                            ))
+                            group.userids.append(group.inviter)
                             
-                            print("group inviter:", group.inviter.email)
+                            print("group inviter:", group.inviter)
+                            print("group members:", group.userids)
                             
                             let newGroup = varGroup(
                                 id: group.id,
@@ -95,7 +92,8 @@ struct CreateGroupView: View {
                                 userids: group.userids
                             )
                             GroupStore.shared.save(newGroup)
-                            
+                            print("invitation created")
+                            print("Groups saved: ", GroupStore.shared.groups.count)
                             // exit
                             presentationMode.wrappedValue.dismiss()
                         }) {
