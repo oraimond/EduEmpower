@@ -52,12 +52,12 @@ struct GroupInvitationView: View {
                                 }
                                 .padding(.top, 10)
                                 Button(action: {
-                                    // Delete from Invitations
+                                    // Delete from Invitees
                                     var mutableGroup = group
                                     mutableGroup.invitees = mutableGroup.invitees.filter { invitee in
                                         invitee != loggedInUser
                                     }
-                                    GroupStore.shared.save(mutableGroup)
+                                    GroupStore.shared.save(mutableGroup, fetching: true)
                                 }) {
                                     Text("Decline")
                                         .font(.caption)
