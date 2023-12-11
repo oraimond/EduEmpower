@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct InsightListRow: View {
-    let insight: varInsight
+    let insight: String
     
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(insight.title)
+            Text("Insight")
                 .font(.headline)
-            Text(insight.insightDescription)
+            Text(insight)
                 .font(.footnote)
         }
     }

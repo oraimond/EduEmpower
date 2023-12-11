@@ -48,23 +48,23 @@ def postgroupsDB(request):
     emails = json_data['invitees']
     cursor = connection.cursor()
     invitees = []
-    for user in emails:
-        query = f"""
-        SELECT userid FROM USERS WHERE email = \'{user}\';
-        """
-        #userid = cursor.execute(query) .fetchone()
-        #invitees.append(userid['userid'])
+    # for user in emails:
+    #     query = f"""
+    #     SELECT userid FROM USERS WHERE email = \'{user}\';
+    #     """
+    #     #userid = cursor.execute(query) .fetchone()
+    #     #invitees.append(userid['userid'])
 
-        cursor.execute(query)
-        userid = cursor.fetchone()
-        invitees.append(userid[0])
-        userid = userid[0]
-        query = f"""
-            UPDATE users
-            SET group_invitations = ARRAY_APPEND(group_invitations, userid)
-            WHERE userid =\'{userid}\';
-            """
-        cursor.execute(query)
+    #     cursor.execute(query)
+    #     userid = cursor.fetchone()
+    #     invitees.append(userid[0])
+    #     userid = userid[0]
+    #     query = f"""
+    #         UPDATE users
+    #         SET group_invitations = ARRAY_APPEND(group_invitations, userid)
+    #         WHERE userid =\'{userid}\';
+    #         """
+    #     cursor.execute(query)
 
 
 

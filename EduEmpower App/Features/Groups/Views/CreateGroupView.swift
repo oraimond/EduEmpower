@@ -87,7 +87,7 @@ struct CreateGroupView: View {
                                 id: group.id,
                                 server_id: group.server_id,
                                 title: title,
-                                inviter: inviter,
+                                inviter: group.inviter,
                                 invitees: invitees,
                                 userids: group.userids
                             )

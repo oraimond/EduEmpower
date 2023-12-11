@@ -34,6 +34,7 @@ struct GroupPostAction {
         let group = URLSession.shared.dataTask(with: request) {
             data, _, error in
             if let data = data {
+                print("Raw Data: \(String(data: data, encoding: .utf8) ?? "nil")")
                 do {
                     let response = try JSONDecoder().decode(GroupResponse.self, from: data)
                     completion(response)

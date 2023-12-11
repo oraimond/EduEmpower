@@ -19,9 +19,9 @@ struct StatisticsView: View {
     @State private var filter = DeviceActivityFilter(segment: .daily(during: DateInterval(start: Date(), end: Date())))
     
     @ObservedObject var viewModel: StatisticsViewModel = StatisticsViewModel()
+
     
-    @State var newInsight: varInsight = varInsight(title: "", insightDescription: "")
-    @State var newSuggestion: varSuggestion = varSuggestion(title: "", suggestionDescription: "")
+    @State var insight: StatGetResponse
     
     var body: some View {
         VStack {
@@ -37,32 +37,42 @@ struct StatisticsView: View {
             
             
             VStack {
-                // TODO if the ratio for social media greater than focus (show negatives) else (show positives)
-                // Check if the "Focus" app value is less than 50
-                if let focusApp = viewModel.dummyStats.first(where: { $0.app == "Focus" }), focusApp.value < 50 {
-                    // Show negative insights
-                    List(viewModel.negativeInsights, id: \.id) { insight in
-                        InsightListRow(insight: insight)
-                    }
-                    List(viewModel.negativeSuggestions, id: \.id) { suggestion in
-                        SuggestionListRow(suggestion: suggestion)
-                    }
-                } else {
-                    // Show positive insights
-                    List(viewModel.positiveInsights, id: \.id) { insight in
-                        InsightListRow(insight: insight)
-                    }
-                    List(viewModel.positiveSuggestions, id: \.id) { suggestion in
-                        SuggestionListRow(suggestion: suggestion)
-                    }
-                }
-            }
-           
+                InsightListRow(insight: insight.insight)
+                SuggestionListRow(suggestion: insight.suggestion)
+             }
         }
+        .onAppear {
+            generateAndDisplayInsights()
+        }
+    }
+    func generateAndDisplayInsights() {
+        let path = "/generate_insights/"
+        guard let url = URL(string: APIConstants.base_url + path) else {
+            print("URL Error")
+            return
+        }
+        var request = URLRequest(url: url)
+        // not sure
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(AuthStore.shared.getToken())", forHTTPHeaderField: "Authorization")
+        request.httpMethod = "GET"
+
+        URLSession.shared.dataTask(with: request) { data, _, error in
+            if let data = data {
+                do {
+                    let response = try JSONDecoder().decode(StatGetResponse.self, from: data)
+                    DispatchQueue.main.async {
+                        insight = response
+                    }
+                } catch let error {
+                    print("Failed to decode insights, error: \(error)")
+                }
+            } else if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }.resume()
     }
 }
 
-#Preview {
-    StatisticsView()
-}
+
 

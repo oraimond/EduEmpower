@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct SuggestionListRow: View {
-    let suggestion: varSuggestion
+    let suggestion: String
     
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(suggestion.title)
+            Text("Suggestion")
                 .font(.headline)
-            Text(suggestion.suggestionDescription)
+            Text(suggestion)
                 .font(.footnote)
         }
     }
