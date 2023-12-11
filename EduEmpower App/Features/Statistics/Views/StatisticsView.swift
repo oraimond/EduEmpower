@@ -21,7 +21,7 @@ struct StatisticsView: View {
     @ObservedObject var viewModel: StatisticsViewModel = StatisticsViewModel()
 
     
-    @State var insight: StatGetResponse
+    @State private var insight: StatGetResponse?
     
     var body: some View {
         VStack {
@@ -37,8 +37,13 @@ struct StatisticsView: View {
             
             
             VStack {
-                InsightListRow(insight: insight.insight)
-                SuggestionListRow(suggestion: insight.suggestion)
+                if let insight = insight {
+                    InsightListRow(insight: insight.insight)
+                    SuggestionListRow(suggestion: insight.suggestion)
+                } else {
+                    Text("Loading insights...")
+                        .padding()
+                }
              }
         }
         .onAppear {
