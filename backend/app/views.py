@@ -8,8 +8,9 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import UserStatistics, Insight, Suggestion
-import openai
+from openai import OpenAI
+
+client = OpenAI(api_key='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')
 
 # TASK API CALLS
 
@@ -125,7 +126,7 @@ def get_user_statistics(request):
                        'Focus': 10, 'Snapchat': 20, 'YouTube': 15}
     return Response(user_statistics)
 
-
+@csrf_exempt
 @api_view(['POST'])
 def generate_insights(request):
     # Extract user statistics from the request
@@ -135,23 +136,15 @@ def generate_insights(request):
     insight_prompt = f"Generate an insight based on user statistics: {user_statistics}, the insights will be shown on the Focus app which help the user to focus on tasks"
     suggestion_prompt = f"Generate an suggestion based on user statistics: {user_statistics}, the suggestions need to help the user to focus on tasks rather than using other apps"
     # Call OpenAI API to get insights
-    openai.api_key = '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'
-    insight_response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=insight_prompt,
-        max_tokens=150
-    )
-    suggestion_response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=suggestion_prompt,
-        max_tokens=150
-    )
+    insight_response = client.completions.create(
+    prompt=insight_prompt,
+    max_tokens=150, model="davinci-002")
+    suggestion_response = client.completions.create(
+    prompt=suggestion_prompt,
+    max_tokens=150,model="davinci-002")
 
     # Extract insights from the OpenAI API response
     insight = insight_response['choices'][0]['text']
     suggestion = suggestion_response['choices'][0]['text']
     # Save insights to the database
-    Insight.objects.create(content=insight)
-    Suggestion.objects.create(content=suggestion)
-
     return JsonResponse({'insight': insight, 'suggestion': suggestion})
