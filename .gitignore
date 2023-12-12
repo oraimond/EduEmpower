@@ -3,7 +3,7 @@
 
 # EECS441 chatterd binary
 chatterd/chatterd
-
+backend/app/client_secret.json
 # macOS files
 .DS_Store
 .DS_Store?
