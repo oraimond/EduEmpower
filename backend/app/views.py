@@ -129,7 +129,7 @@ def get_user_statistics(request):
 @api_view(['POST'])
 def generate_insights(request):
     # Extract user statistics from the request
-    user_statistics = request.data['user_statistics']
+    user_statistics = request.data.get('user_statistics', {})
 
     # Use the user statistics to create a prompt for ChatGPT
     insight_prompt = f"Generate an insight based on user statistics: {user_statistics}, the insights will be shown on the Focus app which help the user to focus on tasks"

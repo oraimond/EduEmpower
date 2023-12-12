@@ -39,5 +39,5 @@ urlpatterns = [
     path('/user/profile', views.getProfileInfo, name='getProfileInfo'),
     path('user-statistics/', views.get_user_statistics,
          name='get_user_statistics'),
-    path('generate-insights/', views.generate_insights, name='generate_insights'),
+    path('generate-insights/', views.generate_insights, name='generate_insights')
 ]

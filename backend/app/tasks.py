@@ -9,6 +9,7 @@ import app.users
 from routing.celery import app
 from app.gcal import updateCalendar
 
+
 @app.task
 def updating():
     cursor = connection.cursor()
@@ -17,19 +18,20 @@ def updating():
     for row in rows:
         updateCalendar(row[0])
 
+
 def gettasksDB(request):
     """
     TODO: Edit function so that it returns tasks for authenticated user.
-    User authentication must be completed first""" # need to search the table for tasks that match the userid ?????
-
+    User authentication must be completed first"""  # need to search the table for tasks that match the userid ?????
 
     # token = request.headers["authorization"]
     username = json.loads(request.body)['userid']
     # do authorization ?????
-    
+
     cursor = connection.cursor()
-    #cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
-    cursor.execute('SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE (%s) = ANY(userids);', (username,))
+    # cursor.execute('SELECT title, duration, due_date, description, userids, scheduled FROM tasks ORDER BY userids DESC;')
+    cursor.execute(
+        'SELECT title, duration, due_date, description, userids, group_id, scheduled, taskid FROM tasks WHERE (%s) = ANY(userids);', (username,))
     rows = cursor.fetchall()
 
     response = []
@@ -46,19 +48,22 @@ def gettasksDB(request):
 
         for user in row[4]:
             cursor = connection.cursor()
-            cursor.execute('SELECT userid, fname, lname, email FROM users WHERE (%s) = userid;', (user,))
+            cursor.execute(
+                'SELECT userid, fname, lname, email FROM users WHERE (%s) = userid;', (user,))
             rows = cursor.fetchall()
 
             curr_user = rows[0]
             # response['userid'] = curr_user[0]
             # response['first_name'] = curr_user[1]
             # response['last_name'] = curr_user[2]
-            # response['email'] = curr_user[3]    
-            tempdict['users'].append({"userid": curr_user[0], "fname": curr_user[1], "lname": curr_user[2]})
+            # response['email'] = curr_user[3]
+            tempdict['users'].append(
+                {"userid": curr_user[0], "fname": curr_user[1], "lname": curr_user[2]})
 
         response.append(tempdict)
 
     return JsonResponse(response, safe=False)
+
 
 def posttasksDB(request):
     """
@@ -66,7 +71,7 @@ def posttasksDB(request):
     Postgres table needs to be updated with assigned_users and group.
     taskid isn't passed in the request, it is generated here or in postgres. 
     """  # generate the taskid !!!!!!!!
-    
+
     if request.method != 'POST':
         return HttpResponse(status=404)
     json_data = json.loads(request.body)
@@ -77,13 +82,14 @@ def posttasksDB(request):
     userids = json_data['userids']
     scheduled = json_data['scheduled']
     cursor = connection.cursor()
-    #cursor.execute('INSERT INTO tasks (tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
-           #        '(%s, %s, %s, %s, %s, %s );', (tasktitle, groupid, timeneeded, duedate, description, userid))
+    # cursor.execute('INSERT INTO tasks (tasktitle, groupid, timeneeded, duedate, description, userid) VALUES '
+    #        '(%s, %s, %s, %s, %s, %s );', (tasktitle, groupid, timeneeded, duedate, description, userid))
     cursor.execute('INSERT INTO tasks (title, duration, due_date, description, userids, scheduled) VALUES '
                    '(%s, %s, %s, %s, %s, %s) RETURNING taskid;', (title, duration, due_date, description, userids, scheduled))
 
     taskid = cursor.fetchone()[0]
     return JsonResponse({'id': taskid})
+
 
 def edittasksDB(request, taskid):
     """
@@ -102,23 +108,22 @@ def edittasksDB(request, taskid):
     cursor = connection.cursor()
 
     cursor.execute('UPDATE tasks SET title = %s, duration=%s, due_date=%s, description=%s, userids=%s, scheduled=%s '
-                   'WHERE taskid = %s;', (title, duration, due_date, description, userids, scheduled, taskid)
-                   ) # this might need to be edited !!!!!!!!
-                   
-    
+                   'WHERE taskid = %s;', (title, duration, due_date,
+                                          description, userids, scheduled, taskid)
+                   )  # this might need to be edited !!!!!!!!
+
     return JsonResponse({'id': taskid})
+
 
 def deletetaskDB(request, taskid):
     """
     TODO: Implement this function
-    """ #change this to a DELETE staements where it searches for the specifc task in table
+    """  # change this to a DELETE staements where it searches for the specifc task in table
 
     if request.method != 'DELETE':
         return HttpResponse(status=404)
 
     cursor = connection.cursor()
     cursor.execute(f'DELETE FROM tasks WHERE taskid = {taskid};')
-    
-    
-    
-    return JsonResponse({"message": "Task successfully deleted", "taskid": taskid })
+
+    return JsonResponse({"message": "Task successfully deleted", "taskid": taskid})

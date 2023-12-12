@@ -14,6 +14,11 @@ extension DeviceActivityReport.Context {
     static let pieChart = Self("pieChart")
 }
 
+struct StatEntry: Encodable {
+    let app: String
+    let value: CGFloat
+}
+
 struct StatisticsView: View {
     @State private var context: DeviceActivityReport.Context = .pieChart
     @State private var filter = DeviceActivityFilter(segment: .daily(during: DateInterval(start: Date(), end: Date())))
@@ -47,8 +52,9 @@ struct StatisticsView: View {
              }
         }
         .onAppear {
-            generateAndDisplayInsights()
-        }
+            DispatchQueue.main.async {
+                generateAndDisplayInsights()
+            }        }
     }
     func generateAndDisplayInsights() {
         let path = "/generate_insights/"
@@ -56,18 +62,36 @@ struct StatisticsView: View {
             print("URL Error")
             return
         }
+        let dummyStats = viewModel.dummyStats
+        
+        let statsForBackend = dummyStats.map { entry in
+            return StatEntry(app: entry.app, value: entry.value)
+        }
         var request = URLRequest(url: url)
         // not sure
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("Bearer \(AuthStore.shared.getToken())", forHTTPHeaderField: "Authorization")
-        request.httpMethod = "GET"
+        request.httpMethod = "POST"
+        
+        do {
+            // Check if viewModel.dummyStats is Encodable
+            let jsonData = try JSONEncoder().encode(statsForBackend)
+            request.httpBody = jsonData
+        } catch {
+            print("Failed to serialize dummy stats: \(error)")
+            return
+        }
 
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let httpResponse = response as? HTTPURLResponse {
+                print("Status Code: \(httpResponse.statusCode)")
+            }
             if let data = data {
                 do {
+                    print(String(data: data, encoding: .utf8) ?? "Empty Data")
                     let response = try JSONDecoder().decode(StatGetResponse.self, from: data)
                     DispatchQueue.main.async {
-                        insight = response
+                        self.insight = response
                     }
                 } catch let error {
                     print("Failed to decode insights, error: \(error)")
