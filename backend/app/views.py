@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from openai import OpenAI
 
-client = OpenAI(api_key='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')
+client = OpenAI(api_key='')
 
 # TASK API CALLS
 
@@ -144,7 +144,7 @@ def generate_insights(request):
     max_tokens=150,model="davinci-002")
 
     # Extract insights from the OpenAI API response
-    insight = insight_response['choices'][0]['text']
-    suggestion = suggestion_response['choices'][0]['text']
+    insight = insight_response.choices[0].text
+    suggestion = suggestion_response.choices[0].text
     # Save insights to the database
     return JsonResponse({'insight': insight, 'suggestion': suggestion})
