@@ -12,11 +12,13 @@ struct varChartDataEntry {
     let id = UUID()
     let app: String
     var value: CGFloat
+    let val_int: Int
     let color: UIColor
 
     init(app: String, value: CGFloat, color: UIColor) {
         self.app = app
         self.value = value * 2 * .pi / 100  // convert the value into radians
         self.color = color
+        self.val_int = Int(value)
     }
 }

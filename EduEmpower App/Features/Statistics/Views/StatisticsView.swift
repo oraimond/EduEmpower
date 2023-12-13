@@ -57,16 +57,19 @@ struct StatisticsView: View {
             }        }
     }
     func generateAndDisplayInsights() {
-        let path = "/generate_insights/"
+        let path = "/generate-insights/"
         guard let url = URL(string: APIConstants.base_url + path) else {
             print("URL Error")
             return
         }
         let dummyStats = viewModel.dummyStats
         
-        let statsForBackend = dummyStats.map { entry in
-            return StatEntry(app: entry.app, value: entry.value)
+        let mappedStats = dummyStats.reduce(into: [String: Int]()) { (result, entry) in
+            result[entry.app] = entry.val_int
         }
+
+        let statsForBackend = ["user_statistics": mappedStats]
+        
         var request = URLRequest(url: url)
         // not sure
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
